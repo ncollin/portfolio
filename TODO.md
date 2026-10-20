@@ -35,7 +35,7 @@ The metadata base is solid; the gaps are URL consistency, social previews, struc
 | # | Issue | Where | Fix |
 | --- | --- | --- | --- |
 | 1 | Done: page URLs consistently omit trailing slashes, except `/`. | `astro.config.mjs`, `base-layout.astro`, all links | `trailingSlash: "never"` and canonical normalization; verify permanent redirects on the deployed host. |
-| 2 | The 404 page has a canonical pointing to `/404/`. | `base-layout.astro` | Skip the canonical whenever `noindex` is set. |
+| 2 | Done: canonical tags are omitted on `noindex` pages (404 and draft). | `base-layout.astro` | Keep the `noindex` robots directive and `og:url`; published pages retain their canonical tags. |
 | 3 | No page has an `og:image`, so shared links show no preview image. | `base-layout.astro` | Add a default OG image, plus one per case study. |
 | 4 | No structured data. | `index.astro`, case study pages | `Person` / `ProfilePage` JSON-LD on home, `Article` on case studies. |
 | 5 | No sitemap. | config (outside `src`) | Add `@astrojs/sitemap`, excluding the draft page and the 404. |

@@ -68,7 +68,9 @@ instead of a large-image card. Only reference an image once the asset exists.
 </BaseLayout>
 ```
 
-Use `noindex` for pages that should not appear in search results. It is currently
+Use `noindex` for pages that should not appear in search results. These pages
+receive a `noindex` robots directive and omit the canonical tag; `og:url` remains
+available for social sharing. It is currently
 set on the 404 page and the draft platform-modernization case study; remove it
 from the case study when it is ready to be indexed. `noindex` is not access control:
 the page remains publicly accessible.
