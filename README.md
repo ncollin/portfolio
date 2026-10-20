@@ -222,6 +222,61 @@ import styles from "@atoms/link/link.module.css";
 ---
 ```
 
+## CSS delivery
+
+Production uses `build.inlineStylesheets: "always"` in
+[astro.config.mjs](astro.config.mjs). This was selected by comparing isolated
+production builds of Astro's `auto`, `always`, and `never` modes on October 20,
+2026, without changing component styles or font loading.
+
+Local Chromium tests used a 390 x 844 viewport, 4x CPU slowdown, 1.6 Mbps
+download throughput, and 150ms latency. The same HTTP/1.1 server served each build
+with Brotli compression, uncached HTML, and immutable cached assets. Five runs
+per scenario and theme (150 measured navigations total) rotated mode order
+between rounds. Cold visits cleared the HTTP cache but retained the selected
+theme; repeat and cross-page visits retained the cache. Values below are
+median FCP / LCP in milliseconds, shown as spec and bold:
+
+| Scenario | `auto` spec / bold | `always` spec / bold | `never` spec / bold |
+| --- | --- | --- | --- |
+| Cold home | 400 / 396 | 228 / 224 | 392 / 400 |
+| Repeat home | 240 / 248 | 228 / 224 | 248 / 244 |
+| Home to component-library case study | 392 / 392 | 232 / 232 | 392 / 392 |
+| Component-library to platform-modernization | 240 / 236 | 228 / 228 | 240 / 244 |
+| Cold component-library case study | 420 / 408 | 224 / 232 | 428 / 424 |
+
+FCP and LCP matched in these samples. Inlining consistently removed the
+stylesheet discovery round trip: the cold homepage's last external stylesheet
+completed around 361ms with `auto`, versus no stylesheet requests with `always`.
+Repeat-visit differences were small and overlapped run-to-run variation, but
+there was no measured timing regression. `never` added a fourth stylesheet to
+the component-library page without improving rendering.
+
+There is a caching trade-off. Brotli body sizes, excluding fonts and response
+headers:
+
+| Page | `auto` HTML + cold CSS | `always` HTML | `auto` CSS requests |
+| --- | --- | --- | --- |
+| Home | 4,153 + 4,807 bytes | 7,941 bytes | 3 |
+| Component-library | 6,287 + 4,480 bytes | 9,473 bytes | 3 |
+| Platform-modernization | 5,574 + 4,480 bytes | 9,082 bytes | 3 |
+
+Inlining reduces cold combined HTML/CSS bytes here, but adds roughly 3–4KB
+of compressed HTML per cached page visit because shared CSS is no longer
+reused separately. A cold home to component-library to platform-modernization
+journey transfers about 26.5KB of HTML/CSS with `always`, versus 21.6KB with
+`auto`. The repeatable cold-rendering improvement justifies this modest increase
+for the current small portfolio; reconsider if styles or typical browsing depth
+grow.
+
+All five pages retained identical content, metadata, classes, and scripts across
+the builds. Computed layout and typography styles matched across every page in
+both themes, including hero sizes and the brand indicator. Median CLS was
+unchanged (0 for bold and warm spec visits; approximately 0.00015 for cold spec).
+These are local lab results, not field Core Web Vitals or an exact model of the
+host's HTTP/2 or HTTP/3, CDN, compression, cache headers, or CSP. Verify deployed
+results and ensure any CSP permits the generated inline styles.
+
 ## CSS tokens
 
 The header's brand selector saves its choice in local storage under `nc-brand`.

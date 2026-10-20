@@ -56,7 +56,7 @@ The site is already lean: no JS framework, about 34 KB of CSS in 3 files, and 17
 | 2 | Done: Plex Mono uses an explicit monospace fallback while loading. | `astro.config.mjs` | `fallbacks: ["monospace"]`; other families and demand-loading behavior remain unchanged. |
 | 3 | Done: removed developer markup comments from component source. | molecules and organisms | Comments no longer appear in source or generated HTML; rendered elements and content are unchanged. |
 | 4 | Done: observer-only section and page-bottom tracking; no scroll or resize handlers. | `header.astro`, `base-layout.astro`, `layout.css` | A hidden end-of-page marker triggers the bottom override, including viewport/content-size changes; unchanged `aria-current` attributes are not rewritten. |
-| 5 | 3 render-blocking CSS requests. | config | Consider `build.inlineStylesheets: "always"`. |
+| 5 | Evaluated: inline stylesheets in production. | `astro.config.mjs` | `build.inlineStylesheets: "always"` removed 3–4 stylesheet requests and improved cold rendering by ~170–200ms in local throttled tests, without a repeat-visit timing regression. Accept the additional ~3–4KB compressed HTML per cached visit; recheck on the deployed host. |
 
 ## Next steps
 

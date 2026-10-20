@@ -6,6 +6,9 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://nico.collin.app',
   trailingSlash: 'never',
+  build: {
+    inlineStylesheets: 'always',
+  },
   integrations: [
     sitemap({
       filter: (page) => !['/404', '/404/', '/404.html'].includes(new URL(page).pathname),
