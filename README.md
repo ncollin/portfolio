@@ -116,6 +116,19 @@ If a future page uses `noindex`, exclude it with the sitemap integration's
 `filter` in [astro.config.mjs](astro.config.mjs) as well: the integration does not
 read layout props. Keep crawling allowed so search engines can read `noindex`.
 
+## Hero variants
+
+Hero accepts `variant="home"` for display typography and `variant="page"`
+(the default) for heading-1 typography. The homepage explicitly uses `home`;
+all three case studies use `page`. Both variants retain a semantic `h1` and
+consume their role's font family, size, weight, line height, letter spacing,
+and text transform from the active theme. The former `type` prop is no longer
+supported. Lead text, eyebrows, and action slots are unchanged.
+The home modifier is a standalone CSS Module rule; the base Hero supplies
+page typography. Verify both development and production output when changing
+these selectors, since descendant-only modifier rules were missing from the
+development module's server-rendered class map.
+
 ## Buttons and links
 
 Compose both Button and Link labels and icons in the default slot; no named
