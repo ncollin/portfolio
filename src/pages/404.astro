@@ -1,5 +1,8 @@
 ---
 import BaseLayout from "@layouts/base-layout.astro";
+import Hero from "@organisms/hero/hero.astro";
+import Button from "@atoms/button/button.astro";
+import Icon from "@atoms/icon/icon.astro";
 ---
 
 <BaseLayout
@@ -8,5 +11,14 @@ import BaseLayout from "@layouts/base-layout.astro";
   noindex
   brand="spec"
 >
-  404 - Page not found
+  <Hero
+    eyebrow="ERROR_404"
+    title="This page isn’t part of the system."
+    lead="The link may be out of date, or the address mistyped. The case studies are one click away."
+  >
+    <Fragment slot="actions">
+      <Button href="/"><Icon name="arrow-left" /> Back to home</Button>
+      <Button variant="secondary" href="/#work">View case studies <Icon name="arrow-right" /></Button>
+    </Fragment>
+  </Hero>
 </BaseLayout>
