@@ -5,14 +5,14 @@
    custom properties: md = 48em (768px), lg = 64em (1024px). */
 
 :root {
-  --nc-scale-font-size-display: var(--nc-font-size-45);
+  --nc-scale-font-size-display: var(--nc-font-size-35);
   --nc-scale-font-size-heading-1: var(--nc-font-size-35);
   --nc-scale-font-size-heading-2: var(--nc-font-size-28);
   --nc-scale-font-size-heading-3: var(--nc-font-size-22);
   --nc-scale-font-size-lead: var(--nc-font-size-17);
   --nc-scale-font-size-data-lg: var(--nc-font-size-35);
   --nc-scale-font-size-data-sm: var(--nc-font-size-22);
-  --nc-scale-line-height-display: var(--nc-line-height-48);
+  --nc-scale-line-height-display: var(--nc-line-height-40);
   --nc-scale-line-height-heading-1: var(--nc-line-height-40);
   --nc-scale-line-height-heading-2: var(--nc-line-height-32);
   --nc-scale-line-height-heading-3: var(--nc-line-height-28);

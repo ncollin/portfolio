@@ -6,7 +6,7 @@
 
 .nc-facts-strip__list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--nc-min-width-column), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--nc-min-width-column)), 1fr));
   column-gap: var(--nc-gap-lg);
   row-gap: var(--nc-gap-md);
   margin: 0;

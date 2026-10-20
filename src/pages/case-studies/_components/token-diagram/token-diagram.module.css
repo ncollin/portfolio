@@ -17,7 +17,7 @@
 
 .nc-token-diagram__layers {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--nc-min-width-column), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--nc-min-width-column)), 1fr));
   gap: var(--nc-gap-md);
   margin: 0;
   padding: 0;
@@ -74,8 +74,10 @@
   line-height: var(--nc-line-height-label);
 }
 
+/* Token names are long unbroken strings: let them wrap anywhere on narrow screens */
 .nc-token-diagram__examples code {
   font: inherit;
+  overflow-wrap: anywhere;
 }
 
 .nc-token-diagram__description {

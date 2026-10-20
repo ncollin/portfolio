@@ -4,7 +4,7 @@
       "size": {
         "display": {
           "$type": "dimension",
-          "$value": "{font-size.45}"
+          "$value": "{font-size.35}"
         },
         "heading-1": {
           "$type": "dimension",
@@ -35,7 +35,7 @@
     "line-height": {
       "display": {
         "$type": "dimension",
-        "$value": "{line-height.48}"
+        "$value": "{line-height.40}"
       },
       "heading-1": {
         "$type": "dimension",

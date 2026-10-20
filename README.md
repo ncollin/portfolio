@@ -91,7 +91,7 @@ The CSS files are static, so keep them in sync when editing the JSON sources. Th
 
 | Token | base | md (≥48em) | lg (≥64em) |
 | --- | --- | --- | --- |
-| `font-size` / `line-height`: `display` | 45 / 48 | 57 / 60 | 72 / 76 |
+| `font-size` / `line-height`: `display` | 35 / 40 | 57 / 60 | 72 / 76 |
 | `heading-1` | 35 / 40 | 45 / 48 | 57 / 60 |
 | `heading-2` (bold only) | 28 / 32 | 35 / 40 | 35 / 40 |
 | `heading-3` | 22 / 28 | 28 / 32 | 28 / 32 |
