@@ -1,207 +1,54 @@
-# Astro Starter Kit: Minimal
+# Nico Collin — Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Source for [nico.collin.app](https://nico.collin.app): a static portfolio with three case studies, built with Astro and CSS Modules, with no UI framework and no client-side framework JavaScript.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The site ships two brands, **spec** (dark slate, IBM Plex) and **bold** (yellow, Archivo), driven by the same semantic tokens. Visitors switch brands with the toggle in the header.
 
-## 🚀 Project Structure
+## Getting started
 
-Inside of your Astro project, you'll see the following folders and files:
+Requires Node.js 22.22 or later.
+
+| Command | Action |
+| --- | --- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Start the dev server at `localhost:4321` |
+| `npm run build` | Generate social images, then build to `./dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run social:images` | Regenerate the social preview images only |
+| `npm run astro ...` | Run Astro CLI commands such as `astro check` |
+
+## Project structure
 
 ```text
 /
 ├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   └── assets/            Resume PDF and generated social images
+├── scripts/
+│   └── generate-social-images.mjs
+├── specs/                 Token JSON sources (exported from Figma)
+└── src/
+    ├── components/
+    │   ├── atoms/         button, divider, icon, link, segmented-control, tag
+    │   ├── molecules/     fact, info-card, lesson-block, section-header, stat, step-row
+    │   └── organisms/     card-grid, case-study-card, header, hero, …
+    ├── layouts/
+    │   └── base-layout.astro
+    ├── pages/
+    │   ├── index.astro
+    │   ├── 404.astro
+    │   ├── robots.txt.ts
+    │   └── case-studies/  component-library, platform-modernization, tecsys-design-practice
+    └── styles/
+        ├── layout.css
+        ├── utils-classes.css
+        └── tokens/        primitives.css, semantic.spec.css, semantic.bold.css
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Components follow atomic design. Each one has its own folder with a matching `.astro` file, CSS Module, and `nc-` root class.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Import aliases
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## Page metadata
-
-Every page using `BaseLayout` must provide a unique `title` and `description`.
-Page titles follow the format `Page title · Nico Collin`.
-The layout uses these for search metadata, Open Graph, and Twitter cards, and
-generates an absolute canonical URL from the page pathname and `site` in
-[astro.config.mjs](astro.config.mjs), without query strings or fragments.
-The `site` setting is required.
-
-Page URLs use no trailing slash, except for the homepage (`/`).
-The config sets `trailingSlash: "never"`; internal page links, canonical URLs,
-and `og:url` follow the same convention. Static hosting must serve these
-extensionless URLs and permanently redirect trailing-slash variants to them.
-Verify this on deployment: Astro's setting alone does not configure every host's
-redirects.
-
-Pages default to the shared 1200 x 630 social image, with a large-image Twitter
-card and Open Graph image metadata. Override it with an `image` URL or
-root-relative public asset path and `imageAlt`. Dimensions default to 1200 x 630
-for all images; override `imageWidth` / `imageHeight` only when the asset differs.
-Custom images do not inherit the default image's alt text.
-
-`npm run social:images` generates the default and three case-study PNGs in
-`public/assets/social/`. It also runs before `npm run build`. Edit the shared
-template and copy in [scripts/generate-social-images.mjs](scripts/generate-social-images.mjs)
-to regenerate them. The template reads primitive colors from the site's tokens
-and outlines packaged IBM Plex Sans / Mono glyphs, requiring no system fonts,
-network font downloads, or runtime image service. Each image must be below
-200 KB. These build-time dependencies add no browser JavaScript.
-
-```astro
-<BaseLayout
-  title="My case study · Nico Collin"
-  description="A concise summary of this case study."
-  image="/assets/my-case-study-preview.jpg"
-  imageAlt="A preview of the case study"
->
-  <!-- Page content -->
-</BaseLayout>
-```
-
-Use `noindex` for pages that should not appear in search results. These pages
-receive a `noindex` robots directive and omit the canonical tag; `og:url` remains
-available for social sharing. Only the 404 page currently uses `noindex`;
-all three case studies are published and indexable. `noindex` is not access
-control: the page remains publicly accessible.
-
-### Structured data
-
-Set `pageType="profile"` on the homepage to emit `ProfilePage` JSON-LD with a
-`Person` main entity. Set `pageType="article"` on case studies and supply the
-required `headline` prop, sharing its value with the visible hero title.
-Articles reuse the layout's description, URL, and social image, and set
-`og:type="article"`. The default `pageType="website"` emits no JSON-LD (as on
-the 404 page).
-
-Author details are defined once in [base-layout.astro](src/layouts/base-layout.astro)
-and included in each JSON-LD graph with a stable `Person` identifier. JSON is
-serialized with `<` escaped so content cannot prematurely close the script.
-Publication and modification dates are omitted until real dates are available.
-Structured data does not change indexing; the layout's `noindex` prop controls
-the robots directive.
-
-### Sitemap and robots
-
-The official `@astrojs/sitemap` integration generates `sitemap-index.xml` and
-numbered sitemap files during builds. Home and all three published case studies
-are included, using the configured site URL and no-trailing-slash convention.
-The 404 page is excluded. Modification dates are not generated.
-
-[robots.txt.ts](src/pages/robots.txt.ts) generates a static `robots.txt` at build
-time, allowing crawling and pointing to the sitemap index using the same `site`
-setting. The layout also links to the sitemap index.
-
-If a future page uses `noindex`, exclude it with the sitemap integration's
-`filter` in [astro.config.mjs](astro.config.mjs) as well: the integration does not
-read layout props. Keep crawling allowed so search engines can read `noindex`.
-
-## Hero variants
-
-Hero accepts `variant="home"` for display typography and `variant="page"`
-(the default) for heading-1 typography. The homepage explicitly uses `home`;
-all three case studies use `page`. Both variants retain a semantic `h1` and
-consume their role's font family, size, weight, line height, letter spacing,
-and text transform from the active theme. The former `type` prop is no longer
-supported. Lead text, eyebrows, and action slots are unchanged.
-The home modifier is a standalone CSS Module rule; the base Hero supplies
-page typography. Verify both development and production output when changing
-these selectors, since descendant-only modifier rules were missing from the
-development module's server-rendered class map.
-
-## Buttons and links
-
-Compose both Button and Link labels and icons in the default slot; no named
-icon slots are supported. Put Icon before or after the text to choose its
-position. Buttons and nav/standalone links use flex gap; inline links use margins
-around directly composed SVG icons. Icon provides decorative accessibility
-attributes and inherits color from the surrounding control.
-
-```astro
-<Button href="#work"><Icon name="arrow-down" /> View case studies</Button>
-<Link href="/assets/nico-collin-resume.pdf">Resume <Icon name="download" /></Link>
-```
-
-Button renders a link when given `href`, otherwise a native
-button. Links with `target="_blank"` include the same visually hidden
-"opens in a new tab" notice as Link; native buttons do not.
-
-## Tags
-
-`Tag` accepts `tone="accent"` (the default) or `tone="muted"`. Accent uses the
-theme's accent text color; muted uses its secondary text color. Omitting `tone`
-preserves the accent appearance used by hero eyebrows.
-
-## Segmented control
-
-Use the control's default slot to provide radio segments:
-
-```astro
----
-import SegmentedControl from "./src/components/atoms/segmented-control/segmented-control.astro";
-import Segment from "./src/components/atoms/segmented-control/_segment.astro";
----
-
-<SegmentedControl label="View layout">
-  <Segment name="view-layout" value="grid" checked>Grid</Segment>
-  <Segment name="view-layout" value="list">List</Segment>
-  <Segment name="view-layout" value="map" disabled>Map</Segment>
-</SegmentedControl>
-```
-
-Adjust the import paths relative to the consuming component. The required `label`
-provides a visually hidden legend. All segments in a control must share a nonempty
-`name` and have distinct `value` props; use different names for independent controls
-in the same form (or page outside a form). Set `checked` on at most one segment for
-an initial selection. Each segment's slot should contain text or non-interactive
-content such as a decorative icon, not links or buttons.
-
-Native radios provide single selection, keyboard navigation, and form submission
-without JavaScript. Use `disabled` on a segment or the entire control, and `required`
-on a segment if the group must have a selection. The component changes selection
-only; filtering content or switching panels requires separate application logic
-listening for the native `change` event.
-
-The header places its brand selector beside, not inside, the Main navigation
-landmark. It sets `--nc-segmented-control-indicator-offset` from the restored
-`data-theme`, so the indicator starts in the correct position before the header
-script synchronizes the radios. User changes still animate unless reduced motion
-is requested. Other segmented controls use checked-radio positioning by default.
-
-## Organism scaffolds
-
-Each component in `src/components/organisms/` has a matching folder, `.astro` file,
-CSS Module, and root class. All accept content through a default slot.
-
-The `step-list`, `lesson-list`, and `work-list` components render native lists:
-wrap each slotted item in `<li>`. Supply appropriate headings when using the
-section and article components. These are structural scaffolds; layouts and
-interactive behavior are not implemented yet.
-
-## Import aliases
-
-[tsconfig.json](tsconfig.json) defines aliases for all local source imports,
-including colocated CSS Modules and SVG assets:
+[tsconfig.json](tsconfig.json) defines aliases for all local imports, including colocated CSS Modules and SVG assets:
 
 | Alias | Directory |
 | --- | --- |
@@ -212,9 +59,6 @@ including colocated CSS Modules and SVG assets:
 | `@styles/*` | `src/styles/*` |
 | `@/*` | `src/*` (other source files) |
 
-Astro resolves these aliases in both the editor and builds, including nested paths.
-Package imports such as `astro:assets` and `astro/types` are unchanged.
-
 ```astro
 ---
 import Link from "@atoms/link/link.astro";
@@ -222,166 +66,182 @@ import styles from "@atoms/link/link.module.css";
 ---
 ```
 
-## CSS delivery
+## Design tokens
 
-Production uses `build.inlineStylesheets: "always"` in
-[astro.config.mjs](astro.config.mjs). This was selected by comparing isolated
-production builds of Astro's `auto`, `always`, and `never` modes on October 20,
-2026, without changing component styles or font loading.
-
-Local Chromium tests used a 390 x 844 viewport, 4x CPU slowdown, 1.6 Mbps
-download throughput, and 150ms latency. The same HTTP/1.1 server served each build
-with Brotli compression, uncached HTML, and immutable cached assets. Five runs
-per scenario and theme (150 measured navigations total) rotated mode order
-between rounds. Cold visits cleared the HTTP cache but retained the selected
-theme; repeat and cross-page visits retained the cache. Values below are
-median FCP / LCP in milliseconds, shown as spec and bold:
-
-| Scenario | `auto` spec / bold | `always` spec / bold | `never` spec / bold |
-| --- | --- | --- | --- |
-| Cold home | 400 / 396 | 228 / 224 | 392 / 400 |
-| Repeat home | 240 / 248 | 228 / 224 | 248 / 244 |
-| Home to component-library case study | 392 / 392 | 232 / 232 | 392 / 392 |
-| Component-library to platform-modernization | 240 / 236 | 228 / 228 | 240 / 244 |
-| Cold component-library case study | 420 / 408 | 224 / 232 | 428 / 424 |
-
-FCP and LCP matched in these samples. Inlining consistently removed the
-stylesheet discovery round trip: the cold homepage's last external stylesheet
-completed around 361ms with `auto`, versus no stylesheet requests with `always`.
-Repeat-visit differences were small and overlapped run-to-run variation, but
-there was no measured timing regression. `never` added a fourth stylesheet to
-the component-library page without improving rendering.
-
-There is a caching trade-off. Brotli body sizes, excluding fonts and response
-headers:
-
-| Page | `auto` HTML + cold CSS | `always` HTML | `auto` CSS requests |
-| --- | --- | --- | --- |
-| Home | 4,153 + 4,807 bytes | 7,941 bytes | 3 |
-| Component-library | 6,287 + 4,480 bytes | 9,473 bytes | 3 |
-| Platform-modernization | 5,574 + 4,480 bytes | 9,082 bytes | 3 |
-
-Inlining reduces cold combined HTML/CSS bytes here, but adds roughly 3–4KB
-of compressed HTML per cached page visit because shared CSS is no longer
-reused separately. A cold home to component-library to platform-modernization
-journey transfers about 26.5KB of HTML/CSS with `always`, versus 21.6KB with
-`auto`. The repeatable cold-rendering improvement justifies this modest increase
-for the current small portfolio; reconsider if styles or typical browsing depth
-grow.
-
-All five pages retained identical content, metadata, classes, and scripts across
-the builds. Computed layout and typography styles matched across every page in
-both themes, including hero sizes and the brand indicator. Median CLS was
-unchanged (0 for bold and warm spec visits; approximately 0.00015 for cold spec).
-These are local lab results, not field Core Web Vitals or an exact model of the
-host's HTTP/2 or HTTP/3, CDN, compression, cache headers, or CSP. Verify deployed
-results and ensure any CSP permits the generated inline styles.
-
-## CSS tokens
-
-The header's brand selector saves its choice in local storage under `nc-brand`.
-The shared layout restores a valid `spec` or `bold` choice in an inline head
-script before rendering. Without a valid saved choice, the layout's `brand` prop
-is used. Storage failures are logged to the console and do not prevent switching
-the current page's brand.
-
-The three global stylesheets in [src/styles/tokens](src/styles/tokens/) correspond
-one-to-one with the JSON sources in [specs](specs/):
+The three stylesheets in [src/styles/tokens](src/styles/tokens/) map one-to-one to the JSON sources in [specs](specs/):
 
 | Source | Stylesheet | Scope |
 | --- | --- | --- |
 | `primitives.tokens.json` | `primitives.css` | `:root` |
-| `semantic.bold.tokens.json` | `semantic.bold.css` | `[data-theme="bold"]` |
 | `semantic.spec.tokens.json` | `semantic.spec.css` | `[data-theme="spec"]` |
+| `semantic.bold.tokens.json` | `semantic.bold.css` | `[data-theme="bold"]` |
 
-Token paths become hyphenated custom properties prefixed with `nc-`:
-`color.text.primary` becomes `--nc-color-text-primary`. All authored CSS classes
-also use the `nc-` prefix, including CSS Module keys and utility classes.
-JSON token paths and component filenames remain unchanged.
-Aliases remain `var()` references, and font-family arrays
-become CSS font stacks. Pixel dimensions in the JSON are converted to rem in CSS
-by dividing by 10; other values and theme names follow the source files:
-`bold` contains the yellow / Archivo palette; `spec` contains the dark slate / Plex
-palette.
+The CSS files are static, so keep them in sync when editing the JSON sources.
 
-The homepage imports all three files. Select a theme on `<html>` (or a containing
-element) with `data-theme="bold"` or `data-theme="spec"`, then consume the tokens
-in component CSS:
+**Naming.** Token paths become hyphenated custom properties with the `nc-` prefix: `color.text.primary` becomes `--nc-color-text-primary`. All authored CSS classes, CSS Module keys, and utility classes also use `nc-`. Aliases stay as `var()` references, and font-family arrays become CSS font stacks.
+
+**Units.** `layout.css` sets the root font size to `62.5%`, so `1rem` equals 10px at the browser default and `24px` in the design becomes `2.4rem`. Pixel values in the JSON are divided by 10. All length tokens, including borders and letter spacing, use rem, so browser font preferences still scale them. Components use semantic tokens such as `var(--nc-padding-md)` directly, without conversions.
 
 ```css
 .nc-example {
   color: var(--nc-color-text-primary);
-  background-color: var(--nc-color-background-surface);
   padding: var(--nc-padding-md);
   font-family: var(--nc-font-family-body);
 }
 ```
 
-The [shared layout](src/layouts/base-layout.astro) loads IBM Plex Sans, IBM Plex
-Mono, Archivo, and Archivo Black through Astro's Fonts API, configured in
-[astro.config.mjs](astro.config.mjs). Fontsource provides the files at build time;
-Astro caches and serves them from the site, without third-party font requests
-from visitors. The first three families include normal weights 400, 500, and 600;
-Archivo Black includes normal weight 400. All use the Latin subset and
-`font-display: swap`. Font-family primitives reference Astro's generated font
-variables, keeping semantic token usage unchanged. Fonts are fetched by the
-browser when used, rather than preloading every family.
+**Motion.** Motion tokens are shared across both brands in the primitives: `--nc-motion-duration-instant` (60ms), `--nc-motion-duration-fast` (120ms), `--nc-motion-duration-base` (200ms), and `--nc-motion-easing-standard` (`cubic-bezier(0.2, 0, 0, 1)`). Components use them without local fallbacks, and reduced-motion rules stay in effect.
 
-IBM Plex Mono explicitly uses `fallbacks: ["monospace"]` in the font
-configuration, keeping its generated fallback stack monospaced while loading.
-Other font families retain their existing fallbacks.
+**Reserved tokens.** The five `--nc-color-icon-*` tokens, `--nc-color-background-surface`, and `--nc-gap-2xl` are intentionally kept in both brands and their JSON sources, even though no component uses them yet. Icons inherit `currentColor` so they follow their control's state. Don't force their use or remove them during cleanup.
 
-An unconditional Plex Sans 600 preload was tested against this baseline on the
-production preview with cold cache, 1.6 Mbps throughput, and 150 ms latency
-(three reloads per theme). Median LCP went from 400 to 528 ms for spec and
-424 to 524 ms for saved bold. The preload brought the spec hero font in earlier,
-but added an unused approximately 24 KB Plex font on bold. It was not retained.
-These are local lab observations, not field performance guarantees; revisit
-preloading only with measurements covering both themes on the deployed site.
+### Fonts
 
-These CSS files are static:
-keep them in sync when editing their JSON sources.
+The [base layout](src/layouts/base-layout.astro) loads IBM Plex Sans, IBM Plex Mono, Archivo, and Archivo Black through Astro's Fonts API, configured in [astro.config.mjs](astro.config.mjs). Fontsource provides the files at build time, and Astro serves them from the site, so visitors make no third-party font requests.
 
-Motion tokens are shared across both themes in `primitives.tokens.json` and
-`primitives.css`: `--nc-motion-duration-instant` (60ms),
-`--nc-motion-duration-fast` (120ms), `--nc-motion-duration-base` (200ms), and
-`--nc-motion-easing-standard` (`cubic-bezier(0.2, 0, 0, 1)`).
-Buttons, links, cards, and segmented controls consume these without local
-timing fallbacks. Component reduced-motion rules remain in effect.
+- Plex Sans, Plex Mono, and Archivo include weights 400, 500, and 600. Archivo Black includes 400.
+- All use the Latin subset and `font-display: swap`.
+- Plex Mono sets `fallbacks: ["monospace"]` so its fallback stays monospaced while loading.
+- Fonts load on demand, only when the active brand uses them. There is no preload (see [Performance](#performance)).
 
-The five `--nc-color-icon-*` tokens, `--nc-color-background-surface`, and
-`--nc-gap-2xl` are reserved design vocabulary, intentionally retained in both
-themes and their JSON sources even though no current component consumes them.
-Icons inherit `currentColor` so they follow their surrounding control's state.
+### Brand switching
 
-The token diagram uses confirmed Nurun primitive, semantic, and utility names;
-these `stla` examples describe the case study, not this portfolio's `nc` tokens.
-All three case studies are finalized. Visual comparison against Figma frames
-is outside the current review scope.
+The header's brand toggle saves the choice in local storage under `nc-brand`. An inline script in the layout's `<head>` restores a valid `spec` or `bold` value on `<html>` before rendering. Without a saved choice, the layout's `brand` prop applies (default: `spec`). Storage failures are logged and don't block switching on the current page.
 
-The shared [base layout](src/layouts/base-layout.astro) imports
-[layout.css](src/styles/layout.css), which sets the root font size to `62.5%` and
-the body to `1.6rem`. With a browser default of 16px, `1rem` equals 10px, so
-`24px` in the design becomes `2.4rem`. Browser font preferences still scale these
-lengths. Use semantic tokens such as `var(--nc-padding-md)` without doing conversions
-in components. All length tokens, including borders and letter spacing, use rem;
-colors, font families, weights, and opacity retain their appropriate types.
+The header sets `--nc-segmented-control-indicator-offset` from the restored `data-theme`, so the indicator starts in the right position before the header script syncs the radios. User changes still animate unless reduced motion is requested.
 
-The sources reference these undefined typography tokens, which are intentionally
-preserved without invented values:
+## Components
 
-- `--nc-type-size-md` (bold only)
-- `--nc-type-size-lg`
-- `--nc-type-size-xl`
-- `--nc-type-line-height-md` (bold only)
-- `--nc-type-line-height-lg`
-- `--nc-type-line-height-lg-tight`
-- `--nc-type-line-height-xl`
+### Hero
 
-Define them at the theme scope before using the dependent heading, display, and
-large-data tokens. Until then, those dependent custom properties are invalid at
-computed-value time.
+`variant="home"` uses display typography, and `variant="page"` (the default) uses heading-1 typography. The home page uses `home`, and all case studies use `page`. Both render a semantic `h1` and take their full typography role from the active brand, including text transform.
 
-## 👀 Want to learn more?
+The home modifier is a standalone CSS Module rule. Check both dev and production output when changing these selectors: descendant-only modifier rules were missing from the dev server's class map.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### Buttons and links
+
+Compose labels and icons in the default slot. There are no named icon slots. Put the Icon before or after the text to choose its position.
+
+```astro
+<Button href="#work"><Icon name="arrow-down" /> View case studies</Button>
+<Link href="/assets/nico-collin-resume.pdf">Resume <Icon name="download" /></Link>
+```
+
+- Button renders a link when given `href`, otherwise a native `<button>`.
+- Buttons and links with `target="_blank"` include a visually hidden "(opens in a new tab)" notice.
+- Icon is decorative (hidden from assistive technology) and inherits color from its control.
+
+### Tag
+
+`tone="accent"` (default) uses the brand's accent text color, and `tone="muted"` uses its secondary text color.
+
+### Segmented control
+
+Native radios provide single selection, keyboard navigation, and form submission without JavaScript.
+
+```astro
+<SegmentedControl label="View layout">
+  <Segment name="view-layout" value="grid" checked>Grid</Segment>
+  <Segment name="view-layout" value="list">List</Segment>
+  <Segment name="view-layout" value="map" disabled>Map</Segment>
+</SegmentedControl>
+```
+
+- `label` is required and becomes a visually hidden legend.
+- All segments in a control share one non-empty `name` and have distinct `value`s. Use different names for independent controls on the same page.
+- Set `checked` on at most one segment. Segments accept `disabled` and `required`.
+- Slot content must be non-interactive (text or a decorative icon).
+- The control only changes selection. Filtering or switching content needs your own `change` listener.
+
+The header places the brand toggle beside, not inside, the Main navigation landmark. Other segmented controls position their indicator from the checked radio.
+
+### Organisms
+
+Organisms accept content through a default slot. `step-list`, `lesson-list`, and `work-list` render native lists, so wrap each slotted item in `<li>`.
+
+### Case study content
+
+All three case studies are final and indexable. The token diagram in the component-library case study (`case-studies/_components/token-diagram`) is a one-off illustration, not a design system component. Its `stla` examples are confirmed Nurun token names describing the case study, not this site's `nc` tokens.
+
+## SEO
+
+### Page metadata
+
+Every page using `BaseLayout` provides a unique `title` and `description`. Titles follow the format `Page title · Nico Collin`. The layout uses them for search metadata, Open Graph, and Twitter cards. The `site` setting in [astro.config.mjs](astro.config.mjs) is required: the layout uses it to build absolute canonical URLs without query strings or fragments.
+
+```astro
+<BaseLayout
+  title="My case study · Nico Collin"
+  description="A concise summary of this case study."
+  image="/assets/social/my-case-study.png"
+  imageAlt="A preview of the case study"
+>
+  …
+</BaseLayout>
+```
+
+**URLs.** Page URLs have no trailing slash, except the home page (`/`). The config sets `trailingSlash: "never"`, and internal links, canonical URLs, and `og:url` follow the same convention. The host must serve extensionless URLs and permanently redirect trailing-slash variants.
+
+**noindex.** Pages with `noindex` get a `noindex` robots directive and no canonical tag. `og:url` stays for social sharing. Only the 404 page uses it. `noindex` isn't access control: the page stays publicly accessible.
+
+### Social images
+
+Pages default to a shared 1200×630 image with a large-image Twitter card. Override it with `image` and `imageAlt`. Custom images don't inherit the default alt text. Set `imageWidth` and `imageHeight` only when an image isn't 1200×630.
+
+`npm run social:images` generates the default image and one per case study in `public/assets/social/`, and runs automatically before `npm run build`. To change them, edit the template and copy in [scripts/generate-social-images.mjs](scripts/generate-social-images.mjs). The template reads primitive colors from the site's tokens and outlines packaged IBM Plex glyphs, so it needs no system fonts, network downloads, or runtime image service. Each image must stay under 200 KB.
+
+### Structured data
+
+- `pageType="profile"` (home page) emits `ProfilePage` JSON-LD with a `Person` main entity.
+- `pageType="article"` (case studies) emits `Article` JSON-LD and sets `og:type="article"`. It requires a `headline` prop, shared with the visible hero title, and reuses the page's description, URL, and social image.
+- The default `pageType="website"` (404) emits no JSON-LD.
+
+Author details are defined once in [base-layout.astro](src/layouts/base-layout.astro) with a stable `Person` identifier. JSON is serialized with `<` escaped so content can't close the script early. Publication and modification dates are left out until real dates are available.
+
+### Sitemap and robots
+
+`@astrojs/sitemap` generates `sitemap-index.xml` and numbered sitemap files at build time. They include the home page and the three case studies, and exclude the 404. [robots.txt.ts](src/pages/robots.txt.ts) generates `robots.txt`, which allows crawling and points to the sitemap index. The layout also links to the sitemap.
+
+If a future page uses `noindex`, also exclude it with the sitemap `filter` in [astro.config.mjs](astro.config.mjs), since the integration doesn't read layout props. Keep crawling allowed so search engines can read the `noindex`.
+
+## Performance
+
+These are local lab results (Chromium, 390×844 viewport, 4× CPU slowdown, 1.6 Mbps, 150ms latency), not field Core Web Vitals.
+
+### CSS delivery
+
+Production uses `build.inlineStylesheets: "always"`. It was chosen on October 20, 2026, by comparing production builds of Astro's `auto`, `always`, and `never` modes (5 runs per scenario and brand, 150 navigations total). Median FCP/LCP in milliseconds, spec / bold:
+
+| Scenario | `auto` | `always` | `never` |
+| --- | --- | --- | --- |
+| Cold home | 400 / 396 | 228 / 224 | 392 / 400 |
+| Repeat home | 240 / 248 | 228 / 224 | 248 / 244 |
+| Home → component library | 392 / 392 | 232 / 232 | 392 / 392 |
+| Component library → platform modernization | 240 / 236 | 228 / 228 | 240 / 244 |
+| Cold component library | 420 / 408 | 224 / 232 | 428 / 424 |
+
+Inlining removes the stylesheet round trip and improves cold rendering by about 170–200ms, with no measured regression on repeat visits. The trade-off is caching: shared CSS is no longer reused across pages, which adds roughly 3–4 KB of compressed HTML per cached visit. A cold home → component library → platform modernization journey transfers about 26.5 KB of HTML/CSS with `always`, versus 21.6 KB with `auto`. Reconsider if the styles or typical browsing depth grow. CLS was unchanged.
+
+### Font preload
+
+An unconditional Plex Sans 600 preload was tested on the production preview (cold cache, 3 reloads per brand). Median LCP got worse: 400 → 528ms for spec, and 424 → 524ms for bold. It also fetched an unused ~24 KB Plex font for bold visitors, so it wasn't kept.
+
+## TODO
+
+### Open
+
+- [ ] **Responsive layout.** There are no layout media queries yet. Add a mobile type and spacing scale (token mode or `clamp()`) for the 72px display title and 40px layout padding, and let the header row and `nc-hero__actions` wrap.
+- [ ] **Anchor offset.** `scroll-margin-top` (`--nc-gap-xl`) is shorter than the sticky header, so `/#work` and `/#contact` land with their titles partly hidden. Set `scroll-padding-top` on `html` to the header height.
+- [ ] **Figma comparison.** Compare the screens against the final Figma frames, including mobile.
+- [ ] **Package name.** `package.json` still uses the starter name `astro`.
+
+### After deployment
+
+- [ ] Confirm the host permanently redirects trailing-slash URLs to their no-slash versions.
+- [ ] Check social previews (LinkedIn, Slack) for the home page and each case study.
+- [ ] Validate structured data with Google's Rich Results Test and the Schema.org validator.
+- [ ] Make sure any Content Security Policy allows the inline styles generated by `inlineStylesheets: "always"`.
+- [ ] Re-measure CSS inlining and font preloading on the deployed host, covering both brands.
+
+### Later
+
+- [ ] Add `datePublished` and `dateModified` to the case study `Article` data once real dates are set.
