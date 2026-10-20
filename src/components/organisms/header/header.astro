@@ -6,6 +6,7 @@ import Icon from "@atoms/icon/icon.astro";
 import Segment from "@atoms/segmented-control/_segment.astro";
 import SegmentedControl from "@atoms/segmented-control/segmented-control.astro";
 import Link from "@atoms/link/link.astro";
+import Logo from "@atoms/logo/logo.astro";
 
 const inWork = Astro.url.pathname.startsWith("/case-studies/");
 const workAriaCurrent = inWork ? "true" : undefined;
@@ -13,7 +14,7 @@ const workAriaCurrent = inWork ? "true" : undefined;
 
 <header class={styles["nc-header"]}>
   <div class={styles["nc-header__content"]}>
-    <Link variant="standalone" size="lg" href="/" class="nc-site-title">Nico Collin</Link>
+    <Link variant="standalone" size="lg" href="/" class="nc-site-title"><Logo />Nico Collin</Link>
     <div class={styles["nc-header__controls"]}>
       <nav aria-label="Main">
         <ul class={styles["nc-header__nav-list"]}>

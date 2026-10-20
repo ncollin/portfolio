@@ -1,0 +1,9 @@
+.nc-logo {
+  flex: none;
+  inline-size: 1.15em;
+  block-size: 1.15em;
+  inline-size: 1lh;
+  block-size: 1lh;
+  margin-inline-end: var(--nc-gap-xs);
+  fill: currentColor;
+}
