@@ -13,7 +13,6 @@ const { id, title, index, intro } = Astro.props;
 const headingId = `${id}-heading`;
 ---
 
-<!-- Slot: LessonBlock components only (each renders an <li>) -->
 <section id={id} class={styles["nc-lesson-list"]} aria-labelledby={headingId}>
   <SectionHeader id={headingId} title={title} index={index} />
   {intro && <p class={styles["nc-lesson-list__intro"]}>{intro}</p>}

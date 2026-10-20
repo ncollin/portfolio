@@ -13,7 +13,6 @@ const { id, title, index, intro } = Astro.props;
 const headingId = `${id}-heading`;
 ---
 
-<!-- Slot: StepRow components only (each renders an <li>) -->
 <section id={id} class={styles["nc-step-list"]} aria-labelledby={headingId}>
   <SectionHeader id={headingId} title={title} index={index} />
   {intro && <p class={styles["nc-step-list__intro"]}>{intro}</p>}

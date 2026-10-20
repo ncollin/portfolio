@@ -9,7 +9,6 @@ interface Props {
 const { statement, support } = Astro.props;
 ---
 
-<!-- Root is an <li>: Lesson blocks are always rendered inside Lesson list -->
 <li class={styles["nc-lesson-block"]}>
   <h3 class={styles["nc-lesson-block__statement"]}>{statement}</h3>
   <p class={styles["nc-lesson-block__support"]}>{support}</p>

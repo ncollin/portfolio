@@ -11,7 +11,6 @@ interface Props {
 const { tag, title, text } = Astro.props;
 ---
 
-<!-- Root is an <li>: Info cards are always rendered inside Card grid -->
 <li class={styles["nc-info-card"]}>
   {tag && <Tag tone="accent">{tag}</Tag>}
   <h3 class={styles["nc-info-card__title"]}>{title}</h3>

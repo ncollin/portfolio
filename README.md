@@ -236,6 +236,18 @@ Archivo Black includes normal weight 400. All use the Latin subset and
 variables, keeping semantic token usage unchanged. Fonts are fetched by the
 browser when used, rather than preloading every family.
 
+IBM Plex Mono explicitly uses `fallbacks: ["monospace"]` in the font
+configuration, keeping its generated fallback stack monospaced while loading.
+Other font families retain their existing fallbacks.
+
+An unconditional Plex Sans 600 preload was tested against this baseline on the
+production preview with cold cache, 1.6 Mbps throughput, and 150 ms latency
+(three reloads per theme). Median LCP went from 400 to 528 ms for spec and
+424 to 524 ms for saved bold. The preload brought the spec hero font in earlier,
+but added an unused approximately 24 KB Plex font on bold. It was not retained.
+These are local lab observations, not field performance guarantees; revisit
+preloading only with measurements covering both themes on the deployed site.
+
 These CSS files are static:
 keep them in sync when editing their JSON sources.
 

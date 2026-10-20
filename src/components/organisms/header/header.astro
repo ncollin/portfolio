@@ -62,8 +62,10 @@ const workAriaCurrent = inWork ? "true" : undefined;
 function setCurrent(id: string | null) {
   for (const link of navLinks) {
     if (id && link.hash === `#${id}`) {
-      link.setAttribute("aria-current", "location");
-    } else {
+      if (link.getAttribute("aria-current") !== "location") {
+        link.setAttribute("aria-current", "location");
+      }
+    } else if (link.hasAttribute("aria-current")) {
       link.removeAttribute("aria-current");
     }
   }
@@ -75,12 +77,9 @@ if (location.pathname === "/") {
     .map((link) => document.getElementById(link.hash.slice(1)))
     .filter((el): el is HTMLElement => el !== null);
   const visible = new Set<string>();
+  let atBottom = false;
 
   const update = () => {
-    // At the very bottom, the last section counts as current,
-    // even if it never reached the middle of the screen
-    const atBottom =
-      window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
     if (atBottom && sections.length) {
       setCurrent(sections[sections.length - 1].id);
       return;
@@ -102,7 +101,19 @@ if (location.pathname === "/") {
   );
   sections.forEach((section) => observer.observe(section));
 
-  window.addEventListener("scroll", update, { passive: true });
+  const pageEnd = document.getElementById("nc-page-end");
+  if (!pageEnd) {
+    throw new Error("Homepage navigation requires the nc-page-end marker in BaseLayout.");
+  }
+  const bottomObserver = new IntersectionObserver(
+    ([entry]) => {
+      atBottom = entry.isIntersecting && entry.intersectionRatio === 1;
+      update();
+    },
+    { rootMargin: "0px 0px 2px 0px", threshold: 1 },
+  );
+  bottomObserver.observe(pageEnd);
+
   window.addEventListener("hashchange", () => setCurrent(location.hash.slice(1) || null));
   setCurrent(location.hash.slice(1) || null); // page loaded with /#work or /#contact
 }

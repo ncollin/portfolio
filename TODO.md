@@ -44,7 +44,7 @@ Smaller items:
 
 - [x] Use `og:type="article"` on the case studies.
 - [x] Use one title separator everywhere: `Page title · Nico Collin`.
-- [ ] Add `initial-scale=1` to the viewport tag.
+- [x] Add `initial-scale=1` to the viewport tag.
 
 ## Performance
 
@@ -52,10 +52,10 @@ The site is already lean: no JS framework, about 34 KB of CSS in 3 files, and 17
 
 | # | Issue | Where | Fix |
 | --- | --- | --- | --- |
-| 1 | No font preload. | `base-layout.astro` | Add the `preload` prop on `<Font>` for the main spec-brand fonts only, not the bold-brand ones. |
-| 2 | Monospace text falls back to sans-serif while loading: Astro's generated fallback for Plex Mono is `sans-serif`, placed before `ui-monospace`. | `astro.config.mjs` | Add `fallbacks: ["monospace"]` to the Plex Mono font config. |
-| 3 | Developer comments ship in the HTML (`<!-- Root is an <li>… -->`). | molecules and organisms | Write them as `{/* */}` so Astro strips them. |
-| 4 | The header script runs `update()` on every scroll, though the IntersectionObserver already handles it. | `header.astro` | Keep only the bottom-of-page check, throttled with `requestAnimationFrame`. |
+| 1 | Evaluated: keep fonts demand-loaded; no unconditional preload. | `base-layout.astro` | Cold-cache production-preview tests (3 runs per theme, 1.6 Mbps / 150 ms latency) found Plex Sans 600 preload did not improve LCP and fetched an unused ~24 KB font for saved-bold visitors. Revisit with deployed measurements if needed. |
+| 2 | Done: Plex Mono uses an explicit monospace fallback while loading. | `astro.config.mjs` | `fallbacks: ["monospace"]`; other families and demand-loading behavior remain unchanged. |
+| 3 | Done: removed developer markup comments from component source. | molecules and organisms | Comments no longer appear in source or generated HTML; rendered elements and content are unchanged. |
+| 4 | Done: observer-only section and page-bottom tracking; no scroll or resize handlers. | `header.astro`, `base-layout.astro`, `layout.css` | A hidden end-of-page marker triggers the bottom override, including viewport/content-size changes; unchanged `aria-current` attributes are not rewritten. |
 | 5 | 3 render-blocking CSS requests. | config | Consider `build.inlineStylesheets: "always"`. |
 
 ## Next steps

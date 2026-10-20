@@ -13,7 +13,6 @@ const { id, title, index, intro } = Astro.props;
 const headingId = `${id}-heading`;
 ---
 
-<!-- Slot: InfoCard components only (each renders an <li>) -->
 <section id={id} class={styles["nc-card-grid"]} aria-labelledby={headingId}>
   <SectionHeader id={headingId} title={title} index={index} />
   {intro && <p class={styles["nc-card-grid__intro"]}>{intro}</p>}

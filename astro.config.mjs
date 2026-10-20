@@ -24,6 +24,7 @@ export default defineConfig({
     {
       name: 'IBM Plex Mono',
       cssVariable: '--nc-font-plex-mono',
+      fallbacks: ['monospace'],
       provider: fontProviders.fontsource(),
       weights: [400, 500, 600],
       styles: ['normal'],

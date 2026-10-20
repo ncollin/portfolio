@@ -27,6 +27,12 @@ body {
   gap: var(--nc-gap-xl);
 }
 
+.nc-page-end {
+  block-size: 1px;
+  margin-block-start: -1px;
+  pointer-events: none;
+}
+
 /* Smooth scrolling for in-page links like /#work and /#contact */
 @media (prefers-reduced-motion: no-preference) {
   html {
