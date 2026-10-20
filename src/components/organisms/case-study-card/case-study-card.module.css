@@ -91,12 +91,24 @@
 }
 
 /* Same width and equal columns on every card, so stats line up across cards */
+/* Mobile first. Base: one stat per row, number then caption, numbers in a
+   shared column (subgrid) so captions line up. Three columns don't fit
+   on phones: at 320px the longest words alone exceed the card width.
+   From md: three equal columns. */
 .nc-case-study-card__stats {
   display: grid;
-  /* Equal thirds, but never narrower than the longest word, so a caption
-     like "components" never breaks mid-word on a phone */
-  grid-template-columns: repeat(3, minmax(min-content, 1fr));
-  gap: var(--nc-gap-md);
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: var(--nc-gap-md);
+  row-gap: var(--nc-gap-sm);
+}
+
+/* Element selector: the Stat's classes are hashed in another file.
+   p raises specificity above the Stat's own display rule. */
+.nc-case-study-card__stats > :global(p) {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: baseline;
 }
 
 /* States: the control family, as in the spec */
@@ -137,6 +149,19 @@
   .nc-case-study-card__body:hover,
   .nc-case-study-card__body:active {
     transform: none;
+  }
+}
+
+@media (min-width: 48em) {
+  /* Equal thirds, but never narrower than the longest word */
+  .nc-case-study-card__stats {
+    grid-template-columns: repeat(3, minmax(min-content, 1fr));
+    gap: var(--nc-gap-md);
+  }
+
+  .nc-case-study-card__stats > :global(p) {
+    grid-column: auto;
+    display: flex;
   }
 }
 

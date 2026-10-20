@@ -155,7 +155,7 @@ How each layout changes:
 | --- | --- | --- | --- |
 | Header | Two rows (name and toggle, then navigation), not sticky | One row, sticky | |
 | `step-row` | Number and title, description below | Title and description side by side | |
-| `case-study-card` | Text, stats below | | Stats to the right |
+| `case-study-card` | Text, then stats as rows (number, caption) | Stats in three columns below the text | Stats to the right |
 | `case-study-nav` | Previous and next stacked | Two halves | |
 | `contact-block` | Text, buttons below aligned left | Side by side when they fit, buttons aligned right | |
 | `hero__actions` | Buttons wrap | | |
@@ -166,7 +166,7 @@ How each layout changes:
 Safety nets for narrow screens and 400% zoom:
 
 - `overflow-wrap: break-word` on `body`: a word too long for its line breaks instead of scrolling the page sideways. Known case: at exactly 320px, the period of "INFRASTRUCTURE." in a bold lesson card moves to the next line.
-- Grid minimums use `min(100%, …)`, and the home card stats use `minmax(min-content, 1fr)`, so no column is wider than the screen or narrower than its longest word.
+- Grid minimums use `min(100%, …)`, so no column is wider than the screen. The home card stats switch to rows on phones and use `minmax(min-content, 1fr)` from `md`, so a column is never narrower than its longest word.
 - Long code examples (token names) use `overflow-wrap: anywhere`.
 
 When adding a component: write the phone layout first, check the longest words of its headings in both brands at 320px and 768px (bold's uppercase Archivo Black is much wider than spec's Plex Sans), then add `md` or `lg` rules.
