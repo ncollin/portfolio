@@ -14,25 +14,25 @@ const workAriaCurrent = inWork ? "true" : undefined;
 
 <header class={styles["nc-header"]}>
   <div class={styles["nc-header__content"]}>
-    <Link variant="standalone" size="lg" href="/" class="nc-site-title"><Logo />Nico Collin</Link>
-    <div class={styles["nc-header__controls"]}>
-      <nav aria-label="Main">
-        <ul class={styles["nc-header__nav-list"]}>
-          <li><Link variant="nav" href="/#work" aria-current={workAriaCurrent}>Work</Link></li>
-          <li><Link variant="nav" href="/#contact">Contact</Link></li>
-          <li>
-            <Link variant="nav" href="/assets/nico-collin-resume.pdf" target="_blank">
-              Resume <span class="visually-hidden">(PDF)</span>
-              <Icon name="download" />
-            </Link>
-          </li>
-        </ul>
-      </nav>
+    <Link variant="standalone" size="lg" href="/" class:list={["nc-site-title", styles["nc-header__title"]]}><Logo />Nico Collin</Link>
+    <div class={styles["nc-header__brand"]}>
       <SegmentedControl label="Portfolio brand">
         <Segment name="brand-selector" value="spec" checked>spec</Segment>
         <Segment name="brand-selector" value="bold">bold</Segment>
       </SegmentedControl>
     </div>
+    <nav aria-label="Main" class={styles["nc-header__nav"]}>
+      <ul class={styles["nc-header__nav-list"]}>
+        <li><Link variant="nav" href="/#work" aria-current={workAriaCurrent}>Work</Link></li>
+        <li><Link variant="nav" href="/#contact">Contact</Link></li>
+        <li>
+          <Link variant="nav" href="/assets/nico-collin-resume.pdf" target="_blank">
+            Resume <span class="visually-hidden">(PDF)</span>
+            <Icon name="download" />
+          </Link>
+        </li>
+      </ul>
+    </nav>
   </div>
 
   <Divider />

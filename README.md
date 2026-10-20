@@ -139,6 +139,17 @@ The header sets `--nc-segmented-control-indicator-offset` from the restored `dat
 
 ## Components
 
+### Header
+
+Mobile first:
+
+- **Base:** two rows. Your name and the brand toggle on the first, the navigation spread across the second. The header isn't sticky, so it doesn't take a fixed share of a small screen. The toggle's segments use tighter side padding (`--nc-segmented-control-segment-padding-inline`) so name and toggle share the row; on the narrowest screens, the name wraps before anything overflows.
+- **From `md` (48em):** one row, sticky. Name on the left, then navigation and toggle on the right.
+- The HTML order follows the mobile layout (name, toggle, navigation), and a CSS grid moves the toggle after the navigation from `md`. So on wider screens, keyboard focus reaches the toggle before the links, even though it sits to their right.
+- Navigation links are at least 44px tall for touch. That's shorter than the toggle, so the one-row header keeps its height.
+
+In-page links (`/#work`, `/#contact`) land below the header through `scroll-padding-top` in [layout.css](src/styles/layout.css). On mobile, it's only breathing room. From `md`, it's the sticky header's height, built from the same tokens as the header. If you change the header's padding, gap, toggle or name size, update that calculation too.
+
 ### Hero
 
 `variant="home"` uses display typography, and `variant="page"` (the default) uses heading-1 typography. The home page uses `home`, and all case studies use `page`. Both render a semantic `h1` and take their full typography role from the active brand, including text transform.
@@ -257,10 +268,8 @@ An unconditional Plex Sans 600 preload was tested on the production preview (col
 
 ### Open
 
-- [ ] **Responsive layout.** There are no layout media queries yet. Add a mobile type and spacing scale (token mode or `clamp()`) for the 72px display title and 40px layout padding, and let the header row and `nc-hero__actions` wrap.
-- [ ] **Anchor offset.** `scroll-margin-top` (`--nc-gap-xl`) is shorter than the sticky header, so `/#work` and `/#contact` land with their titles partly hidden. Set `scroll-padding-top` on `html` to the header height.
+- [ ] **Responsive layout.** Scale tokens, overflow-safe grids and the header are done. Remaining: mobile-first layouts for `step-row`, `case-study-card`, `case-study-nav`, `hero__actions` and `contact-block`, then testing at 320–1440px and 200%/400% zoom in both brands.
 - [ ] **Figma comparison.** Compare the screens against the final Figma frames, including mobile.
-- [ ] **Package name.** `package.json` still uses the starter name `astro`.
 
 ### After deployment
 

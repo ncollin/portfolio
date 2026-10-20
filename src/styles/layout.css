@@ -52,7 +52,26 @@ body {
   }
 }
 
-/* Breathing room above a section when the page scrolls to it */
-:target {
-  scroll-margin-top: var(--nc-gap-xl);
+/* Where in-page links (/#work, /#contact) land. Base: the header isn't
+   sticky, so only breathing room. From md: the sticky header's height,
+   built from the same tokens as the header (top padding, row height, gap,
+   divider), plus the same breathing room. The row is as tall as the brand
+   toggle or the name, whichever is taller. */
+html {
+  scroll-padding-top: var(--nc-gap-lg);
+}
+
+@media (min-width: 48em) {
+  html {
+    --_toggle-block-size: calc(
+      2 * var(--nc-border-width-default) + 2 * var(--nc-padding-xs) +
+        2 * var(--nc-padding-sm) + var(--nc-line-height-label)
+    );
+
+    scroll-padding-top: calc(
+      var(--nc-padding-lg) +
+        max(var(--_toggle-block-size), var(--nc-line-height-heading-3)) +
+        var(--nc-gap-lg) + var(--nc-border-width-default) + var(--nc-gap-lg)
+    );
+  }
 }

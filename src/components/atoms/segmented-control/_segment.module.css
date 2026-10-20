@@ -13,7 +13,8 @@
 
 .nc-segment__content {
   display: block;
-  padding: var(--nc-padding-sm) var(--nc-padding-md);
+  /* Contexts with little room (the mobile header) can tighten the sides */
+  padding: var(--nc-padding-sm) var(--nc-segmented-control-segment-padding-inline, var(--nc-padding-md));
   border-radius: var(--nc-border-radius-sm);
   text-align: center;
   color: var(--nc-color-text-primary);

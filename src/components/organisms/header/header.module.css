@@ -1,30 +1,50 @@
+/* Mobile first.
+   Base: two rows, not sticky, so the header doesn't take a fixed share of a
+   small screen.
+     name ----------- toggle
+     --- Work -- Contact -- Resume ---
+   From md: one row, sticky.
+     name --------- Work  Contact  Resume  toggle
+   The HTML order follows mobile (name, toggle, navigation); from md the grid
+   places the toggle after the navigation. */
+
 .nc-header {
-  position: sticky;
-  top: 0;
   display: flex;
   flex-direction: column;
   gap: var(--nc-gap-lg);
   background: var(--nc-color-background-canvas);
-  z-index: 9999;
   padding-top: var(--nc-padding-lg);
 }
 
-.nc-header__controls {
-  --nc-segmented-control-indicator-offset: 0px;
-
-  display: flex;
+.nc-header__content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "title brand"
+    "nav nav";
   align-items: center;
-  gap: var(--nc-gap-lg);
+  column-gap: var(--nc-gap-md);
+  row-gap: var(--nc-gap-md);
 }
 
-:global([data-theme="bold"]) .nc-header__controls {
+.nc-header__title {
+  grid-area: title;
+}
+
+.nc-header__brand {
+  --nc-segmented-control-indicator-offset: 0px;
+  /* Tighter toggle so name and toggle share one row on phones */
+  --nc-segmented-control-segment-padding-inline: var(--nc-padding-sm);
+
+  grid-area: brand;
+}
+
+:global([data-theme="bold"]) .nc-header__brand {
   --nc-segmented-control-indicator-offset: calc(100% + var(--nc-gap-xs));
 }
 
-.nc-header__content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.nc-header__nav {
+  grid-area: nav;
 }
 
 .nc-header__nav-list {
@@ -32,5 +52,35 @@
   margin: 0;
   padding: 0;
   display: flex;
-  gap: var(--nc-gap-lg);
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  column-gap: var(--nc-gap-lg);
+}
+
+/* 44px touch targets. Shorter than the toggle, so the one-row header
+   keeps the same height from md up. */
+.nc-header__nav-list :global(a) {
+  min-block-size: calc(var(--nc-size-40) + var(--nc-size-4));
+}
+
+@media (min-width: 48em) {
+  .nc-header {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+  }
+
+  .nc-header__content {
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas: "title nav brand";
+    column-gap: var(--nc-gap-lg);
+  }
+
+  .nc-header__brand {
+    --nc-segmented-control-segment-padding-inline: var(--nc-padding-md);
+  }
+
+  .nc-header__nav-list {
+    justify-content: flex-end;
+  }
 }
