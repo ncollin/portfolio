@@ -22,3 +22,18 @@
   margin: 0;
   padding: 0;
 }
+
+/* Exactly three lessons: lessons are text-heavy, so on tablets they stay
+   one per row at full width (three columns would be too narrow, two plus
+   one leaves an orphan). Three columns from lg. */
+@media (min-width: 48em) {
+  .nc-lesson-list__lessons:has(> :nth-child(3):last-child) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 64em) {
+  .nc-lesson-list__lessons:has(> :nth-child(3):last-child) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

@@ -56,12 +56,14 @@
     justify-content: space-between;
   }
 
-  .nc-contact-block__text,
-  .nc-contact-block__actions {
+  .nc-contact-block__text {
     flex: 1 1 var(--nc-min-width-column);
   }
 
+  /* Only as wide as the buttons, so they stay on one line beside the text
+     on tablets; the text takes the rest */
   .nc-contact-block__actions {
+    flex: 0 1 auto;
     justify-content: flex-end;
   }
 }

@@ -14,3 +14,11 @@
   box-shadow: var(--nc-shadow-offset-default) var(--nc-shadow-offset-default)
     var(--nc-shadow-blur) var(--nc-shadow-color);
 }
+
+/* Exactly three items: three columns from md, instead of two plus one
+   orphan when three minimum-width columns don't quite fit */
+@media (min-width: 48em) {
+  .nc-stats-strip:has(> :nth-child(3):last-child) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

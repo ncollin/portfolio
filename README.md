@@ -94,7 +94,7 @@ The CSS files are static, so keep them in sync when editing the JSON sources. Th
 | `font-size` / `line-height`: `display` | 35 / 40 | 57 / 60 | 72 / 76 |
 | `heading-1` | 35 / 40 | 45 / 48 | 57 / 60 |
 | `heading-2` (bold only) | 28 / 32 | 35 / 40 | 35 / 40 |
-| `heading-3` | 22 / 28 | 28 / 32 | 28 / 32 |
+| `heading-3` | 22 / 28 | 22 / 28 | 28 / 32 |
 | `lead` | 17 / 28 | 22 / 36 | 22 / 36 |
 | `data-lg` | 35 / 40 | 45 / 48 | 57 / 56 |
 | `data-sm` | 22 / 28 | 28 / 32 | 28 / 32 |
@@ -136,6 +136,40 @@ The [base layout](src/layouts/base-layout.astro) loads IBM Plex Sans, IBM Plex M
 The header's brand toggle saves the choice in local storage under `nc-brand`. An inline script in the layout's `<head>` restores a valid `spec` or `bold` value on `<html>` before rendering. Without a saved choice, the layout's `brand` prop applies (default: `spec`). Storage failures are logged and don't block switching on the current page.
 
 The header sets `--nc-segmented-control-indicator-offset` from the restored `data-theme`, so the indicator starts in the right position before the header script syncs the radios. User changes still animate unless reduced motion is requested.
+
+## Responsive
+
+**Rule: mobile first.** Every component's base styles target the smallest screen (320px). Wider layouts are added with `min-width` media queries only, never `max-width`.
+
+| Breakpoint | Min width | Typical devices |
+| --- | --- | --- |
+| base | 0 | Phones |
+| `md` | `48em` (768px) | Tablets, small laptops |
+| `lg` | `64em` (1024px) | Desktop |
+
+Breakpoints are in `em` so they also respond to browser zoom. Type and spacing change through the [Scale tokens](#design-tokens), so components rarely need their own media queries for sizes.
+
+How each layout changes:
+
+| Component | Base | `md` | `lg` |
+| --- | --- | --- | --- |
+| Header | Two rows (name and toggle, then navigation), not sticky | One row, sticky | |
+| `step-row` | Number and title, description below | Title and description side by side | |
+| `case-study-card` | Text, stats below | | Stats to the right |
+| `case-study-nav` | Previous and next stacked | Two halves | |
+| `contact-block` | Text, buttons below aligned left | Side by side when they fit, buttons aligned right | |
+| `hero__actions` | Buttons wrap | | |
+| Three-item grids (cards, stats, token layers) | One column | Three columns | |
+| Three lessons | One column | One column | Three columns |
+| Other grids | `auto-fit` columns of at least `min-width-column` (240px), never wider than the screen | | |
+
+Safety nets for narrow screens and 400% zoom:
+
+- `overflow-wrap: break-word` on `body`: a word too long for its line breaks instead of scrolling the page sideways. Known case: at exactly 320px, the period of "INFRASTRUCTURE." in a bold lesson card moves to the next line.
+- Grid minimums use `min(100%, …)`, and the home card stats use `minmax(min-content, 1fr)`, so no column is wider than the screen or narrower than its longest word.
+- Long code examples (token names) use `overflow-wrap: anywhere`.
+
+When adding a component: write the phone layout first, check the longest words of its headings in both brands at 320px and 768px (bold's uppercase Archivo Black is much wider than spec's Plex Sans), then add `md` or `lg` rules.
 
 ## Components
 
@@ -268,7 +302,7 @@ An unconditional Plex Sans 600 preload was tested on the production preview (col
 
 ### Open
 
-- [ ] **Responsive layout.** Scale tokens, overflow-safe grids, the header and the component layouts are done. Remaining: testing at 320–1440px and 200%/400% zoom in both brands, real devices, Lighthouse on mobile, then a "Responsive" section in this README.
+- [ ] **Responsive testing.** Layouts are done and checked at 375, 768 and 1280px in both brands. Remaining: 320px, 200% and 400% zoom on desktop (no horizontal scrolling), keyboard order in the header, a real iPhone and Android phone, and Lighthouse on mobile.
 - [ ] **Figma comparison.** Compare the screens against the final Figma frames, including mobile.
 
 ### After deployment

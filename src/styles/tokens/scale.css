@@ -31,14 +31,12 @@
     --nc-scale-font-size-display: var(--nc-font-size-57);
     --nc-scale-font-size-heading-1: var(--nc-font-size-45);
     --nc-scale-font-size-heading-2: var(--nc-font-size-35);
-    --nc-scale-font-size-heading-3: var(--nc-font-size-28);
     --nc-scale-font-size-lead: var(--nc-font-size-22);
     --nc-scale-font-size-data-lg: var(--nc-font-size-45);
     --nc-scale-font-size-data-sm: var(--nc-font-size-28);
     --nc-scale-line-height-display: var(--nc-line-height-60);
     --nc-scale-line-height-heading-1: var(--nc-line-height-48);
     --nc-scale-line-height-heading-2: var(--nc-line-height-40);
-    --nc-scale-line-height-heading-3: var(--nc-line-height-32);
     --nc-scale-line-height-lead: var(--nc-line-height-36);
     --nc-scale-line-height-data-lg: var(--nc-line-height-48);
     --nc-scale-line-height-data-sm: var(--nc-line-height-32);
@@ -54,9 +52,11 @@
   :root {
     --nc-scale-font-size-display: var(--nc-font-size-72);
     --nc-scale-font-size-heading-1: var(--nc-font-size-57);
+    --nc-scale-font-size-heading-3: var(--nc-font-size-28);
     --nc-scale-font-size-data-lg: var(--nc-font-size-57);
     --nc-scale-line-height-display: var(--nc-line-height-76);
     --nc-scale-line-height-heading-1: var(--nc-line-height-60);
+    --nc-scale-line-height-heading-3: var(--nc-line-height-32);
     --nc-scale-line-height-data-lg: var(--nc-line-height-56);
     --nc-scale-padding-2xl: var(--nc-size-40);
   }

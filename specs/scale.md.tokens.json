@@ -16,7 +16,7 @@
         },
         "heading-3": {
           "$type": "dimension",
-          "$value": "{font-size.28}"
+          "$value": "{font-size.22}"
         },
         "lead": {
           "$type": "dimension",
@@ -47,7 +47,7 @@
       },
       "heading-3": {
         "$type": "dimension",
-        "$value": "{line-height.32}"
+        "$value": "{line-height.28}"
       },
       "lead": {
         "$type": "dimension",
