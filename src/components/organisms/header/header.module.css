@@ -1,4 +1,4 @@
-.header {
+.nc-header {
   position: sticky;
   top: 0;
   display: flex;
@@ -9,19 +9,19 @@
   padding-top: var(--nc-padding-lg);
 }
 
-.header__nav {
+.nc-header__nav {
   display: flex;
   align-items: center;
   gap: var(--nc-gap-lg);
 }
 
-.header__content {
+.nc-header__content {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.header__nav-list {
+.nc-header__nav-list {
   list-style: none;
   margin: 0;
   padding: 0;

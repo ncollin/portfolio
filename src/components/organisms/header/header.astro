@@ -11,11 +11,11 @@ const inWork = Astro.url.pathname.startsWith("/case-studies/");
 const workAriaCurrent = inWork ? "true" : undefined;
 ---
 
-<header class={styles["header"]}>
-  <div class={styles["header__content"]}>
+<header class={styles["nc-header"]}>
+  <div class={styles["nc-header__content"]}>
     <Link variant="standalone" size="lg" href="/" class="nc-site-title">Nico Collin</Link>
-    <nav class={styles["header__nav"]} aria-label="Main">
-      <ul class={styles["header__nav-list"]}>
+    <nav class={styles["nc-header__nav"]} aria-label="Main">
+      <ul class={styles["nc-header__nav-list"]}>
         <li><Link variant="nav" href="/#work" aria-current={workAriaCurrent}>Work</Link></li>
         <li><Link variant="nav" href="/#contact">Contact</Link></li>
         <li>

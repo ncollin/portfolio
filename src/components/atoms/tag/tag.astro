@@ -1,7 +1,13 @@
 ---
-import styles from"@atoms/tag/tag.module.css";
+import styles from "@atoms/tag/tag.module.css";
+
+interface Props {
+  tone?: "accent" | "muted";
+}
+
+const { tone = "accent" } = Astro.props;
 ---
 
-<span class={styles["nc-tag"]}>
+<span class:list={[styles["nc-tag"], styles[`nc-tag--${tone}`]]}>
   <slot />
 </span>

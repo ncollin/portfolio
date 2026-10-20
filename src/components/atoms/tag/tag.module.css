@@ -4,5 +4,12 @@
   line-height: var(--nc-line-height-label);
   letter-spacing: var(--nc-letter-spacing-label);
   font-weight: var(--nc-font-weight-label);
+}
+
+.nc-tag--accent {
   color: var(--nc-color-text-accent);
+}
+
+.nc-tag--muted {
+  color: var(--nc-color-text-secondary);
 }

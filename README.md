@@ -38,6 +38,40 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
+## Page metadata
+
+Every page using `BaseLayout` must provide a unique `title` and `description`.
+The layout uses these for search metadata, Open Graph, and Twitter cards, and
+generates an absolute canonical URL from the page pathname and `site` in
+[astro.config.mjs](astro.config.mjs), without query strings or fragments.
+The `site` setting is required.
+
+Pass an optional `image` URL or root-relative public asset path and `imageAlt`
+to enable image previews. Without an image, the layout requests a summary card
+instead of a large-image card. Only reference an image once the asset exists.
+
+```astro
+<BaseLayout
+  title="My case study - Nico Collin"
+  description="A concise summary of this case study."
+  image="/assets/my-case-study-preview.jpg"
+  imageAlt="A preview of the case study"
+>
+  <!-- Page content -->
+</BaseLayout>
+```
+
+Use `noindex` for pages that should not appear in search results. It is currently
+set on the 404 page and the draft platform-modernization case study; remove it
+from the case study when it is ready to be indexed. `noindex` is not access control:
+the page remains publicly accessible.
+
+## Tags
+
+`Tag` accepts `tone="accent"` (the default) or `tone="muted"`. Accent uses the
+theme's accent text color; muted uses its secondary text color. Omitting `tone`
+preserves the accent appearance used by hero eyebrows.
+
 ## Segmented control
 
 Use the control's default slot to provide radio segments:
