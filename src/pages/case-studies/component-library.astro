@@ -16,9 +16,13 @@ import LessonList from "@organisms/lesson-list/lesson-list.astro";
 import LessonBlock from "@molecules/lesson-block/lesson-block.astro";
 import Link from "@atoms/link/link.astro";
 import Icon from "@atoms/icon/icon.astro";
+
+const headline = "Taking control of an inherited component library";
 ---
 
 <BaseLayout
+  pageType="article"
+  headline={headline}
   title="Taking control of an inherited component library · Nico Collin"
   description="How I turned an inherited component library into a token-driven design system themed across six brands at Nurun."
   image="/assets/social/component-library.png"
@@ -32,7 +36,7 @@ import Icon from "@atoms/icon/icon.astro";
   <Hero
       type="page"
       eyebrow="Case study 01 · Nurun · 2023–present"
-      title="Taking control of an inherited component library"
+      title={headline}
       lead="I inherited a cross-project component library I hadn’t designed, with no budget and no clear scope. As frontend tech lead on a multi-brand automotive account, I turned it into a token-driven design system themed across six brands, trading open-ended flexibility for controlled choices."
     />
 

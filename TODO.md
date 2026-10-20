@@ -37,12 +37,12 @@ The metadata base is solid; the gaps are URL consistency, social previews, struc
 | 1 | Done: page URLs consistently omit trailing slashes, except `/`. | `astro.config.mjs`, `base-layout.astro`, all links | `trailingSlash: "never"` and canonical normalization; verify permanent redirects on the deployed host. |
 | 2 | Done: canonical tags are omitted on `noindex` pages (404 and draft). | `base-layout.astro` | Keep the `noindex` robots directive and `og:url`; published pages retain their canonical tags. |
 | 3 | Done: default and case-study social images use a shared spec-themed template. | `base-layout.astro`, case-study pages, `scripts/generate-social-images.mjs` | Build-time 1200 x 630 PNGs with alt text and dimensions; verify social previews after deployment. |
-| 4 | No structured data. | `index.astro`, case study pages | `Person` / `ProfilePage` JSON-LD on home, `Article` on case studies. |
+| 4 | Done: homepage has `ProfilePage` / `Person` JSON-LD; case studies have `Article` with a shared author identity. | `base-layout.astro`, `index.astro`, case study pages | Safely serialized metadata with visible headlines, URLs, and images; no invented dates. Validate with external tools after deployment. |
 | 5 | No sitemap. | config (outside `src`) | Add `@astrojs/sitemap`, excluding the draft page and the 404. |
 
 Smaller items:
 
-- [ ] Use `og:type="article"` on the case studies.
+- [x] Use `og:type="article"` on the case studies.
 - [ ] Use one title separator everywhere: home uses " - ", case studies use " · ".
 - [ ] Add `initial-scale=1` to the viewport tag.
 

@@ -85,6 +85,21 @@ set on the 404 page and the draft platform-modernization case study; remove it
 from the case study when it is ready to be indexed. `noindex` is not access control:
 the page remains publicly accessible.
 
+### Structured data
+
+Set `pageType="profile"` on the homepage to emit `ProfilePage` JSON-LD with a
+`Person` main entity. Set `pageType="article"` on case studies and supply the
+required `headline` prop, sharing its value with the visible hero title.
+Articles reuse the layout's description, URL, and social image, and set
+`og:type="article"`. The default `pageType="website"` emits no JSON-LD (as on
+the 404 page).
+
+Author details are defined once in [base-layout.astro](src/layouts/base-layout.astro)
+and included in each JSON-LD graph with a stable `Person` identifier. JSON is
+serialized with `<` escaped so content cannot prematurely close the script.
+Publication and modification dates are omitted until real dates are available.
+Structured data does not change indexing: the draft remains `noindex`.
+
 ## Tags
 
 `Tag` accepts `tone="accent"` (the default) or `tone="muted"`. Accent uses the

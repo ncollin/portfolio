@@ -13,9 +13,13 @@ import StepList from "@organisms/step-list/step-list.astro";
 import StepRow from "@molecules/step-row/step-row.astro";
 import LessonList from "@organisms/lesson-list/lesson-list.astro";
 import LessonBlock from "@molecules/lesson-block/lesson-block.astro";
+
+const headline = "Building a frontend and design practice from zero";
 ---
 
 <BaseLayout
+  pageType="article"
+  headline={headline}
   title="Building a frontend and design practice from zero · Nico Collin"
   description="How I helped grow a nine-person UX team at Tecsys and built a shared design system adopted across three products."
   image="/assets/social/tecsys-design-practice.png"
@@ -25,7 +29,7 @@ import LessonBlock from "@molecules/lesson-block/lesson-block.astro";
   <Hero
     type="page"
     eyebrow="Case study 03 · Tecsys · 2018–2023"
-    title="Building a frontend and design practice from zero"
+    title={headline}
     lead="Over five years at Tecsys, I went from the company’s first and only frontend developer to frontend tech lead of a nine-person UX team. Along the way, I brought modern UI into a legacy Java supply-chain platform without a rewrite, built its component library and design system, and helped grow a design culture in a backend-first company."
   />
 

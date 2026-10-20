@@ -10,7 +10,7 @@ import "@styles/tokens/semantic.bold.css";
 import Header from "@organisms/header/header.astro";
 import Footer from "@organisms/footer/footer.astro";
 
-interface Props {
+type Props = {
   title: string;
   description: string;
   image?: string;
@@ -19,7 +19,10 @@ interface Props {
   imageHeight?: number;
   noindex?: boolean;
   brand?: "spec" | "bold";
-}
+} & (
+  | { pageType: "article"; headline: string }
+  | { pageType?: "website" | "profile"; headline?: never }
+);
 
 const {
   title,
@@ -30,6 +33,8 @@ const {
   imageHeight = 630,
   noindex = false,
   brand = "spec",
+  pageType = "website",
+  headline,
 } = Astro.props;
 
 if (!Astro.site) {
@@ -42,6 +47,45 @@ const imageURL = new URL(image ?? "/assets/social/default.png", Astro.site);
 const socialImageAlt = imageAlt ?? (image
   ? undefined
   : "Nico Collin - Frontend Tech Lead. UI foundations teams ship on.");
+const person = {
+  "@type": "Person",
+  "@id": new URL("/#person", Astro.site).href,
+  name: "Nico Collin",
+  url: new URL("/", Astro.site).href,
+  jobTitle: "Frontend tech lead",
+  sameAs: ["https://www.linkedin.com/in/ncollin"],
+};
+const structuredData = pageType === "website" ? undefined : {
+  "@context": "https://schema.org",
+  "@graph": [
+    person,
+    pageType === "profile" ? {
+      "@type": "ProfilePage",
+      "@id": `${canonicalURL.href}#webpage`,
+      url: canonicalURL.href,
+      name: title,
+      description,
+      inLanguage: "en",
+      mainEntity: { "@id": person["@id"] },
+    } : {
+      "@type": "Article",
+      "@id": `${canonicalURL.href}#article`,
+      url: canonicalURL.href,
+      headline,
+      description,
+      inLanguage: "en",
+      image: imageURL.href,
+      author: { "@id": person["@id"] },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": canonicalURL.href,
+      },
+    },
+  ],
+};
+const structuredDataJSON = structuredData
+  ? JSON.stringify(structuredData).replace(/</g, "\\u003c")
+  : undefined;
 ---
 
 <!doctype html>
@@ -71,7 +115,7 @@ const socialImageAlt = imageAlt ?? (image
     {!noindex && <link rel="canonical" href={canonicalURL.href} />}
     {noindex && <meta name="robots" content="noindex" />}
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pageType === "article" ? "article" : "website"} />
     <meta property="og:site_name" content="Nico Collin" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -86,6 +130,9 @@ const socialImageAlt = imageAlt ?? (image
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageURL.href} />
     {socialImageAlt && <meta name="twitter:image:alt" content={socialImageAlt} />}
+    {structuredDataJSON && (
+      <script type="application/ld+json" set:html={structuredDataJSON} />
+    )}
   </head>
   <body>
     <div class="nc-layout">
