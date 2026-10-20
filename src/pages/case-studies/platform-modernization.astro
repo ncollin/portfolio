@@ -11,6 +11,8 @@ import CardGrid from "@organisms/card-grid/card-grid.astro";
 import InfoCard from "@molecules/info-card/info-card.astro";
 import StepList from "@organisms/step-list/step-list.astro";
 import StepRow from "@molecules/step-row/step-row.astro";
+import LessonList from "@organisms/lesson-list/lesson-list.astro";
+import LessonBlock from "@molecules/lesson-block/lesson-block.astro";
 ---
 
 <BaseLayout
@@ -34,16 +36,15 @@ import StepRow from "@molecules/step-row/step-row.astro";
   </FactsStrip>
 
   <StatsStrip>
-    <Stat value="2×" caption="faster CI pipeline" />
+    <Stat value="2×" caption="faster CI on every pull request" />
     <Stat value="3" caption="squads kept shipping" />
-    <Stat value="Vite" caption="replacing Gulp" />
+    <Stat value="Per block" caption="CSS and JS, loaded only when needed" />
   </StatsStrip>
 
   <TextSection id="context" index="01" title="Context">
-    <p>The client platform is a content-driven Java application built on a dynamic block system, with more than 10 years of history. It renders on the server with FreeMarker, with legacy AngularJS on the frontend. Before I joined, Vue.js had been chosen to gradually replace AngularJS.</p>
+    <p>The client platform is a content-driven Java application with more than 10 years of history. Pages are built entirely from content: authors place blocks into page zones, and everything is stored in Sling. It renders on the server with FreeMarker, with legacy AngularJS on the frontend. Before I joined, Vue.js had been chosen to gradually replace AngularJS.</p>
+    <p>The hardest part isn’t any single technology. It’s the mix of legacy and newer stacks, along with architecture decisions that made sense at the time but didn’t scale.</p>
     <p>As frontend tech lead, I define the technical approach for every new feature, support three squads of about 15 people, and am responsible for improving the project’s frontend stack.</p>
-    <!-- TODO: what the platform is for (brand websites? a configurator?), its rough size,
-         and the state it was in when you joined: what hurt most? -->
   </TextSection>
 
   <CardGrid
@@ -52,13 +53,14 @@ import StepRow from "@molecules/step-row/step-row.astro";
     title="Challenges"
     intro="The platform had to keep shipping for the client while it changed."
   >
-    <InfoCard tag="01" title="No full rewrite"
-      text="A complete AngularJS migration wasn’t an option, so modernization had to be incremental." />
-    <InfoCard tag="02" title="Tangled CSS and JS"
-      text="Styles and scripts were mixed together, so moving or cleaning anything risked regressions." />
-    <InfoCard tag="03" title="Three squads, one platform"
+    <InfoCard tag="01" title="No time or budget of its own"
+      text="Modernization has no dedicated resources. Client priorities always come first, and there’s no long-term vision for where the platform should go." />
+    <InfoCard tag="02" title="No full rewrite"
+      text="A complete AngularJS migration wasn’t an option, so modernization has to happen inside client work." />
+    <InfoCard tag="03" title="Code all over the place"
+      text="Frontend code is scattered, and there’s no full inventory of existing blocks, so any cleanup is hard to scope." />
+    <InfoCard tag="04" title="Three squads, one platform"
       text="All three squads had to stay aligned, and knowledge had to spread across them instead of staying in one squad." />
-    <!-- TODO: any other constraint, such as budget, client expectations or release cadence -->
   </CardGrid>
 
   <StepList
@@ -68,38 +70,52 @@ import StepRow from "@molecules/step-row/step-row.astro";
     intro="Rather than a big-bang migration, I modernize the platform piece by piece, inside normal client work."
   >
     <StepRow number="01" title="Turn client requests into refactoring opportunities">
-      <p>Any client request touching an AngularJS module becomes a chance to refactor it to Vue.js, when budget and time allow.</p>
-      <!-- TODO: how much has been migrated so far, and how refactoring time is negotiated with the client -->
+      <p>Refactoring happens when a client request touches legacy code. If the deadline isn’t critical, we bake the needed refactoring into the work and move that module from AngularJS to Vue.js. Most of the complex blocks have been migrated this way.</p>
     </StepRow>
     <StepRow number="02" title="Load only what each block needs">
-      <p>I evolved the block system from a single global CSS and JS file to loading only the files needed by the blocks on the page.</p>
-      <!-- TODO: how it works technically, and its impact on page weight or performance scores -->
+      <p>The platform used to load one global CSS file and one JS file on every page, even for blocks that weren’t there. I led a refactoring that splits each block’s CSS and JS, and loads them only when the block is on the page.</p>
+      <p><strong>Loading strategy.</strong> A loading layer on top applies a preload, defer or async strategy to each file.</p>
+      <p><strong>Where it stands.</strong> New blocks use this system, but the legacy global files are still loaded alongside them, so page weight hasn’t dropped yet. The gains will show as legacy code is removed, block by block.</p>
     </StepRow>
     <StepRow number="03" title="Introduce a BFF API">
-      <p>I introduced a backend-for-frontend (BFF) API layer.</p>
-      <!-- TODO: why it was needed and what problem it solved -->
+      <p>The existing APIs were so generic that the frontend had to parse and reshape almost everything. Every API change also risked breaking another part of the application.</p>
+      <p>I introduced a backend-for-frontend (BFF) layer shaped around what the frontend actually needs. Frontend code got simpler, and API changes stopped rippling across the app.</p>
     </StepRow>
     <StepRow number="04" title="Modernize the build and delivery pipeline">
-      <p><strong>Gulp to Vite.</strong> I moved the build process from Gulp to Vite.</p>
-      <p><strong>A CI pipeline twice as fast.</strong> I restructured the pipeline to run processes in parallel, cutting its run time in half.</p>
+      <p><strong>Vite for the new block system.</strong> The new per-block system builds with Vite, while legacy code stays on Gulp until it’s migrated.</p>
+      <p><strong>A CI pipeline twice as fast.</strong> I restructured the pipelines to run processes in parallel, cutting build and test time on every pull request in half.</p>
       <p><strong>Quality gates.</strong> CI/CD gates with linting and Stylelint enforce standards automatically.</p>
-      <!-- TODO: build time before and after Vite -->
     </StepRow>
     <StepRow number="05" title="From Ghost Inspector to Playwright">
-      <p>A major initiative moved end-to-end testing from Ghost Inspector to Playwright, bringing QA and developers into closer collaboration.</p>
-      <!-- TODO: your role, why the switch, and what changed day to day for QA and developers -->
+      <p>The QA team wanted to move away from Ghost Inspector. I drove the initiative and set up a full Playwright architecture where developers and QA write end-to-end tests together.</p>
+      <p><strong>Adoption.</strong> One squad now runs it on a regular cadence, and a second squad is ramping up.</p>
     </StepRow>
     <StepRow number="06" title="Spread knowledge across squads">
+      <p><strong>Documentation portal.</strong> Documentation had been missing since day one, and the team kept flagging it. Confluence existed, but people struggled to find what they needed. I introduced a Docusaurus portal where I document every frontend architecture decision, and I keep improving it over time.</p>
       <p><strong>Coaching.</strong> I coach the squad leads and the team.</p>
       <p><strong>Workshops.</strong> I facilitate workshops and collaboration across squads.</p>
-      <p><strong>Documentation portal.</strong> A documentation portal exposes all architecture decisions and how to work on the platform.</p>
-      <!-- TODO: who built the portal, and its format (for example, architecture decision records) -->
     </StepRow>
     <StepRow number="07" title="Bring AI into the workflow">
-      <p>I explored AI tools and integrated them into the team’s workflow.</p>
-      <!-- TODO: which tools, what for (code, docs, reviews, tests), how they were rolled out, what worked -->
+      <p>The team mainly uses GitHub Copilot, and I’m still exploring how to work with it well. I write shared prompts and skills, and connect MCP servers such as Figma’s.</p>
+      <p><strong>An AI refactoring workflow.</strong> I’m building an AI workflow to bring the component library back in sync with the design system, and to help migrate the main app. It uses the documentation portal as the single source of truth for rules and guidelines. Early results are promising.</p>
     </StepRow>
   </StepList>
+
+  <LessonList
+    id="lessons"
+    index="04"
+    title="What I’d do differently"
+    intro="Most of these lessons are about what incremental modernization needs to stay on track."
+  >
+    <LessonBlock
+      statement="Set a long-term vision, even an informal one."
+      support="Without a shared direction for the platform, modernization depends on which client requests happen to come in."
+    />
+    <LessonBlock
+      statement="Treat documentation as infrastructure."
+      support="Audits like a full inventory of existing blocks, and documented decisions, make cleanup possible to scope. With AI in the workflow, they matter even more: the tools are only as good as the context they’re given."
+    />
+  </LessonList>
 
   <CaseStudyNav
     previous={{ href: "/case-studies/component-library", title: "Taking control of an inherited component library" }}

@@ -16,7 +16,7 @@ import LessonBlock from "@molecules/lesson-block/lesson-block.astro";
 ---
 
 <BaseLayout
-  title="Building a frontend and design practice at Tecsys · Nico Collin"
+  title="Building a frontend and design practice from zero · Nico Collin"
   description="How I helped grow a nine-person UX team at Tecsys and built a shared design system adopted across three products."
   brand="spec"
 >
@@ -73,23 +73,18 @@ import LessonBlock from "@molecules/lesson-block/lesson-block.astro";
     </StepRow>
     <StepRow number="02" title="Vue for the first product">
       <p>The first real opportunity came from the WMS team: a new interface for warehouse package receivers. The platform’s table-based UI couldn’t support the experience they needed, so the app ran as a custom view inside the platform, bypassing those limits.</p>
-      <p>I evaluated which JavaScript framework to introduce and chose Vue.js. The deciding factor was the team, not the benchmark.</p>
-      <p><strong>Least to learn.</strong> Vue adds the least on top of plain JavaScript, which the team still needed to ramp up on.</p>
-      <p><strong>Flexible enough.</strong> Its flexibility fit a restrictive ecosystem, where a stricter framework would have fought the platform.</p>
-      <p><strong>The trade-off.</strong> Less built-in structure, which I accepted and compensated for through the component library and conventions.</p>
-      <p>I handled almost all of the development. Platform experts helped wire up the data the app needed.</p>
+      <p><strong>Chosen for the team, not the benchmark.</strong> I picked Vue.js because it adds the least on top of plain JavaScript, which the team was still learning, and its flexibility fit a restrictive platform. I accepted its lighter structure and made up for it with the component library and conventions.</p>
+      <p>I handled almost all of the development, with platform experts wiring up the data the app needed.</p>
     </StepRow>
     <StepRow number="03" title="Designing without a designer">
-      <p>Tecsys had no designer, so I took on the UX and UI work myself. I learned Figma, which was still fairly new at the time, and produced the wireframes, UI design and interactive prototype.</p>
-      <p><strong>Two contexts, one app.</strong> Receivers used it at a desk and on mobile devices on the warehouse floor, so the design had to work across both.</p>
-      <p><strong>Validation with limited access.</strong> I couldn’t get access to actual end users, so I validated designs through review sessions with internal domain experts instead, and challenged assumptions there.</p>
-      <p><strong>Designing for scanner hardware.</strong> On the floor, only a specific set of older mobile devices with built-in hardware scanners was supported. The UI had to adapt to their input methods and interaction patterns, not just their smaller screens.</p>
-      <p><strong>Input that never gets lost.</strong> Receivers scanned packages back to back, without touching the screen or refocusing a field between scans. The app had to capture every scan, every time, no matter what was on screen, so focus management became a core requirement of the interaction design.</p>
-      <p><strong>Result of the first phase.</strong> The receiving app shipped and proved that the new processes and technology worked inside the platform. We never got field data from the warehouse floor, but the new experience generated real excitement internally. It also exposed the limit: one person pushing the boundaries doesn’t change a company.</p>
+      <p>Tecsys had no designer, so I took on the UX and UI work myself. I learned Figma, which was still fairly new at the time, and produced the wireframes, UI design and interactive prototype. With no access to end users, I validated designs in review sessions with internal domain experts.</p>
+      <p><strong>Built for the warehouse floor.</strong> Receivers used the app at a desk and on older mobile devices with built-in hardware scanners, so the UI had to adapt to their input methods, not just their smaller screens.</p>
+      <p><strong>Every scan, every time.</strong> Receivers scanned packages back to back without touching the screen, so the app had to capture every scan whatever was on screen. Focus management became a core requirement.</p>
+      <p><strong>The turning point.</strong> The app shipped and proved the new approach worked inside the platform. We never got field data, but it created real excitement internally. It also showed the limit: one person pushing the boundaries doesn’t change a company.</p>
     </StepRow>
     <StepRow number="04" title="Building a UX function">
       <p>A new manager joined with the goal of making UX part of Tecsys culture, and together we built the team from zero.</p>
-      <p><strong>Shaping the vision.</strong> I worked closely with him, travelling to work in person, to define what the UX team should be and how it would work with engineering.</p>
+      <p><strong>Shaping the vision.</strong> I worked side by side with him, often in person, to define what the UX team should be and how it would work with engineering.</p>
       <p><strong>Hiring.</strong> We searched for and hired the first UX designer, then a UI designer.</p>
       <p><strong>Levelling up.</strong> While we recruited, I deepened my UX practice: online training, design and prototyping tools, design sprint workshops, and design systems.</p>
     </StepRow>
@@ -120,19 +115,24 @@ import LessonBlock from "@molecules/lesson-block/lesson-block.astro";
     id="lessons"
     index="05"
     title="What I’d do differently"
-    intro="Most of my lessons are about adoption."
+    intro="Most of my lessons are about getting closer to the people around the product: the teams who build it, and the users it’s built for."
   >
     <LessonBlock
-      statement="Grow champions in strategic teams early."
-      support="Tecsys was a backend-first company, and the value of UX and UI wasn’t obvious to most teams. A model with a central owner and open pull requests wasn’t enough on its own."
+      statement="Grow champions inside strategic teams early."
+      support="In a backend-first company, a central owner and open pull requests weren’t enough. Engineers who had seen the benefits firsthand could have made the case to their peers, in their own context and language."
     />
     <LessonBlock
-      statement="Let peers make the case."
-      support="Engineers who had seen the benefits firsthand could have shown their peers what the system brought, in their own context and language. That advocacy would have done more for adoption than any process designed from the outside."
+      statement="Fight for access to end users."
+      support="They’re who we build the apps for. I designed for the warehouse floor without ever seeing it, and internal experts can’t fully stand in for the people doing the work."
+    />
+    <LessonBlock
+      statement="Learn the platform from the inside."
+      support="A deeper understanding of how the Java platform worked under the hood would have let me drive change from within, and talk the same language as the platform developers."
     />
   </LessonList>
 
   <CaseStudyNav
     previous={{ href: "/case-studies/platform-modernization", title: "Modernizing a 10-year-old platform without stopping delivery" }}
+    next={{ href: "/case-studies/component-library", title: "Taking control of an inherited component library" }}
   />
 </BaseLayout>
