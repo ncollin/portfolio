@@ -1,8 +1,8 @@
+/* Mobile first. Base: text, then buttons below, wrapping and aligned left.
+   From md: text and buttons side by side, buttons aligned right. */
 .nc-contact-block {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   gap: var(--nc-gap-lg);
   padding: var(--nc-padding-xl);
   background-color: var(--nc-color-background-emphasis);
@@ -13,7 +13,6 @@
 }
 
 .nc-contact-block__text {
-  flex: 1 1 var(--nc-min-width-column);
   display: flex;
   flex-direction: column;
   gap: var(--nc-gap-sm);
@@ -44,9 +43,25 @@
 }
 
 .nc-contact-block__actions {
-  flex: 1 1 var(--nc-min-width-column);
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
   gap: var(--nc-gap-md); /* room for Bold's button shadows */
+}
+
+@media (min-width: 48em) {
+  .nc-contact-block {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nc-contact-block__text,
+  .nc-contact-block__actions {
+    flex: 1 1 var(--nc-min-width-column);
+  }
+
+  .nc-contact-block__actions {
+    justify-content: flex-end;
+  }
 }

@@ -6,9 +6,10 @@
   --_shadow: var(--nc-shadow-offset-default);
 
   position: relative; /* anchors the stretched link */
+  /* Mobile first. Base: text, then stats below at full width.
+     From lg: stats to the right of the text. */
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
   column-gap: var(--nc-gap-xl);
   row-gap: var(--nc-gap-lg);
   padding: var(--nc-padding-xl);
@@ -22,7 +23,6 @@
 }
 
 .nc-case-study-card__text {
-  flex: 1 1 var(--nc-min-width-column);
   display: flex;
   flex-direction: column;
   gap: var(--nc-gap-sm);
@@ -92,7 +92,6 @@
 
 /* Same width and equal columns on every card, so stats line up across cards */
 .nc-case-study-card__stats {
-  flex: 0 1 min(100%, calc(var(--nc-min-width-column) * 1.75));
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--nc-gap-md);
@@ -136,5 +135,21 @@
   .nc-case-study-card__body:hover,
   .nc-case-study-card__body:active {
     transform: none;
+  }
+}
+
+@media (min-width: 64em) {
+  .nc-case-study-card__body {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .nc-case-study-card__text {
+    flex: 1 1 var(--nc-min-width-column);
+  }
+
+  /* Same width on every card, so stats line up across cards */
+  .nc-case-study-card__stats {
+    flex: 0 1 calc(var(--nc-min-width-column) * 1.75);
   }
 }

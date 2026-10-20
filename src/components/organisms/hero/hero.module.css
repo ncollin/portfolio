@@ -42,8 +42,11 @@
   margin: 0;
 }
 
+/* Buttons wrap to a new line when they don't fit; the gap leaves room for
+   Bold's button shadows */
 .nc-hero__actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--nc-gap-md);
 }

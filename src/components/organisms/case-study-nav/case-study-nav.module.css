@@ -1,26 +1,18 @@
+/* Mobile first. Base: previous and next stacked, both aligned left.
+   From md: two equal halves side by side, next aligned right. */
 .nc-case-study-nav {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
   gap: var(--nc-gap-lg);
 }
 
-/* Two equal halves, so a long title wraps evenly instead of crowding the other */
 .nc-case-study-nav__item {
-  flex: 1 1 0;
   min-inline-size: 0;
   text-wrap: balance;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--nc-gap-sm);
-}
-
-/* Next sits on the right, even when there's no previous */
-.nc-case-study-nav__item--next {
-  align-items: flex-end;
-  text-align: end;
-  margin-inline-start: auto;
 }
 
 .nc-case-study-nav__label {
@@ -32,4 +24,23 @@
   line-height: var(--nc-line-height-label);
   letter-spacing: var(--nc-letter-spacing-label);
   text-transform: var(--nc-text-transform-label);
+}
+
+@media (min-width: 48em) {
+  .nc-case-study-nav {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  /* Two equal halves, so a long title wraps evenly instead of crowding the other */
+  .nc-case-study-nav__item {
+    flex: 1 1 0;
+  }
+
+  /* Next sits on the right, even when there's no previous */
+  .nc-case-study-nav__item--next {
+    align-items: flex-end;
+    text-align: end;
+    margin-inline-start: auto;
+  }
 }

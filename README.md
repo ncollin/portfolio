@@ -268,7 +268,7 @@ An unconditional Plex Sans 600 preload was tested on the production preview (col
 
 ### Open
 
-- [ ] **Responsive layout.** Scale tokens, overflow-safe grids and the header are done. Remaining: mobile-first layouts for `step-row`, `case-study-card`, `case-study-nav`, `hero__actions` and `contact-block`, then testing at 320–1440px and 200%/400% zoom in both brands.
+- [ ] **Responsive layout.** Scale tokens, overflow-safe grids, the header and the component layouts are done. Remaining: testing at 320–1440px and 200%/400% zoom in both brands, real devices, Lighthouse on mobile, then a "Responsive" section in this README.
 - [ ] **Figma comparison.** Compare the screens against the final Figma frames, including mobile.
 
 ### After deployment
