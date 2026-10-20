@@ -169,6 +169,12 @@ on a segment if the group must have a selection. The component changes selection
 only; filtering content or switching panels requires separate application logic
 listening for the native `change` event.
 
+The header places its brand selector beside, not inside, the Main navigation
+landmark. It sets `--nc-segmented-control-indicator-offset` from the restored
+`data-theme`, so the indicator starts in the correct position before the header
+script synchronizes the radios. User changes still animate unless reduced motion
+is requested. Other segmented controls use checked-radio positioning by default.
+
 ## Organism scaffolds
 
 Each component in `src/components/organisms/` has a matching folder, `.astro` file,

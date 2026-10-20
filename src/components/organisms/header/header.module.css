@@ -9,10 +9,16 @@
   padding-top: var(--nc-padding-lg);
 }
 
-.nc-header__nav {
+.nc-header__controls {
+  --nc-segmented-control-indicator-offset: 0px;
+
   display: flex;
   align-items: center;
   gap: var(--nc-gap-lg);
+}
+
+:global([data-theme="bold"]) .nc-header__controls {
+  --nc-segmented-control-indicator-offset: calc(100% + var(--nc-gap-xs));
 }
 
 .nc-header__content {

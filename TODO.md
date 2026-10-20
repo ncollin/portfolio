@@ -16,7 +16,7 @@ The site has no responsive behavior yet, which matters most: on a phone the 72px
 | 2 | Hero `type` prop does nothing. No CSS for `nc-hero--home` / `--page`, home never passes `type="home"`, `heading-1` tokens unused anywhere. | `hero.astro`, `hero.module.css`, `index.astro` | Likely: case study heroes use `heading-1`, home uses `display`. Confirm in Figma. |
 | 3 | Done: shared motion tokens define the existing 60ms, 120ms, 200ms durations and standard easing. | `primitives.tokens.json`, `primitives.css`, button, link, card, segmented control CSS | Components use tokens without hardcoded motion fallbacks; existing reduced-motion behavior is preserved. |
 | 4 | Reviewed: retain all 5 `icon-*` colors, `background-surface`, and `gap-2xl` as reserved design vocabulary. | `semantic.*.css`, semantic JSON sources | Intentionally unused today; icons inherit `currentColor`. Do not force usage or remove them during cleanup. |
-| 5 | Toggle slides on load. A saved "bold" visitor gets "spec" checked in HTML; the header script fixes it after load, so the indicator animates. | `segmented-control.module.css`, `header.astro` | Drive the indicator from `[data-theme="bold"]`, which the inline script sets before paint. |
+| 5 | Done: brand indicator follows the theme restored before paint, independent of deferred radio synchronization. | `segmented-control.module.css`, `header.module.css` | Header-scoped indicator offset follows `data-theme`; deliberate changes still animate and reduced motion disables the transition. |
 | 6 | Anchor jumps hide section titles. The sticky header is taller than `scroll-margin-top` (64px). | `layout.css` | Set `scroll-padding-top` on `html` to the header height. |
 
 Smaller issues:
@@ -26,7 +26,7 @@ Smaller issues:
 - [x] Removed the duplicate button icon stroke rule; Icon owns stroke styling.
 - [x] Removed the unused footer content passed by the layout.
 - [x] Token diagram uses confirmed primitive, semantic, and utility examples from the Nurun system.
-- [ ] The brand toggle sits inside `<nav>`, but it isn't navigation; move it beside the nav.
+- [x] Brand selector is beside the Main navigation landmark, preserving visual grouping and keyboard order.
 
 ## SEO
 

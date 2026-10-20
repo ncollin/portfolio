@@ -22,13 +22,14 @@
   border-radius: var(--nc-border-radius-sm);
   background: var(--nc-color-background-action);
   pointer-events: none; /* never block clicks, even if stacking changes */
+  transform: translateX(var(--nc-segmented-control-indicator-offset, 0px));
   transition: transform var(--nc-motion-duration-base)
     var(--nc-motion-easing-standard);
 }
 
 /* Element selectors, not the segment's classes: they're hashed in another file */
 .nc-segmented-control:has(> label:nth-of-type(2) input:checked)::before {
-  transform: translateX(calc(100% + var(--nc-gap-xs)));
+  transform: translateX(var(--nc-segmented-control-indicator-offset, calc(100% + var(--nc-gap-xs))));
 }
 
 .nc-segmented-control__legend {
