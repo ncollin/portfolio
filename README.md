@@ -80,10 +80,9 @@ network font downloads, or runtime image service. Each image must be below
 
 Use `noindex` for pages that should not appear in search results. These pages
 receive a `noindex` robots directive and omit the canonical tag; `og:url` remains
-available for social sharing. It is currently
-set on the 404 page and the draft platform-modernization case study; remove it
-from the case study when it is ready to be indexed. `noindex` is not access control:
-the page remains publicly accessible.
+available for social sharing. Only the 404 page currently uses `noindex`;
+all three case studies are published and indexable. `noindex` is not access
+control: the page remains publicly accessible.
 
 ### Structured data
 
@@ -98,7 +97,23 @@ Author details are defined once in [base-layout.astro](src/layouts/base-layout.a
 and included in each JSON-LD graph with a stable `Person` identifier. JSON is
 serialized with `<` escaped so content cannot prematurely close the script.
 Publication and modification dates are omitted until real dates are available.
-Structured data does not change indexing: the draft remains `noindex`.
+Structured data does not change indexing; the layout's `noindex` prop controls
+the robots directive.
+
+### Sitemap and robots
+
+The official `@astrojs/sitemap` integration generates `sitemap-index.xml` and
+numbered sitemap files during builds. Home and all three published case studies
+are included, using the configured site URL and no-trailing-slash convention.
+The 404 page is excluded. Modification dates are not generated.
+
+[robots.txt.ts](src/pages/robots.txt.ts) generates a static `robots.txt` at build
+time, allowing crawling and pointing to the sitemap index using the same `site`
+setting. The layout also links to the sitemap index.
+
+If a future page uses `noindex`, exclude it with the sitemap integration's
+`filter` in [astro.config.mjs](astro.config.mjs) as well: the integration does not
+read layout props. Keep crawling allowed so search engines can read `noindex`.
 
 ## Tags
 

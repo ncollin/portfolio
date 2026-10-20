@@ -1,10 +1,16 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://nico.collin.app',
   trailingSlash: 'never',
+  integrations: [
+    sitemap({
+      filter: (page) => !['/404', '/404/', '/404.html'].includes(new URL(page).pathname),
+    }),
+  ],
   fonts: [
     {
       name: 'IBM Plex Sans',
