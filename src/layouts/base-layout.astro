@@ -20,8 +20,8 @@ type Props = {
   noindex?: boolean;
   brand?: "spec" | "bold";
 } & (
-  | { pageType: "article"; headline: string }
-  | { pageType?: "website" | "profile"; headline?: never }
+  | { pageType: "article"; headline: string; datePublished: string; dateModified?: string }
+  | { pageType?: "website" | "profile"; headline?: never; datePublished?: never; dateModified?: never }
 );
 
 const {
@@ -35,6 +35,8 @@ const {
   brand = "spec",
   pageType = "website",
   headline,
+  datePublished,
+  dateModified = datePublished,
 } = Astro.props;
 
 if (!Astro.site) {
@@ -73,6 +75,8 @@ const structuredData = pageType === "website" ? undefined : {
       url: canonicalURL.href,
       headline,
       description,
+      datePublished,
+      dateModified,
       inLanguage: "en",
       image: imageURL.href,
       author: { "@id": person["@id"] },
@@ -125,6 +129,8 @@ const structuredDataJSON = structuredData
     {socialImageAlt && <meta property="og:image:alt" content={socialImageAlt} />}
     <meta property="og:image:width" content={String(imageWidth)} />
     <meta property="og:image:height" content={String(imageHeight)} />
+    {datePublished && <meta property="article:published_time" content={datePublished} />}
+    {dateModified && <meta property="article:modified_time" content={dateModified} />}
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />

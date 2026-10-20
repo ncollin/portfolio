@@ -1,5 +1,7 @@
 {
-  "name": "astro",
+  "name": "nico-collin-portfolio",
+  "private": true,
+  "description": "Nico Collin’s portfolio site, built with Astro.",
   "type": "module",
   "version": "0.0.1",
   "engines": {
