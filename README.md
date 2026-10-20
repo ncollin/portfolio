@@ -179,7 +179,7 @@ Mobile first:
 
 - **Base:** two rows. Your name and the brand toggle on the first, the navigation spread across the second. The header isn't sticky, so it doesn't take a fixed share of a small screen. The toggle's segments use tighter side padding (`--nc-segmented-control-segment-padding-inline`) so name and toggle share the row; on the narrowest screens, the name wraps before anything overflows.
 - **From `md` (48em):** one row, sticky. Name on the left, then navigation and toggle on the right.
-- The HTML order follows the mobile layout (name, toggle, navigation), and a CSS grid moves the toggle after the navigation from `md`. So on wider screens, keyboard focus reaches the toggle before the links, even though it sits to their right.
+- Keyboard order follows the visual order through `reading-flow: grid-rows` on the header grid: name → toggle → navigation on mobile, name → navigation → toggle from `md`. `reading-flow` is supported in Chromium browsers (Chrome, Edge, 137+) but not yet in Safari or Firefox. There, the HTML order applies, which is name → navigation → toggle: correct on desktop, where Tab is mostly used, and off on mobile. Positive `tabindex` values were ruled out: they affect the whole page's tab order and fail Lighthouse's accessibility audit.
 - Navigation links are at least 44px tall for touch. That's shorter than the toggle, so the one-row header keeps its height.
 
 In-page links (`/#work`, `/#contact`) land below the header through `scroll-padding-top` in [layout.css](src/styles/layout.css). On mobile, it's only breathing room. From `md`, it's the sticky header's height, built from the same tokens as the header. If you change the header's padding, gap, toggle or name size, update that calculation too.

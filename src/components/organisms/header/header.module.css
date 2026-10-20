@@ -5,8 +5,11 @@
      --- Work -- Contact -- Resume ---
    From md: one row, sticky.
      name --------- Work  Contact  Resume  toggle
-   The HTML order follows mobile (name, toggle, navigation); from md the grid
-   places the toggle after the navigation. */
+   The HTML order is name, navigation, toggle (the desktop order).
+   reading-flow: grid-rows makes keyboard focus and screen readers follow
+   the grid's visual order instead, so on mobile it's name, toggle,
+   navigation. Supported in Chromium (137+); elsewhere the HTML order
+   applies, which matches desktop. */
 
 .nc-header {
   display: flex;
@@ -25,6 +28,7 @@
   align-items: center;
   column-gap: var(--nc-gap-md);
   row-gap: var(--nc-gap-md);
+  reading-flow: grid-rows;
 }
 
 .nc-header__title {
