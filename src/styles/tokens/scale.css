@@ -1,0 +1,63 @@
+/* Scale tokens: the values that change with the viewport, shared by both brands.
+   Source: specs/scale.{base,md,lg}.tokens.json, one file per mode.
+   Mobile first: base applies everywhere, then md and lg override from their
+   min-width up. Breakpoints are fixed here because media queries can't read
+   custom properties: md = 48em (768px), lg = 64em (1024px). */
+
+:root {
+  --nc-scale-font-size-display: var(--nc-font-size-45);
+  --nc-scale-font-size-heading-1: var(--nc-font-size-35);
+  --nc-scale-font-size-heading-2: var(--nc-font-size-28);
+  --nc-scale-font-size-heading-3: var(--nc-font-size-22);
+  --nc-scale-font-size-lead: var(--nc-font-size-17);
+  --nc-scale-font-size-data-lg: var(--nc-font-size-35);
+  --nc-scale-font-size-data-sm: var(--nc-font-size-22);
+  --nc-scale-line-height-display: var(--nc-line-height-48);
+  --nc-scale-line-height-heading-1: var(--nc-line-height-40);
+  --nc-scale-line-height-heading-2: var(--nc-line-height-32);
+  --nc-scale-line-height-heading-3: var(--nc-line-height-28);
+  --nc-scale-line-height-lead: var(--nc-line-height-28);
+  --nc-scale-line-height-data-lg: var(--nc-line-height-40);
+  --nc-scale-line-height-data-sm: var(--nc-line-height-28);
+  --nc-scale-padding-xl: var(--nc-size-24);
+  --nc-scale-padding-2xl: var(--nc-size-16);
+  --nc-scale-gap-lg: var(--nc-size-24);
+  --nc-scale-gap-xl: var(--nc-size-40);
+  --nc-scale-gap-2xl: var(--nc-size-64);
+}
+
+@media (min-width: 48em) {
+  :root {
+    --nc-scale-font-size-display: var(--nc-font-size-57);
+    --nc-scale-font-size-heading-1: var(--nc-font-size-45);
+    --nc-scale-font-size-heading-2: var(--nc-font-size-35);
+    --nc-scale-font-size-heading-3: var(--nc-font-size-28);
+    --nc-scale-font-size-lead: var(--nc-font-size-22);
+    --nc-scale-font-size-data-lg: var(--nc-font-size-45);
+    --nc-scale-font-size-data-sm: var(--nc-font-size-28);
+    --nc-scale-line-height-display: var(--nc-line-height-60);
+    --nc-scale-line-height-heading-1: var(--nc-line-height-48);
+    --nc-scale-line-height-heading-2: var(--nc-line-height-40);
+    --nc-scale-line-height-heading-3: var(--nc-line-height-32);
+    --nc-scale-line-height-lead: var(--nc-line-height-36);
+    --nc-scale-line-height-data-lg: var(--nc-line-height-48);
+    --nc-scale-line-height-data-sm: var(--nc-line-height-32);
+    --nc-scale-padding-xl: var(--nc-size-32);
+    --nc-scale-padding-2xl: var(--nc-size-24);
+    --nc-scale-gap-lg: var(--nc-size-32);
+    --nc-scale-gap-xl: var(--nc-size-64);
+    --nc-scale-gap-2xl: var(--nc-size-96);
+  }
+}
+
+@media (min-width: 64em) {
+  :root {
+    --nc-scale-font-size-display: var(--nc-font-size-72);
+    --nc-scale-font-size-heading-1: var(--nc-font-size-57);
+    --nc-scale-font-size-data-lg: var(--nc-font-size-57);
+    --nc-scale-line-height-display: var(--nc-line-height-76);
+    --nc-scale-line-height-heading-1: var(--nc-line-height-60);
+    --nc-scale-line-height-data-lg: var(--nc-line-height-56);
+    --nc-scale-padding-2xl: var(--nc-size-40);
+  }
+}

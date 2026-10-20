@@ -68,15 +68,43 @@ import styles from "@atoms/link/link.module.css";
 
 ## Design tokens
 
-The three stylesheets in [src/styles/tokens](src/styles/tokens/) map one-to-one to the JSON sources in [specs](specs/):
+Tokens come in three collections, each referencing the one before it:
+
+```
+primitives  →  scale (base | md | lg)  →  semantic (spec | bold)  →  components
+```
+
+The stylesheets in [src/styles/tokens](src/styles/tokens/) map to the JSON sources in [specs](specs/), one JSON file per mode:
 
 | Source | Stylesheet | Scope |
 | --- | --- | --- |
 | `primitives.tokens.json` | `primitives.css` | `:root` |
+| `scale.base.tokens.json` | `scale.css` | `:root` |
+| `scale.md.tokens.json` | `scale.css` | `:root`, from `48em` |
+| `scale.lg.tokens.json` | `scale.css` | `:root`, from `64em` |
 | `semantic.spec.tokens.json` | `semantic.spec.css` | `[data-theme="spec"]` |
 | `semantic.bold.tokens.json` | `semantic.bold.css` | `[data-theme="bold"]` |
 
-The CSS files are static, so keep them in sync when editing the JSON sources.
+The CSS files are static, so keep them in sync when editing the JSON sources. The layout imports them in this order: primitives, scale, spec, bold.
+
+**Scale.** Scale holds only the tokens that change with the viewport, which are the same in both brands. Components never use scale tokens directly: semantic tokens point to them (`--nc-font-size-display: var(--nc-scale-font-size-display)`), so components keep using semantic names. Spec's `heading-2` is the one exception: a small label that doesn't scale, so it points to its primitive instead.
+
+| Token | base | md (≥48em) | lg (≥64em) |
+| --- | --- | --- | --- |
+| `font-size` / `line-height`: `display` | 45 / 48 | 57 / 60 | 72 / 76 |
+| `heading-1` | 35 / 40 | 45 / 48 | 57 / 60 |
+| `heading-2` (bold only) | 28 / 32 | 35 / 40 | 35 / 40 |
+| `heading-3` | 22 / 28 | 28 / 32 | 28 / 32 |
+| `lead` | 17 / 28 | 22 / 36 | 22 / 36 |
+| `data-lg` | 35 / 40 | 45 / 48 | 57 / 56 |
+| `data-sm` | 22 / 28 | 28 / 32 | 28 / 32 |
+| `padding-xl` | 24 | 32 | 32 |
+| `padding-2xl` (page margins) | 16 | 24 | 40 |
+| `gap-lg` | 24 | 32 | 32 |
+| `gap-xl` | 40 | 64 | 64 |
+| `gap-2xl` | 64 | 96 | 96 |
+
+Values are in px; every one references an existing primitive. The `lg` values are the original desktop values. Breakpoints can't be tokens, because media queries can't read custom properties: `md` and `lg` are fixed at `48em` and `64em` in `scale.css` and in this README. The Scale collection still needs to be created in Figma to match these files.
 
 **Naming.** Token paths become hyphenated custom properties with the `nc-` prefix: `color.text.primary` becomes `--nc-color-text-primary`. All authored CSS classes, CSS Module keys, and utility classes also use `nc-`. Aliases stay as `var()` references, and font-family arrays become CSS font stacks.
 
