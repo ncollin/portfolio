@@ -17,8 +17,8 @@
   border-radius: var(--nc-border-radius-md);
   box-shadow: var(--_shadow) var(--_shadow) var(--nc-shadow-blur) var(--nc-shadow-color);
   transition-property: background-color, border-color, box-shadow, transform;
-  transition-duration: var(--nc-motion-duration-fast, 120ms);
-  transition-timing-function: var(--nc-motion-easing-standard, cubic-bezier(0.2, 0, 0, 1));
+  transition-duration: var(--nc-motion-duration-fast);
+  transition-timing-function: var(--nc-motion-easing-standard);
 }
 
 .nc-case-study-card__text {
@@ -87,7 +87,7 @@
   line-height: var(--nc-line-height-control);
   letter-spacing: var(--nc-letter-spacing-control);
   text-transform: var(--nc-text-transform-control);
-  transition: color var(--nc-motion-duration-fast, 120ms) var(--nc-motion-easing-standard, cubic-bezier(0.2, 0, 0, 1));
+  transition: color var(--nc-motion-duration-fast) var(--nc-motion-easing-standard);
 }
 
 .nc-case-study-card__stats {
@@ -117,7 +117,7 @@
   background-color: var(--nc-color-background-control-pressed);
   border-color: var(--nc-color-border-control-pressed);
   transform: translate(var(--nc-shadow-offset-default), var(--nc-shadow-offset-default));
-  transition-duration: var(--nc-motion-duration-instant, 60ms);
+  transition-duration: var(--nc-motion-duration-instant);
 }
 
 /* Keyboard focus on the link shows a ring around the whole card */

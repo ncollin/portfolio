@@ -11,24 +11,23 @@ interface Props {
 const { id, index } = Astro.props;
 const headingId = `${id}-heading`;
 
-// Illustrative names: replace with real examples from the Nurun system.
 const layers = [
   {
     name: "Primitive tokens",
     note: "Raw values",
-    examples: ["color-blue-600: #1F5FBF", "space-16: 16px"],
+    examples: ["--stla-font-size-16", "--stla-color-blue-50"],
     description: "The raw values, such as colors and spacing.",
   },
   {
     name: "Semantic tokens",
     note: "Themes swap here",
-    examples: ["color-action-primary", "space-component-padding"],
+    examples: ["--stla-background-color-brand-default", "--stla-text-size-body-lg"],
     description: "Give those values meaning and intent. This is the layer each brand theme replaces.",
   },
   {
     name: "Utility classes",
     note: "Built on tokens",
-    examples: [".bg-action-primary", ".p-component"],
+    examples: [".stla-lg-heading-1", ".stla-global-form-label"],
     description: "Consistent styling without one-off values.",
   },
 ];

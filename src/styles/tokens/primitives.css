@@ -66,5 +66,9 @@
   --nc-radius-0: 0rem;
   --nc-radius-4: 0.4rem;
   --nc-radius-6: 0.6rem;
+  --nc-motion-duration-instant: 60ms;
+  --nc-motion-duration-fast: 120ms;
+  --nc-motion-duration-base: 200ms;
+  --nc-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
   --nc-opacity-90: 0.9;
 }

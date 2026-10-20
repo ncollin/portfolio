@@ -23,8 +23,8 @@
   line-height: var(--nc-line-height-label);
   letter-spacing: var(--nc-letter-spacing-label);
   text-transform: var(--nc-text-transform-label);
-  transition: color var(--nc-motion-duration-fast, 120ms)
-    var(--nc-motion-easing-standard, cubic-bezier(0.2, 0, 0, 1));
+  transition: color var(--nc-motion-duration-fast)
+    var(--nc-motion-easing-standard);
 }
 
 .nc-segment__input:not(:checked) + .nc-segment__content {

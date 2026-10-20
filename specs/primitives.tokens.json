@@ -317,6 +317,28 @@
       "$value": "6px"
     }
   },
+  "motion": {
+    "duration": {
+      "instant": {
+        "$type": "duration",
+        "$value": "60ms"
+      },
+      "fast": {
+        "$type": "duration",
+        "$value": "120ms"
+      },
+      "base": {
+        "$type": "duration",
+        "$value": "200ms"
+      }
+    },
+    "easing": {
+      "standard": {
+        "$type": "cubicBezier",
+        "$value": [0.2, 0, 0, 1]
+      }
+    }
+  },
   "opacity": {
     "90": {
       "$type": "number",

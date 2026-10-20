@@ -22,8 +22,8 @@
   border-radius: var(--nc-border-radius-sm);
   background: var(--nc-color-background-action);
   pointer-events: none; /* never block clicks, even if stacking changes */
-  transition: transform var(--nc-motion-duration-base, 200ms)
-    var(--nc-motion-easing-standard, cubic-bezier(0.2, 0, 0, 1));
+  transition: transform var(--nc-motion-duration-base)
+    var(--nc-motion-easing-standard);
 }
 
 /* Element selectors, not the segment's classes: they're hashed in another file */

@@ -22,8 +22,8 @@
   text-transform: var(--nc-text-transform-control);
 
   transition-property: background-color, border-color, color, box-shadow, transform;
-  transition-duration: var(--nc-motion-duration-fast, 120ms);
-  transition-timing-function: var(--nc-motion-easing-standard, cubic-bezier(0.2, 0, 0, 1));
+  transition-duration: var(--nc-motion-duration-fast);
+  transition-timing-function: var(--nc-motion-easing-standard);
 }
 
 @media (hover: hover) {
@@ -39,7 +39,7 @@
 .nc-button:active {
   --_shadow: var(--nc-shadow-offset-pressed);
   transform: translate(var(--nc-shadow-offset-default), var(--nc-shadow-offset-default));
-  transition-duration: var(--nc-motion-duration-instant, 60ms);
+  transition-duration: var(--nc-motion-duration-instant);
 }
 
 .nc-button:focus-visible {

@@ -14,8 +14,8 @@ The site has no responsive behavior yet, which matters most: on a phone the 72px
 | --- | --- | --- | --- |
 | 1 | No responsive behavior. Only hover and reduced-motion media queries exist; display is 72px, layout padding 40px, header row never wraps. | `layout.css`, `header.module.css`, tokens | Add a mobile type and spacing scale (token mode or `clamp()`) and let the header wrap. |
 | 2 | Hero `type` prop does nothing. No CSS for `nc-hero--home` / `--page`, home never passes `type="home"`, `heading-1` tokens unused anywhere. | `hero.astro`, `hero.module.css`, `index.astro` | Likely: case study heroes use `heading-1`, home uses `display`. Confirm in Figma. |
-| 3 | Motion tokens missing. `motion-duration-*` and `motion-easing-standard` only work through hardcoded fallbacks. | button, link, card, segmented control CSS | Add them as Figma variables, or drop the `var()`. |
-| 4 | Unused tokens: all 5 `icon-*` colors (icons follow `currentColor`), `background-surface`, `gap-2xl`. | `semantic.*.css` | Connect them in code, or remove them from Figma. |
+| 3 | Done: shared motion tokens define the existing 60ms, 120ms, 200ms durations and standard easing. | `primitives.tokens.json`, `primitives.css`, button, link, card, segmented control CSS | Components use tokens without hardcoded motion fallbacks; existing reduced-motion behavior is preserved. |
+| 4 | Reviewed: retain all 5 `icon-*` colors, `background-surface`, and `gap-2xl` as reserved design vocabulary. | `semantic.*.css`, semantic JSON sources | Intentionally unused today; icons inherit `currentColor`. Do not force usage or remove them during cleanup. |
 | 5 | Toggle slides on load. A saved "bold" visitor gets "spec" checked in HTML; the header script fixes it after load, so the indicator animates. | `segmented-control.module.css`, `header.astro` | Drive the indicator from `[data-theme="bold"]`, which the inline script sets before paint. |
 | 6 | Anchor jumps hide section titles. The sticky header is taller than `scroll-margin-top` (64px). | `layout.css` | Set `scroll-padding-top` on `html` to the header height. |
 
@@ -25,7 +25,7 @@ Smaller issues:
 - [x] Button links with `target="_blank"` announce "opens in a new tab" like Link.
 - [x] Removed the duplicate button icon stroke rule; Icon owns stroke styling.
 - [x] Removed the unused footer content passed by the layout.
-- [ ] Token diagram still uses placeholder example names.
+- [x] Token diagram uses confirmed primitive, semantic, and utility examples from the Nurun system.
 - [ ] The brand toggle sits inside `<nav>`, but it isn't navigation; move it beside the nav.
 
 ## SEO
@@ -60,5 +60,5 @@ The site is already lean: no JS framework, about 34 KB of CSS in 3 files, and 17
 
 ## Next steps
 
-- [ ] Share the Figma file link (final frames, including mobile) to compare screens against the code.
-- [ ] Finalize the content of the 3 case studies.
+- Skipped by request: compare screens against final Figma frames.
+- [x] Finalize the content of the 3 case studies.

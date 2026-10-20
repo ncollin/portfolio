@@ -268,6 +268,23 @@ preloading only with measurements covering both themes on the deployed site.
 These CSS files are static:
 keep them in sync when editing their JSON sources.
 
+Motion tokens are shared across both themes in `primitives.tokens.json` and
+`primitives.css`: `--nc-motion-duration-instant` (60ms),
+`--nc-motion-duration-fast` (120ms), `--nc-motion-duration-base` (200ms), and
+`--nc-motion-easing-standard` (`cubic-bezier(0.2, 0, 0, 1)`).
+Buttons, links, cards, and segmented controls consume these without local
+timing fallbacks. Component reduced-motion rules remain in effect.
+
+The five `--nc-color-icon-*` tokens, `--nc-color-background-surface`, and
+`--nc-gap-2xl` are reserved design vocabulary, intentionally retained in both
+themes and their JSON sources even though no current component consumes them.
+Icons inherit `currentColor` so they follow their surrounding control's state.
+
+The token diagram uses confirmed Nurun primitive, semantic, and utility names;
+these `stla` examples describe the case study, not this portfolio's `nc` tokens.
+All three case studies are finalized. Visual comparison against Figma frames
+is outside the current review scope.
+
 The shared [base layout](src/layouts/base-layout.astro) imports
 [layout.css](src/styles/layout.css), which sets the root font size to `62.5%` and
 the body to `1.6rem`. With a browser default of 16px, `1rem` equals 10px, so
