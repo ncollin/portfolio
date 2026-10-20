@@ -5,6 +5,7 @@
 }
 
 .nc-text-section__body {
+  max-inline-size: var(--nc-max-width-prose);
   display: flex;
   flex-direction: column;
   gap: var(--nc-gap-md);

@@ -5,8 +5,11 @@
   gap: var(--nc-gap-lg);
 }
 
+/* Two equal halves, so a long title wraps evenly instead of crowding the other */
 .nc-case-study-nav__item {
-  flex: 1 1 var(--nc-min-width-column);
+  flex: 1 1 0;
+  min-inline-size: 0;
+  text-wrap: balance;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

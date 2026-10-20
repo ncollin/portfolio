@@ -18,19 +18,23 @@
   flex: none;
 }
 
+/* Heading-3 voice (family, weight, case) at body size, so titles lead
+   the row without overpowering the description beside them */
 .nc-step-row__title {
   flex: 1 1 var(--nc-min-width-column);
   margin: 0;
   color: var(--nc-color-text-primary);
-  font-family: var(--nc-font-family-body);
+  font-family: var(--nc-font-family-heading-3);
   font-size: var(--nc-font-size-body);
-  font-weight: var(--nc-font-weight-body);
+  font-weight: var(--nc-font-weight-heading-3);
   line-height: var(--nc-line-height-body);
-  letter-spacing: var(--nc-letter-spacing-body);
+  letter-spacing: var(--nc-letter-spacing-heading-3);
+  text-transform: var(--nc-text-transform-heading-3);
 }
 
 .nc-step-row__description {
   flex: 2 1 var(--nc-min-width-column);
+  max-inline-size: var(--nc-max-width-prose);
   display: flex;
   flex-direction: column;
   gap: var(--nc-gap-sm);

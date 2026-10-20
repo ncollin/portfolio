@@ -90,9 +90,11 @@
   transition: color var(--nc-motion-duration-fast) var(--nc-motion-easing-standard);
 }
 
+/* Same width and equal columns on every card, so stats line up across cards */
 .nc-case-study-card__stats {
-  display: flex;
-  flex-wrap: wrap;
+  flex: 0 1 min(100%, calc(var(--nc-min-width-column) * 1.75));
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--nc-gap-md);
 }
 

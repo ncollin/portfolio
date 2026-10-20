@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "@layouts/base-layout.astro";
+import Link from "@atoms/link/link.astro";
+import Icon from "@atoms/icon/icon.astro";
 import CaseStudyNav from "@organisms/case-study-nav/case-study-nav.astro";
 import Hero from "@organisms/hero/hero.astro";
 import FactsStrip from "@organisms/facts-strip/facts-strip.astro";
@@ -27,6 +29,10 @@ const headline = "Modernizing a 10-year-old platform without stopping delivery";
   imageAlt="Modernizing a 10-year-old platform without stopping delivery - a Nurun case study by Nico Collin."
   brand="spec"
 >
+  <Link variant="standalone" size="md" href="/#work">
+    <Icon name="arrow-left" />
+    All case studies
+  </Link>
   <Hero
     variant="page"
     eyebrow="Case study 02 · Nurun · 2023–present"
@@ -44,7 +50,7 @@ const headline = "Modernizing a 10-year-old platform without stopping delivery";
   <StatsStrip>
     <Stat value="2×" caption="faster CI on every pull request" />
     <Stat value="3" caption="squads kept shipping" />
-    <Stat value="Per block" caption="CSS and JS, loaded only when needed" />
+    <Stat value="10+" caption="years of legacy, modernized in place" />
   </StatsStrip>
 
   <TextSection id="context" index="01" title="Context">

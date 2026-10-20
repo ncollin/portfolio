@@ -32,6 +32,7 @@
 }
 
 .nc-hero__lead {
+  max-inline-size: var(--nc-max-width-prose);
   font-family: var(--nc-font-family-lead);
   font-size: var(--nc-font-size-lead);
   line-height: var(--nc-line-height-lead);

@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "@layouts/base-layout.astro";
+import Link from "@atoms/link/link.astro";
+import Icon from "@atoms/icon/icon.astro";
 import CaseStudyNav from "@organisms/case-study-nav/case-study-nav.astro";
 import Hero from "@organisms/hero/hero.astro";
 import FactsStrip from "@organisms/facts-strip/facts-strip.astro";
@@ -27,6 +29,10 @@ const headline = "Building a frontend and design practice from zero";
   imageAlt="Building a frontend and design practice from zero - a Tecsys case study by Nico Collin."
   brand="spec"
 >
+  <Link variant="standalone" size="md" href="/#work">
+    <Icon name="arrow-left" />
+    All case studies
+  </Link>
   <Hero
     variant="page"
     eyebrow="Case study 03 · Tecsys · 2018–2023"
@@ -42,7 +48,7 @@ const headline = "Building a frontend and design practice from zero";
   </FactsStrip>
 
   <StatsStrip>
-    <Stat value="1→9" caption="UX team, from one person" />
+    <Stat value="9" caption="UX team, grown from one person" />
     <Stat value="~30" caption="components, 100+ tokens" />
     <Stat value="3" caption="products on the design system" />
   </StatsStrip>
@@ -140,6 +146,5 @@ const headline = "Building a frontend and design practice from zero";
 
   <CaseStudyNav
     previous={{ href: "/case-studies/platform-modernization", title: "Modernizing a 10-year-old platform without stopping delivery" }}
-    next={{ href: "/case-studies/component-library", title: "Taking control of an inherited component library" }}
   />
 </BaseLayout>

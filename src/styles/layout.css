@@ -12,6 +12,15 @@ body {
   line-height: var(--nc-line-height-body);
 }
 
+/* Even heading lines, and no single word alone on a paragraph's last line */
+:where(h1, h2, h3, h4) {
+  text-wrap: balance;
+}
+
+:where(p, li) {
+  text-wrap: pretty;
+}
+
 .nc-layout {
   display: flex;
   flex-direction: column;
