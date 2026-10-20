@@ -46,6 +46,13 @@ generates an absolute canonical URL from the page pathname and `site` in
 [astro.config.mjs](astro.config.mjs), without query strings or fragments.
 The `site` setting is required.
 
+Page URLs use no trailing slash, except for the homepage (`/`).
+The config sets `trailingSlash: "never"`; internal page links, canonical URLs,
+and `og:url` follow the same convention. Static hosting must serve these
+extensionless URLs and permanently redirect trailing-slash variants to them.
+Verify this on deployment: Astro's setting alone does not configure every host's
+redirects.
+
 Pass an optional `image` URL or root-relative public asset path and `imageAlt`
 to enable image previews. Without an image, the layout requests a summary card
 instead of a large-image card. Only reference an image once the asset exists.

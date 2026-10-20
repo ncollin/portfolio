@@ -34,7 +34,7 @@ The metadata base is solid; the gaps are URL consistency, social previews, struc
 
 | # | Issue | Where | Fix |
 | --- | --- | --- | --- |
-| 1 | Canonicals end with `/` (`/case-studies/component-library/`); internal links don't. Confirmed in the build. | `base-layout.astro`, all links | Pick one style and set `trailingSlash` in the config to match. |
+| 1 | Done: page URLs consistently omit trailing slashes, except `/`. | `astro.config.mjs`, `base-layout.astro`, all links | `trailingSlash: "never"` and canonical normalization; verify permanent redirects on the deployed host. |
 | 2 | The 404 page has a canonical pointing to `/404/`. | `base-layout.astro` | Skip the canonical whenever `noindex` is set. |
 | 3 | No page has an `og:image`, so shared links show no preview image. | `base-layout.astro` | Add a default OG image, plus one per case study. |
 | 4 | No structured data. | `index.astro`, case study pages | `Person` / `ProfilePage` JSON-LD on home, `Article` on case studies. |

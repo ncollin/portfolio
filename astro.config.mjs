@@ -4,6 +4,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://nico.collin.app',
+  trailingSlash: 'never',
   fonts: [
     {
       name: 'IBM Plex Sans',

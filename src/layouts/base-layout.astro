@@ -33,6 +33,7 @@ if (!Astro.site) {
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+canonicalURL.pathname = canonicalURL.pathname.replace(/\/+$/, "") || "/";
 const imageURL = image ? new URL(image, Astro.site) : undefined;
 ---
 
