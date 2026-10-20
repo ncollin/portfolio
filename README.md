@@ -41,6 +41,7 @@ All commands are run from the root of the project, from a terminal:
 ## Page metadata
 
 Every page using `BaseLayout` must provide a unique `title` and `description`.
+Page titles follow the format `Page title · Nico Collin`.
 The layout uses these for search metadata, Open Graph, and Twitter cards, and
 generates an absolute canonical URL from the page pathname and `site` in
 [astro.config.mjs](astro.config.mjs), without query strings or fragments.
@@ -69,7 +70,7 @@ network font downloads, or runtime image service. Each image must be below
 
 ```astro
 <BaseLayout
-  title="My case study - Nico Collin"
+  title="My case study · Nico Collin"
   description="A concise summary of this case study."
   image="/assets/my-case-study-preview.jpg"
   imageAlt="A preview of the case study"

@@ -43,7 +43,7 @@ The metadata base is solid; the gaps are URL consistency, social previews, struc
 Smaller items:
 
 - [x] Use `og:type="article"` on the case studies.
-- [ ] Use one title separator everywhere: home uses " - ", case studies use " · ".
+- [x] Use one title separator everywhere: `Page title · Nico Collin`.
 - [ ] Add `initial-scale=1` to the viewport tag.
 
 ## Performance
