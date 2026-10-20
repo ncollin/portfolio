@@ -11,10 +11,6 @@
   border-radius: var(--nc-border-radius-sm);
 }
 
-.nc-link__icon {
-  display: inline-flex;
-}
-
 /* Inline: inside running text. Stays inline, always underlined. */
 .nc-link--inline {
   display: inline;
@@ -23,17 +19,9 @@
   text-underline-offset: 0.2em;
 }
 
-.nc-link--inline .nc-link__icon {
+.nc-link--inline > svg {
   vertical-align: middle;
-}
-
-/* Inline links use margins, since they can't use flex gap */
-.nc-link--inline .nc-link__icon:first-child {
-  margin-inline-end: var(--nc-gap-xs);
-}
-
-.nc-link--inline .nc-link__icon:last-child {
-  margin-inline-start: var(--nc-gap-xs);
+  margin-inline: var(--nc-gap-xs);
 }
 
 /* Nav and standalone: their own element, so they can use flex.

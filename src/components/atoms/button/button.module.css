@@ -26,15 +26,6 @@
   transition-timing-function: var(--nc-motion-easing-standard, cubic-bezier(0.2, 0, 0, 1));
 }
 
-.nc-button__icon {
-  display: inline-flex;
-  color: inherit; /* icons use currentColor, so they follow the label */
-}
-
-.nc-button__icon svg path {
-  stroke: currentColor;
-}
-
 @media (hover: hover) {
   .nc-button:hover {
     --_shadow: var(--nc-shadow-offset-hover);

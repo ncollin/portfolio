@@ -11,8 +11,6 @@ type Props = HTMLAttributes<"a"> & {
 const { href, target, variant = "inline", size = "md", class: className, ...rest } = Astro.props;
 const external = target === "_blank";
 const rel = external ? "noopener noreferrer" : undefined;
-const hasIconStart = Astro.slots.has("icon-start");
-const hasIcon = Astro.slots.has("icon");
 const classes = [
   styles["nc-link"],
   styles[`nc-link--${variant}`],
@@ -22,8 +20,6 @@ const classes = [
 ---
 
 <a href={href} target={target} rel={rel} class:list={classes} {...rest}>
-  {hasIconStart && <span class={styles["nc-link__icon"]} aria-hidden="true"><slot name="icon-start" /></span>}
   <slot />
   {external && <span class="visually-hidden"> (opens in a new tab)</span>}
-  {hasIcon && <span class={styles["nc-link__icon"]} aria-hidden="true"><slot name="icon" /></span>}
 </a>

@@ -21,7 +21,7 @@ const { previous, next } = Astro.props;
     <div class={styles["nc-case-study-nav__item"]}>
       <p class={styles["nc-case-study-nav__label"]} aria-hidden="true">Previous case study</p>
       <Link variant="standalone" size="md" href={previous.href}>
-        <Icon slot="icon-start" name="arrow-left" />
+        <Icon name="arrow-left" />
         <span class="visually-hidden">Previous case study: </span>{previous.title}
       </Link>
     </div>
@@ -31,7 +31,7 @@ const { previous, next } = Astro.props;
       <p class={styles["nc-case-study-nav__label"]} aria-hidden="true">Next case study</p>
       <Link variant="standalone" size="md" href={next.href}>
         <span class="visually-hidden">Next case study: </span>{next.title}
-        <Icon slot="icon" name="arrow-right" />
+        <Icon name="arrow-right" />
       </Link>
     </div>
   )}

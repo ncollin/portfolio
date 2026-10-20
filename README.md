@@ -116,6 +116,23 @@ If a future page uses `noindex`, exclude it with the sitemap integration's
 `filter` in [astro.config.mjs](astro.config.mjs) as well: the integration does not
 read layout props. Keep crawling allowed so search engines can read `noindex`.
 
+## Buttons and links
+
+Compose both Button and Link labels and icons in the default slot; no named
+icon slots are supported. Put Icon before or after the text to choose its
+position. Buttons and nav/standalone links use flex gap; inline links use margins
+around directly composed SVG icons. Icon provides decorative accessibility
+attributes and inherits color from the surrounding control.
+
+```astro
+<Button href="#work"><Icon name="arrow-down" /> View case studies</Button>
+<Link href="/assets/nico-collin-resume.pdf">Resume <Icon name="download" /></Link>
+```
+
+Button renders a link when given `href`, otherwise a native
+button. Links with `target="_blank"` include the same visually hidden
+"opens in a new tab" notice as Link; native buttons do not.
+
 ## Tags
 
 `Tag` accepts `tone="accent"` (the default) or `tone="muted"`. Accent uses the

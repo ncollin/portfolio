@@ -21,10 +21,10 @@ The site has no responsive behavior yet, which matters most: on a phone the 72px
 
 Smaller issues:
 
-- [ ] Hero buttons put the Icon in the default slot; contact buttons use `slot="icon"`. Pick one.
-- [ ] Button with `target="_blank"` doesn't announce "opens in a new tab" like Link does.
-- [ ] `.nc-button__icon svg path` duplicates the stroke rule in `icon.module.css`.
-- [ ] Footer receives `<p>Site name</p>` from the layout but has no slot to render it.
+- [x] Button and Link compose icons before or after text in the default slot, without named icon slots.
+- [x] Button links with `target="_blank"` announce "opens in a new tab" like Link.
+- [x] Removed the duplicate button icon stroke rule; Icon owns stroke styling.
+- [x] Removed the unused footer content passed by the layout.
 - [ ] Token diagram still uses placeholder example names.
 - [ ] The brand toggle sits inside `<nav>`, but it isn't navigation; move it beside the nav.
 

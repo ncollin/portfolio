@@ -40,9 +40,12 @@ const layers = [
     With the project’s UI lead and another designer, I defined a token foundation designed to scale and to enable theming, in three layers:
   </p>
   <ol class={styles["nc-token-diagram__layers"]}>
-    {layers.map((layer) => (
+    {layers.map((layer, layerIndex) => (
       <li class={styles["nc-token-diagram__layer"]}>
-        <p class={styles["nc-token-diagram__note"]}>{layer.note}</p>
+        <p class={styles["nc-token-diagram__note"]}>
+          <span aria-hidden="true">{String(layerIndex + 1).padStart(2, "0")}</span>
+          {layer.note}
+        </p>
         <h3 class={styles["nc-token-diagram__name"]}>{layer.name}</h3>
         <ul class={styles["nc-token-diagram__examples"]}>
           {layer.examples.map((example) => <li><code>{example}</code></li>)}

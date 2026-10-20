@@ -9,17 +9,16 @@ type Props = {
 
 const { variant = "primary", href, class: className, ...rest } = Astro.props;
 const classes = [styles["nc-button"], styles[`nc-button--${variant}`], className];
-const hasIcon = Astro.slots.has("icon");
+const opensInNewTab = rest.target === "_blank";
 ---
 
 {href ? (
   <a href={href} class:list={classes} {...rest}>
     <slot />
-    {hasIcon && <span class={styles["nc-button__icon"]} aria-hidden="true"><slot name="icon" /></span>}
+    {opensInNewTab && <span class="visually-hidden"> (opens in a new tab)</span>}
   </a>
 ) : (
   <button type="button" class:list={classes} {...rest}>
     <slot />
-    {hasIcon && <span class={styles["nc-button__icon"]} aria-hidden="true"><slot name="icon" /></span>}
   </button>
 )}

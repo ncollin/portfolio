@@ -20,7 +20,6 @@
   gap: var(--nc-gap-md);
   margin: 0;
   padding: 0;
-  counter-reset: layer;
 }
 
 .nc-token-diagram__layer {
@@ -36,18 +35,10 @@
     var(--nc-shadow-blur) var(--nc-shadow-color);
 }
 
-/* "01 →", "02 →", "03 ·": shows the flow between layers. The "/ ''" part
-   gives the decoration empty alt text, so screen readers skip it. */
-.nc-token-diagram__note::before {
-  counter-increment: layer;
-  content: counter(layer, decimal-leading-zero) " → " / "";
-}
-
-.nc-token-diagram__layer:last-child .nc-token-diagram__note::before {
-  content: counter(layer, decimal-leading-zero) " · " / "";
-}
-
 .nc-token-diagram__note {
+  display: flex;
+  align-items: center;
+  gap: var(--nc-gap-xs);
   margin: 0;
   color: var(--nc-color-text-accent);
   font-family: var(--nc-font-family-label);
