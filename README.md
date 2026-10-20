@@ -53,9 +53,19 @@ extensionless URLs and permanently redirect trailing-slash variants to them.
 Verify this on deployment: Astro's setting alone does not configure every host's
 redirects.
 
-Pass an optional `image` URL or root-relative public asset path and `imageAlt`
-to enable image previews. Without an image, the layout requests a summary card
-instead of a large-image card. Only reference an image once the asset exists.
+Pages default to the shared 1200 x 630 social image, with a large-image Twitter
+card and Open Graph image metadata. Override it with an `image` URL or
+root-relative public asset path and `imageAlt`. Dimensions default to 1200 x 630
+for all images; override `imageWidth` / `imageHeight` only when the asset differs.
+Custom images do not inherit the default image's alt text.
+
+`npm run social:images` generates the default and three case-study PNGs in
+`public/assets/social/`. It also runs before `npm run build`. Edit the shared
+template and copy in [scripts/generate-social-images.mjs](scripts/generate-social-images.mjs)
+to regenerate them. The template reads primitive colors from the site's tokens
+and outlines packaged IBM Plex Sans / Mono glyphs, requiring no system fonts,
+network font downloads, or runtime image service. Each image must be below
+200 KB. These build-time dependencies add no browser JavaScript.
 
 ```astro
 <BaseLayout
