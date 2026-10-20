@@ -1,0 +1,13 @@
+---
+import styles from "@organisms/footer/footer.module.css";
+import Divider from "@atoms/divider/divider.astro";
+const year = new Date().getFullYear();
+---
+
+<footer class={styles["nc-footer"]}>
+  <Divider />
+  <div class={styles["nc-footer__row"]}>
+    <p class={styles["nc-footer__label"]}>© {year} Nico Collin</p>
+    <p class={styles["nc-footer__label"]}>Built with tokens</p>
+  </div>
+</footer>

@@ -1,0 +1,16 @@
+---
+import styles from "@molecules/stat/stat.module.css";
+
+interface Props {
+  value: string;
+  caption: string;
+  size?: "sm" | "lg";
+}
+
+const { value, caption, size = "lg" } = Astro.props;
+---
+
+<p class:list={[styles["nc-stat"], styles[`nc-stat--${size}`]]}>
+  <span class={styles["nc-stat__value"]}>{value}</span>
+  <span class={styles["nc-stat__caption"]}>{caption}</span>
+</p>

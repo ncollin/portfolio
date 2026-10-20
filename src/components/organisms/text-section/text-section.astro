@@ -1,0 +1,21 @@
+---
+import styles from "@organisms/text-section/text-section.module.css";
+import SectionHeader from "@molecules/section-header/section-header.astro";
+
+interface Props {
+  id: string;
+  title: string;
+  index?: string;
+}
+
+const { id, title, index } = Astro.props;
+const headingId = `${id}-heading`;
+---
+
+<!-- Slot: <p> elements. The first reads in primary, the rest in secondary. -->
+<section id={id} class={styles["nc-text-section"]} aria-labelledby={headingId}>
+  <SectionHeader id={headingId} title={title} index={index} />
+  <div class={styles["nc-text-section__body"]}>
+    <slot />
+  </div>
+</section>

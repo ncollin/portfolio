@@ -1,0 +1,15 @@
+---
+import styles from "@atoms/segmented-control/segmented-control.module.css";
+
+interface Props {
+  label: string;
+  disabled?: boolean;
+}
+
+const { label, disabled = false } = Astro.props;
+---
+
+<fieldset class={styles["nc-segmented-control"]} disabled={disabled}>
+  <legend class={styles["nc-segmented-control__legend"]}>{label}</legend>
+  <slot />
+</fieldset>

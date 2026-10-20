@@ -1,0 +1,29 @@
+---
+import styles from "@organisms/hero/hero.module.css";
+import Tag from "@atoms/tag/tag.astro";
+
+interface Props {
+  type?: "home" | "page";
+  title: string;
+  lead?: string;
+  eyebrow?: string;
+}
+const { type = "page", title, lead, eyebrow } = Astro.props;
+const hasActions = Astro.slots.has("actions");
+
+const classes = [
+  styles["nc-hero"],
+  styles[`nc-hero--${type}`]
+];
+---
+
+<header class:list={classes}>
+  {eyebrow && <Tag>{eyebrow}</Tag>}
+  <h1 class={styles["nc-hero__title"]}>{title}</h1>
+  {lead && <p class={styles["nc-hero__lead"]}>{lead}</p>}
+  {hasActions && (
+    <div class={styles["nc-hero__actions"]}>
+      <slot name="actions" />
+    </div>
+  )}
+</header>

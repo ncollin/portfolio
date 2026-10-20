@@ -1,0 +1,8 @@
+.nc-tag {
+  font-family: var(--nc-font-family-label);
+  font-size: var(--nc-font-size-label);
+  line-height: var(--nc-line-height-label);
+  letter-spacing: var(--nc-letter-spacing-label);
+  font-weight: var(--nc-font-weight-label);
+  color: var(--nc-color-text-accent);
+}

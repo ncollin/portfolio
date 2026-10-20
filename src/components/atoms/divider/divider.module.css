@@ -1,0 +1,5 @@
+.nc-divider {
+  border: none;
+  border-top: var(--nc-border-width-default) solid var(--nc-color-border-default);
+  margin: 0;
+}

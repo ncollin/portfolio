@@ -1,0 +1,24 @@
+.nc-lesson-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nc-gap-lg);
+}
+
+.nc-lesson-list__intro {
+  margin: 0;
+  max-inline-size: var(--nc-max-width-prose);
+  color: var(--nc-color-text-primary);
+  font-family: var(--nc-font-family-body);
+  font-size: var(--nc-font-size-body);
+  font-weight: var(--nc-font-weight-body);
+  line-height: var(--nc-line-height-body);
+  letter-spacing: var(--nc-letter-spacing-body);
+}
+
+.nc-lesson-list__lessons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--nc-min-width-column), 1fr));
+  gap: var(--nc-gap-md);
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,22 @@
+---
+import styles from "@molecules/step-row/step-row.module.css";
+import Tag from "@atoms/tag/tag.astro";
+
+interface Props {
+  number: string;
+  title: string;
+}
+
+const { number, title } = Astro.props;
+---
+
+<!-- Root is an <li>: Step rows are always rendered inside Step list's <ol>.
+     The visible number repeats the list order, so it is hidden from screen readers.
+     Slot: the description, one or more <p>. -->
+<li class={styles["nc-step-row"]}>
+  <span class={styles["nc-step-row__number"]} aria-hidden="true"><Tag tone="accent">{number}</Tag></span>
+  <h3 class={styles["nc-step-row__title"]}>{title}</h3>
+  <div class={styles["nc-step-row__description"]}>
+    <slot />
+  </div>
+</li>

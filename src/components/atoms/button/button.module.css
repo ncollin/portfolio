@@ -1,0 +1,101 @@
+.nc-button {
+  --_shadow: var(--nc-shadow-offset-default);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--nc-gap-xs);
+  padding: var(--nc-padding-sm) var(--nc-padding-lg);
+  border: var(--nc-border-width-default) solid;
+  border-radius: var(--nc-border-radius-sm);
+  box-shadow: var(--_shadow) var(--_shadow) var(--nc-shadow-blur) var(--nc-shadow-color);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+
+  /* control text role */
+  font-family: var(--nc-font-family-control);
+  font-size: var(--nc-font-size-control);
+  font-weight: var(--nc-font-weight-control);
+  line-height: var(--nc-line-height-control);
+  letter-spacing: var(--nc-letter-spacing-control);
+  text-transform: var(--nc-text-transform-control);
+
+  transition-property: background-color, border-color, color, box-shadow, transform;
+  transition-duration: var(--nc-motion-duration-fast, 120ms);
+  transition-timing-function: var(--nc-motion-easing-standard, cubic-bezier(0.2, 0, 0, 1));
+}
+
+.nc-button__icon {
+  display: inline-flex;
+  color: inherit; /* icons use currentColor, so they follow the label */
+}
+
+.nc-button__icon svg path {
+  stroke: currentColor;
+}
+
+@media (hover: hover) {
+  .nc-button:hover {
+    --_shadow: var(--nc-shadow-offset-hover);
+    transform: translate(
+      calc(var(--nc-shadow-offset-default) - var(--nc-shadow-offset-hover)),
+      calc(var(--nc-shadow-offset-default) - var(--nc-shadow-offset-hover))
+    );
+  }
+}
+
+.nc-button:active {
+  --_shadow: var(--nc-shadow-offset-pressed);
+  transform: translate(var(--nc-shadow-offset-default), var(--nc-shadow-offset-default));
+  transition-duration: var(--nc-motion-duration-instant, 60ms);
+}
+
+.nc-button:focus-visible {
+  outline: var(--nc-outline-width-focus) solid var(--nc-color-outline-focus);
+  outline-offset: var(--nc-outline-offset-focus);
+}
+
+/* Primary */
+.nc-button--primary {
+  background-color: var(--nc-color-background-action);
+  border-color: var(--nc-color-border-action);
+  color: var(--nc-color-text-on-action);
+}
+@media (hover: hover) {
+  .nc-button--primary:hover {
+    background-color: var(--nc-color-background-action-hover);
+    border-color: var(--nc-color-border-action-hover);
+  }
+}
+.nc-button--primary:active {
+  background-color: var(--nc-color-background-action-pressed);
+  border-color: var(--nc-color-border-action-pressed);
+}
+
+/* Secondary */
+.nc-button--secondary {
+  background-color: var(--nc-color-background-control);
+  border-color: var(--nc-color-border-control);
+  color: var(--nc-color-text-primary);
+}
+@media (hover: hover) {
+  .nc-button--secondary:hover {
+    background-color: var(--nc-color-background-control-hover);
+    border-color: var(--nc-color-border-control-hover);
+  }
+}
+.nc-button--secondary:active {
+  background-color: var(--nc-color-background-control-pressed);
+  border-color: var(--nc-color-border-control-pressed);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nc-button {
+    transition-property: background-color, border-color, color;
+  }
+  .nc-button:hover,
+  .nc-button:active {
+    transform: none;
+  }
+}

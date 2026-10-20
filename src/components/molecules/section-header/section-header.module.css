@@ -1,0 +1,17 @@
+.nc-section-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--nc-gap-sm);
+  margin: 0;
+  color: var(--nc-color-text-tertiary);
+  font-family: var(--nc-font-family-heading-2);
+  font-size: var(--nc-font-size-heading-2);
+  font-weight: var(--nc-font-weight-heading-2);
+  line-height: var(--nc-line-height-heading-2);
+  letter-spacing: var(--nc-letter-spacing-heading-2);
+  text-transform: var(--nc-text-transform-heading-2);
+}
+
+.nc-section-header__index {
+  color: var(--nc-color-text-accent);
+}

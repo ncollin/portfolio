@@ -1,0 +1,16 @@
+.nc-stats-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--nc-min-width-column), 1fr));
+  gap: var(--nc-gap-md);
+}
+
+/* Each slotted Stat is a cell. Element selector, since the Stat's classes
+   are hashed in its own module. */
+.nc-stats-strip > * {
+  padding: var(--nc-padding-lg);
+  background-color: var(--nc-color-background-container);
+  border: var(--nc-border-width-default) solid var(--nc-color-border-default);
+  border-radius: var(--nc-border-radius-md);
+  box-shadow: var(--nc-shadow-offset-default) var(--nc-shadow-offset-default)
+    var(--nc-shadow-blur) var(--nc-shadow-color);
+}

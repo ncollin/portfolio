@@ -1,0 +1,24 @@
+.nc-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nc-gap-lg);
+}
+
+.nc-footer__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--nc-gap-md);
+}
+
+.nc-footer__label {
+  margin: 0;
+  color: var(--nc-color-text-tertiary);
+  font-family: var(--nc-font-family-label);
+  font-size: var(--nc-font-size-label);
+  font-weight: var(--nc-font-weight-label);
+  line-height: var(--nc-line-height-label);
+  letter-spacing: var(--nc-letter-spacing-label);
+  text-transform: var(--nc-text-transform-label);
+}

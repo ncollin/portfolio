@@ -1,0 +1,32 @@
+.nc-case-study-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--nc-gap-lg);
+}
+
+.nc-case-study-nav__item {
+  flex: 1 1 var(--nc-min-width-column);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--nc-gap-sm);
+}
+
+/* Next sits on the right, even when there's no previous */
+.nc-case-study-nav__item--next {
+  align-items: flex-end;
+  text-align: end;
+  margin-inline-start: auto;
+}
+
+.nc-case-study-nav__label {
+  margin: 0;
+  color: var(--nc-color-text-tertiary);
+  font-family: var(--nc-font-family-label);
+  font-size: var(--nc-font-size-label);
+  font-weight: var(--nc-font-weight-label);
+  line-height: var(--nc-line-height-label);
+  letter-spacing: var(--nc-letter-spacing-label);
+  text-transform: var(--nc-text-transform-label);
+}

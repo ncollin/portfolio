@@ -1,0 +1,12 @@
+---
+import styles from "@organisms/facts-strip/facts-strip.module.css";
+import Divider from "@atoms/divider/divider.astro";
+---
+
+<div class={styles["nc-facts-strip"]}>
+  <Divider />
+  <dl class={styles["nc-facts-strip__list"]}>
+    <slot />
+  </dl>
+  <Divider />
+</div>

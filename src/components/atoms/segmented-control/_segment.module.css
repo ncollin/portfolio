@@ -1,0 +1,47 @@
+.nc-segment {
+  position: relative; /* contains the input, and sits above the indicator */
+  z-index: 1;
+}
+
+.nc-segment__input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: 0;
+  opacity: 0;
+}
+
+.nc-segment__content {
+  display: block;
+  padding: var(--nc-padding-sm) var(--nc-padding-md);
+  border-radius: var(--nc-border-radius-sm);
+  text-align: center;
+  color: var(--nc-color-text-primary);
+  font-family: var(--nc-font-family-label);
+  font-size: var(--nc-font-size-label);
+  font-weight: var(--nc-font-weight-label);
+  line-height: var(--nc-line-height-label);
+  letter-spacing: var(--nc-letter-spacing-label);
+  text-transform: var(--nc-text-transform-label);
+  transition: color var(--nc-motion-duration-fast, 120ms)
+    var(--nc-motion-easing-standard, cubic-bezier(0.2, 0, 0, 1));
+}
+
+.nc-segment__input:not(:checked) + .nc-segment__content {
+  cursor: pointer;
+}
+
+.nc-segment__input:checked + .nc-segment__content {
+  color: var(--nc-color-text-on-action);
+}
+
+@media (hover: hover) {
+  .nc-segment__input:not(:checked) + .nc-segment__content:hover {
+    color: var(--nc-color-text-accent);
+  }
+}
+
+.nc-segment__input:focus-visible + .nc-segment__content {
+  outline: var(--nc-outline-width-focus) solid var(--nc-color-outline-focus);
+  outline-offset: var(--nc-outline-offset-focus);
+}

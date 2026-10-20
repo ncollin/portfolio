@@ -1,0 +1,37 @@
+.nc-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nc-gap-xs);
+  margin: 0;
+}
+
+.nc-stat__value {
+  color: var(--nc-color-text-accent);
+}
+
+.nc-stat--lg .nc-stat__value {
+  font-family: var(--nc-font-family-data-lg);
+  font-size: var(--nc-font-size-data-lg);
+  font-weight: var(--nc-font-weight-data-lg);
+  line-height: var(--nc-line-height-data-lg);
+  letter-spacing: var(--nc-letter-spacing-data-lg);
+  text-transform: var(--nc-text-transform-data-lg);
+}
+
+.nc-stat--sm .nc-stat__value {
+  font-family: var(--nc-font-family-data-sm);
+  font-size: var(--nc-font-size-data-sm);
+  font-weight: var(--nc-font-weight-data-sm);
+  line-height: var(--nc-line-height-data-sm);
+  letter-spacing: var(--nc-letter-spacing-data-sm);
+  text-transform: var(--nc-text-transform-data-sm);
+}
+
+.nc-stat__caption {
+  color: var(--nc-color-text-secondary);
+  font-family: var(--nc-font-family-body);
+  font-size: var(--nc-font-size-body);
+  font-weight: var(--nc-font-weight-body);
+  line-height: var(--nc-line-height-body);
+  letter-spacing: var(--nc-letter-spacing-body);
+}

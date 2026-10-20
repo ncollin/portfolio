@@ -1,0 +1,14 @@
+.nc-icon {
+  flex-shrink: 0;
+  inline-size: var(--nc-icon-scale-md);
+  block-size: var(--nc-icon-scale-md);
+  color: inherit;
+}
+
+/* Every shape follows the surrounding text color, and keeps a fixed stroke
+   weight in screen pixels, whatever the icon's viewBox */
+.nc-icon :where(path, line, polyline, circle, rect) {
+  stroke: currentColor;
+  stroke-width: var(--nc-icon-stroke-md);
+  vector-effect: non-scaling-stroke;
+}

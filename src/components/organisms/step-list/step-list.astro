@@ -1,0 +1,23 @@
+---
+import styles from "@organisms/step-list/step-list.module.css";
+import SectionHeader from "@molecules/section-header/section-header.astro";
+
+interface Props {
+  id: string;
+  title: string;
+  index?: string;
+  intro?: string;
+}
+
+const { id, title, index, intro } = Astro.props;
+const headingId = `${id}-heading`;
+---
+
+<!-- Slot: StepRow components only (each renders an <li>) -->
+<section id={id} class={styles["nc-step-list"]} aria-labelledby={headingId}>
+  <SectionHeader id={headingId} title={title} index={index} />
+  {intro && <p class={styles["nc-step-list__intro"]}>{intro}</p>}
+  <ol class={styles["nc-step-list__steps"]}>
+    <slot />
+  </ol>
+</section>

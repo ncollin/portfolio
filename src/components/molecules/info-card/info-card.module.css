@@ -1,0 +1,34 @@
+.nc-info-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--nc-gap-sm);
+  padding: var(--nc-padding-lg);
+  list-style: none;
+  background-color: var(--nc-color-background-container);
+  border: var(--nc-border-width-default) solid var(--nc-color-border-default);
+  border-radius: var(--nc-border-radius-md);
+  box-shadow: var(--nc-shadow-offset-default) var(--nc-shadow-offset-default)
+    var(--nc-shadow-blur) var(--nc-shadow-color);
+}
+
+.nc-info-card__title {
+  margin: 0;
+  color: var(--nc-color-text-primary);
+  font-family: var(--nc-font-family-heading-3);
+  font-size: var(--nc-font-size-heading-3);
+  font-weight: var(--nc-font-weight-heading-3);
+  line-height: var(--nc-line-height-heading-3);
+  letter-spacing: var(--nc-letter-spacing-heading-3);
+  text-transform: var(--nc-text-transform-heading-3);
+}
+
+.nc-info-card__text {
+  margin: 0;
+  color: var(--nc-color-text-secondary);
+  font-family: var(--nc-font-family-body);
+  font-size: var(--nc-font-size-body);
+  font-weight: var(--nc-font-weight-body);
+  line-height: var(--nc-line-height-body);
+  letter-spacing: var(--nc-letter-spacing-body);
+}

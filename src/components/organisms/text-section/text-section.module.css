@@ -1,0 +1,25 @@
+.nc-text-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nc-gap-lg);
+}
+
+.nc-text-section__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nc-gap-md);
+  color: var(--nc-color-text-secondary);
+  font-family: var(--nc-font-family-body);
+  font-size: var(--nc-font-size-body);
+  font-weight: var(--nc-font-weight-body);
+  line-height: var(--nc-line-height-body);
+  letter-spacing: var(--nc-letter-spacing-body);
+}
+
+.nc-text-section__body > p {
+  margin: 0;
+}
+
+.nc-text-section__body > p:first-child {
+  color: var(--nc-color-text-primary);
+}

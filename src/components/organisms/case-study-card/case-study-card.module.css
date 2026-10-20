@@ -1,0 +1,138 @@
+.nc-case-study-card {
+  list-style: none;
+}
+
+.nc-case-study-card__body {
+  --_shadow: var(--nc-shadow-offset-default);
+
+  position: relative; /* anchors the stretched link */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--nc-gap-xl);
+  row-gap: var(--nc-gap-lg);
+  padding: var(--nc-padding-xl);
+  background-color: var(--nc-color-background-container);
+  border: var(--nc-border-width-default) solid var(--nc-color-border-default);
+  border-radius: var(--nc-border-radius-md);
+  box-shadow: var(--_shadow) var(--_shadow) var(--nc-shadow-blur) var(--nc-shadow-color);
+  transition-property: background-color, border-color, box-shadow, transform;
+  transition-duration: var(--nc-motion-duration-fast, 120ms);
+  transition-timing-function: var(--nc-motion-easing-standard, cubic-bezier(0.2, 0, 0, 1));
+}
+
+.nc-case-study-card__text {
+  flex: 1 1 var(--nc-min-width-column);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nc-gap-sm);
+}
+
+.nc-case-study-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--nc-gap-md);
+  margin: 0;
+  color: var(--nc-color-text-tertiary);
+  font-family: var(--nc-font-family-label);
+  font-size: var(--nc-font-size-label);
+  font-weight: var(--nc-font-weight-label);
+  line-height: var(--nc-line-height-label);
+  letter-spacing: var(--nc-letter-spacing-label);
+  text-transform: var(--nc-text-transform-label);
+}
+
+.nc-case-study-card__title {
+  margin: 0;
+  color: var(--nc-color-text-primary);
+  font-family: var(--nc-font-family-heading-3);
+  font-size: var(--nc-font-size-heading-3);
+  font-weight: var(--nc-font-weight-heading-3);
+  line-height: var(--nc-line-height-heading-3);
+  letter-spacing: var(--nc-letter-spacing-heading-3);
+  text-transform: var(--nc-text-transform-heading-3);
+}
+
+/* The stretched link: one real link, clickable across the whole card */
+.nc-case-study-card__link {
+  color: inherit;
+  text-decoration: none;
+  outline: none; /* focus is shown on the whole card instead */
+}
+.nc-case-study-card__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.nc-case-study-card__summary {
+  margin: 0;
+  color: var(--nc-color-text-secondary);
+  font-family: var(--nc-font-family-body);
+  font-size: var(--nc-font-size-body);
+  font-weight: var(--nc-font-weight-body);
+  line-height: var(--nc-line-height-body);
+}
+
+.nc-case-study-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nc-gap-xs);
+  color: var(--nc-color-text-primary);
+  font-family: var(--nc-font-family-control);
+  font-size: var(--nc-font-size-control);
+  font-weight: var(--nc-font-weight-control);
+  line-height: var(--nc-line-height-control);
+  letter-spacing: var(--nc-letter-spacing-control);
+  text-transform: var(--nc-text-transform-control);
+  transition: color var(--nc-motion-duration-fast, 120ms) var(--nc-motion-easing-standard, cubic-bezier(0.2, 0, 0, 1));
+}
+
+.nc-case-study-card__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--nc-gap-md);
+}
+
+/* States: the control family, as in the spec */
+@media (hover: hover) {
+  .nc-case-study-card__body:hover {
+    --_shadow: var(--nc-shadow-offset-hover);
+    background-color: var(--nc-color-background-control-hover);
+    border-color: var(--nc-color-border-control-hover);
+    transform: translate(
+      calc(var(--nc-shadow-offset-default) - var(--nc-shadow-offset-hover)),
+      calc(var(--nc-shadow-offset-default) - var(--nc-shadow-offset-hover))
+    );
+  }
+  .nc-case-study-card__body:hover .nc-case-study-card__cta {
+    color: var(--nc-color-text-accent);
+  }
+}
+
+.nc-case-study-card__body:active {
+  --_shadow: var(--nc-shadow-offset-pressed);
+  background-color: var(--nc-color-background-control-pressed);
+  border-color: var(--nc-color-border-control-pressed);
+  transform: translate(var(--nc-shadow-offset-default), var(--nc-shadow-offset-default));
+  transition-duration: var(--nc-motion-duration-instant, 60ms);
+}
+
+/* Keyboard focus on the link shows a ring around the whole card */
+.nc-case-study-card__body:has(.nc-case-study-card__link:focus-visible) {
+  outline: var(--nc-outline-width-focus) solid var(--nc-color-outline-focus);
+  outline-offset: var(--nc-outline-offset-focus);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nc-case-study-card__body,
+  .nc-case-study-card__cta {
+    transition-property: background-color, border-color, color;
+  }
+  .nc-case-study-card__body:hover,
+  .nc-case-study-card__body:active {
+    transform: none;
+  }
+}

@@ -1,0 +1,16 @@
+---
+import styles from "./section-header.module.css";
+
+interface Props {
+  id: string;
+  title: string;
+  index?: string;
+}
+
+const { id, title, index } = Astro.props;
+---
+
+<h2 id={id} class={styles["nc-section-header"]}>
+  {index && <span class={styles["nc-section-header__index"]}>{index}</span>}
+  {title}
+</h2>

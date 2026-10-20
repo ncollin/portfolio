@@ -1,0 +1,19 @@
+---
+import styles from "@molecules/info-card/info-card.module.css";
+import Tag from "@atoms/tag/tag.astro";
+
+interface Props {
+  tag?: string;
+  title: string;
+  text: string;
+}
+
+const { tag, title, text } = Astro.props;
+---
+
+<!-- Root is an <li>: Info cards are always rendered inside Card grid -->
+<li class={styles["nc-info-card"]}>
+  {tag && <Tag tone="accent">{tag}</Tag>}
+  <h3 class={styles["nc-info-card__title"]}>{title}</h3>
+  <p class={styles["nc-info-card__text"]}>{text}</p>
+</li>

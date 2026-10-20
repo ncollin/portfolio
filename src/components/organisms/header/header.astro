@@ -1,0 +1,109 @@
+---
+import styles from "@organisms/header/header.module.css";
+
+import Divider from "@atoms/divider/divider.astro";
+import Icon from "@atoms/icon/icon.astro";
+import Segment from "@atoms/segmented-control/_segment.astro";
+import SegmentedControl from "@atoms/segmented-control/segmented-control.astro";
+import Link from "@atoms/link/link.astro";
+
+const inWork = Astro.url.pathname.startsWith("/case-studies/");
+const workAriaCurrent = inWork ? "true" : undefined;
+---
+
+<header class={styles["header"]}>
+  <div class={styles["header__content"]}>
+    <Link variant="standalone" size="lg" href="/" class="nc-site-title">Nico Collin</Link>
+    <nav class={styles["header__nav"]} aria-label="Main">
+      <ul class={styles["header__nav-list"]}>
+        <li><Link variant="nav" href="/#work" aria-current={workAriaCurrent}>Work</Link></li>
+        <li><Link variant="nav" href="/#contact">Contact</Link></li>
+        <li>
+          <Link variant="nav" href="/assets/nico-collin-resume.pdf" target="_blank">
+            Resume <span class="visually-hidden">(PDF)</span>
+            <Icon slot="icon" name="download" />
+          </Link>
+        </li>
+      </ul>
+      <SegmentedControl label="Portfolio brand">
+        <Segment name="brand-selector" value="spec" checked>spec</Segment>
+        <Segment name="brand-selector" value="bold">bold</Segment>
+      </SegmentedControl>
+    </nav>
+  </div>
+
+  <Divider />
+</header>
+
+<script>
+  const selectors = document.querySelectorAll<HTMLInputElement>(
+    'input[name="brand-selector"]'
+  );
+
+  for (const input of selectors) {
+    input.checked = input.value === document.documentElement.dataset.theme;
+
+    input.addEventListener("change", () => {
+      if (input.checked && (input.value === "spec" || input.value === "bold")) {
+        document.documentElement.dataset.theme = input.value;
+        try {
+          localStorage.setItem("nc-brand", input.value);
+        } catch (error) {
+          console.warn("Unable to save the selected brand.", error);
+        }
+      }
+    });
+  }
+
+  const navLinks = [
+  ...document.querySelectorAll<HTMLAnchorElement>('nav[aria-label="Main"] a[href^="/#"]'),
+];
+
+function setCurrent(id: string | null) {
+  for (const link of navLinks) {
+    if (id && link.hash === `#${id}`) {
+      link.setAttribute("aria-current", "location");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  }
+}
+
+// Section links only point to sections on Home
+if (location.pathname === "/") {
+  const sections = navLinks
+    .map((link) => document.getElementById(link.hash.slice(1)))
+    .filter((el): el is HTMLElement => el !== null);
+  const visible = new Set<string>();
+
+  const update = () => {
+    // At the very bottom, the last section counts as current,
+    // even if it never reached the middle of the screen
+    const atBottom =
+      window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    if (atBottom && sections.length) {
+      setCurrent(sections[sections.length - 1].id);
+      return;
+    }
+    const current = sections.find((section) => visible.has(section.id));
+    setCurrent(current ? current.id : null);
+  };
+
+  // A section is current while it crosses a band around the middle of the screen
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) visible.add(entry.target.id);
+        else visible.delete(entry.target.id);
+      }
+      update();
+    },
+    { rootMargin: "-40% 0px -55% 0px" },
+  );
+  sections.forEach((section) => observer.observe(section));
+
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("hashchange", () => setCurrent(location.hash.slice(1) || null));
+  setCurrent(location.hash.slice(1) || null); // page loaded with /#work or /#contact
+}
+</script>

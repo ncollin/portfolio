@@ -1,0 +1,57 @@
+---
+// One-off illustration for this case study, not a design system component.
+import styles from "./token-diagram.module.css";
+import SectionHeader from "@molecules/section-header/section-header.astro";
+
+interface Props {
+  id: string;
+  index?: string;
+}
+
+const { id, index } = Astro.props;
+const headingId = `${id}-heading`;
+
+// Illustrative names: replace with real examples from the Nurun system.
+const layers = [
+  {
+    name: "Primitive tokens",
+    note: "Raw values",
+    examples: ["color-blue-600: #1F5FBF", "space-16: 16px"],
+    description: "The raw values, such as colors and spacing.",
+  },
+  {
+    name: "Semantic tokens",
+    note: "Themes swap here",
+    examples: ["color-action-primary", "space-component-padding"],
+    description: "Give those values meaning and intent. This is the layer each brand theme replaces.",
+  },
+  {
+    name: "Utility classes",
+    note: "Built on tokens",
+    examples: [".bg-action-primary", ".p-component"],
+    description: "Consistent styling without one-off values.",
+  },
+];
+---
+
+<section id={id} class={styles["nc-token-diagram"]} aria-labelledby={headingId}>
+  <SectionHeader id={headingId} title="Token architecture" index={index} />
+  <p class={styles["nc-token-diagram__text"]}>
+    With the project’s UI lead and another designer, I defined a token foundation designed to scale and to enable theming, in three layers:
+  </p>
+  <ol class={styles["nc-token-diagram__layers"]}>
+    {layers.map((layer) => (
+      <li class={styles["nc-token-diagram__layer"]}>
+        <p class={styles["nc-token-diagram__note"]}>{layer.note}</p>
+        <h3 class={styles["nc-token-diagram__name"]}>{layer.name}</h3>
+        <ul class={styles["nc-token-diagram__examples"]}>
+          {layer.examples.map((example) => <li><code>{example}</code></li>)}
+        </ul>
+        <p class={styles["nc-token-diagram__description"]}>{layer.description}</p>
+      </li>
+    ))}
+  </ol>
+  <p class={styles["nc-token-diagram__text"]}>
+    Replacing the old list of CSS variables would have meant more refactoring than the budget allowed, so the new tokens were added as a separate system, living in parallel with the old variables. Theming was rolled out to every brand: new development used it fully, while existing styles were only partly migrated.
+  </p>
+</section>

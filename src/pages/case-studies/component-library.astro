@@ -1,0 +1,115 @@
+---
+import BaseLayout from "@layouts/base-layout.astro";
+import CaseStudyNav from "@organisms/case-study-nav/case-study-nav.astro";
+import Hero from "@organisms/hero/hero.astro";
+import FactsStrip from "@organisms/facts-strip/facts-strip.astro";
+import Fact from "@molecules/fact/fact.astro";
+import StatsStrip from "@organisms/stats-strip/stats-strip.astro";
+import TextSection from "@organisms/text-section/text-section.astro";
+import Stat from "@molecules/stat/stat.astro";
+import CardGrid from "@organisms/card-grid/card-grid.astro";
+import InfoCard from "@molecules/info-card/info-card.astro";
+import TokenDiagram from "./_components/token-diagram/token-diagram.astro";
+import StepList from "@organisms/step-list/step-list.astro";
+import StepRow from "@molecules/step-row/step-row.astro";
+import LessonList from "@organisms/lesson-list/lesson-list.astro";
+import LessonBlock from "@molecules/lesson-block/lesson-block.astro";
+import Link from "@atoms/link/link.astro";
+import Icon from "@atoms/icon/icon.astro";
+---
+
+<BaseLayout title="Taking control of an inherited component library · Nico Collin" brand="spec">
+  <Link variant="standalone" size="md" href="/#work">
+    <Icon slot="icon-start" name="arrow-left" />
+    All case studies
+  </Link>
+  <Hero
+      type="page"
+      eyebrow="Case study 01 · Nurun · 2023–present"
+      title="Taking control of an inherited component library"
+      lead="I inherited a cross-project component library I hadn’t designed, with no budget and no clear scope. As frontend tech lead on a multi-brand automotive account, I turned it into a token-driven design system themed across six brands, trading open-ended flexibility for controlled choices."
+    />
+
+    <FactsStrip>
+      <Fact label="Role" value="Frontend tech lead, supporting 3 squads (~15 people)" />
+      <Fact label="Client" value="Large multi-brand automotive client, through Nurun" />
+      <Fact label="Stack" value="StencilJS web components, Vue.js, AngularJS, Java with FreeMarker, Figma API" />
+      <Fact label="Scope" value="Feature architecture, frontend stack, team coaching, design system" />
+    </FactsStrip>
+
+    <StatsStrip>
+      <Stat value="~30" caption="components" />
+      <Stat value="~500" caption="primitive and semantic tokens" />
+      <Stat value="6×2" caption="brands, each in light and dark" />
+    </StatsStrip>
+
+    <TextSection id="context" index="01" title="Context">
+      <p>Another lead had started a component library meant to be shared across Nurun’s client projects. The goal was to make it highly customizable, so projects with very different design directions could all build on the same foundation.</p>
+      <p>Some foundational choices were already made when I joined. The library was built as web components with StencilJS, so the same components could be shared across different technologies and projects.</p>
+      <p>My initial mandate was to help put that library in place. When the colleague who started it left, it was handed to me, along with its vision, setup and requirements, none of which I had been involved in.</p>
+      <p>The library was only part of my job. As the frontend tech lead on the automotive client account, I also defined the technical approach for every new feature, supported three squads of about 15 people, coached the team, and improved the project’s frontend stack. The design system work had to fit alongside all of that.</p>
+    </TextSection>
+
+    <CardGrid id="challenges" index="02" title="Challenges">
+      <InfoCard tag="01" title="A mixed legacy stack"
+        text="The client platform ran on Java with FreeMarker server templating and legacy AngularJS, with Vue.js chosen to gradually replace it. Components had to work across several stacks at once." />
+      <InfoCard tag="02" title="No budget, no scope, little pull"
+        text="The initiative had no funding and no clear definition, and other teams’ features, budgets and deadlines always came first." />
+      <InfoCard tag="03" title="Code before design"
+        text="The library was built before any design system existed: one prop for nearly every visual detail, where a design system defines a few clean variants." />
+      <InfoCard tag="04" title="Too much freedom"
+        text="CSS strings injected through props, and instead of tokens, an exhaustive list of CSS variables, like one for every padding from 0 to 100." />
+    </CardGrid>
+
+    <TokenDiagram id="token-architecture" index="03" />
+
+    <StepList
+      id="approach"
+      index="04"
+      title="Approach"
+      intro="With no budget and no shared roadmap, I used my own client project as the vehicle for moving the library forward."
+    >
+      <StepRow number="01" title="Work through a client project">
+        <p>I developed the library inside the automotive client project. Each improvement was driven by an actual client need, which justified the time and tested the library under real conditions.</p>
+        <p><strong>Coaching the team.</strong> Most of the team hadn’t worked with a component library before. The hardest shift was mindset: building components in isolation, free of any application context, is very different from developing features inside a full application.</p>
+      </StepRow>
+      <StepRow number="02" title="Make change safe">
+        <p>Before touching the design, I set up automated versioning and changelogs. Teams could adopt new versions incrementally, so the library could evolve without breaking the projects that depended on it.</p>
+      </StepRow>
+      <StepRow number="03" title="Build a real token foundation">
+        <p>The project’s UI lead wanted to start a design system, and I partnered closely with her. Over many working sessions with her and another designer, we defined the three-layer token foundation above, and rolled theming out to every brand.</p>
+      </StepRow>
+      <StepRow number="04" title="Trade open flexibility for controlled flexibility">
+        <p>Injecting CSS through props was blocking any update or scaling, so we deprecated it and replaced it with variant props and flexible tokens. Teams could still adapt components, but only through choices the system defined. For new development, manual overrides and hardcoded CSS values were no longer allowed.</p>
+        <p><strong>Enforcement.</strong> Pull request reviews held the line, with the team’s help, backed by CI/CD gates running linting and Stylelint on both the library and the client app.</p>
+      </StepRow>
+      <StepRow number="05" title="Make Figma the source of truth">
+        <p>To keep design and code from drifting apart, I wrote scripts that pull token data from Figma through its REST API and generate a specification file in the W3C Design Tokens Community Group format, convertible to any platform: web, Android and others.</p>
+        <p><strong>Icons too.</strong> The same pipeline downloaded the icon set through the Figma API for an icon component to consume. Both pipelines were built by hand, before AI tools were part of my workflow.</p>
+        <p><strong>Documentation.</strong> The library’s monorepo published utilities, a Storybook and a Docusaurus documentation portal alongside the components.</p>
+      </StepRow>
+      <StepRow number="06" title="Narrow the scope">
+        <p>Other teams resisted adoption, and the agency-wide label was creating confusion within my own team. So I stopped treating it as an agency library and focused it on the automotive client, where it could deliver real efficiency. Wider reuse would be reconsidered when a real opportunity came up.</p>
+      </StepRow>
+    </StepList>
+
+    <LessonList
+      id="lessons"
+      index="05"
+      title="What I’d do differently"
+      intro="Since I inherited this initiative, most of my lessons are about how a shared library should start."
+    >
+      <LessonBlock
+        statement="Secure time, budget and collaborators up front."
+        support="A cross-project library with no dedicated budget and no committed partners depends on goodwill and spare time, and both run out under client deadlines."
+      />
+      <LessonBlock
+        statement="Never start development without designers."
+        support="Building the library before the design system created debt that still isn’t fully paid. Design and code need to grow together from day one."
+      />
+    </LessonList>
+
+  <CaseStudyNav
+    next={{ href: "/case-studies/platform-modernization", title: "Modernizing a 10-year-old platform without stopping delivery" }}
+  />
+</BaseLayout>

@@ -1,0 +1,103 @@
+---
+import BaseLayout from "@layouts/base-layout.astro";
+import Hero from "@organisms/hero/hero.astro";
+import FactsStrip from "@organisms/facts-strip/facts-strip.astro";
+import Fact from "@molecules/fact/fact.astro";
+import CardGrid from "@organisms/card-grid/card-grid.astro";
+import WorkList from "@organisms/work-list/work-list.astro";
+import CaseStudyCard from "@organisms/case-study-card/case-study-card.astro";
+import Stat from "@molecules/stat/stat.astro";
+import InfoCard from "@molecules/info-card/info-card.astro";
+import Button from "@atoms/button/button.astro";
+import Icon from "@atoms/icon/icon.astro";
+import ContactBlock from "@organisms/contact-block/contact-block.astro";
+---
+
+<BaseLayout title="Home · Nico Collin" brand="spec">
+  <Hero eyebrow="FRONTEND_TECH_LEAD · LAVAL, QC" title="I build the UI foundations teams ship on." lead="Frontend tech lead at Nurun, previously Tecsys and Ubisoft. I modernize legacy platforms without stopping delivery, and build the design systems and teams that keep them moving.">
+    <Fragment slot="actions">
+      <Button href="#work">View case studies <Icon name="arrow-down"/></Button>
+      <Button variant="secondary" href="/assets/nico-collin-resume.pdf" target="_blank">Download resume <Icon name="download"/></Button>
+    </Fragment>
+  </Hero>
+
+  <FactsStrip>
+    <Fact label="Currently" value="Frontend tech lead, Nurun" />
+    <Fact label="Previously" value="Tecsys, Ubisoft" />
+    <Fact label="Focus" value="Design systems, frontend architecture" />
+    <Fact label="Also" value="Team coaching, UX/UI design" />
+  </FactsStrip>
+
+  <WorkList>
+    <CaseStudyCard
+      href="/case-studies/component-library"
+      number="01"
+      meta="Nurun · 2023–now"
+      title="Taking control of an inherited component library"
+      summary="Turned an unfunded, unscoped library into a token-driven design system themed across six brands."
+    >
+      <Fragment slot="stats">
+        <Stat size="sm" value="~30" caption="components" />
+        <Stat size="sm" value="~500" caption="tokens" />
+        <Stat size="sm" value="6×2" caption="brand themes" />
+      </Fragment>
+    </CaseStudyCard>
+
+    <CaseStudyCard
+      href="/case-studies/platform-modernization"
+      number="02"
+      meta="Nurun · 2023–now"
+      title="Modernizing a 10-year-old platform without stopping delivery"
+      summary="Using client work as the vehicle to move a legacy Java and AngularJS platform forward, one block at a time."
+      draft
+    >
+      <Fragment slot="stats">
+        <Stat size="sm" value="2×" caption="faster CI" />
+        <Stat size="sm" value="3" caption="squads aligned" />
+        <Stat size="sm" value="Vite" caption="from Gulp" />
+      </Fragment>
+    </CaseStudyCard>
+
+    <CaseStudyCard
+      href="/case-studies/tecsys-design-practice"
+      number="03"
+      meta="Tecsys · 2018–2023"
+      title="Building a frontend and design practice from zero"
+      summary="From first frontend hire to tech lead of a nine-person UX team, with a design system shared across three products."
+    >
+      <Fragment slot="stats">
+        <Stat size="sm" value="1→9" caption="UX team" />
+        <Stat size="sm" value="~30" caption="components" />
+        <Stat size="sm" value="3" caption="products" />
+      </Fragment>
+    </CaseStudyCard>
+  </WorkList>
+
+  <CardGrid id="how-i-work" title="How I work">
+    <InfoCard tag="01" title="Modernize from inside delivery"
+      text="No big-bang rewrites. Client work becomes the vehicle for improving the stack." />
+    <InfoCard tag="02" title="Design and code grow together"
+      text="A system is only as strong as the partnership between designers and developers." />
+    <InfoCard tag="03" title="Adoption is a people problem"
+      text="Champions inside teams do more for a system than any process imposed from outside." />
+  </CardGrid>
+
+  <ContactBlock
+    title="Let’s talk."
+    text="Open to UI architecture and frontend leadership roles."
+  >
+    <Fragment slot="actions">
+      <Button href="mailto:nico.collin.84@gmail.com" variant="secondary">
+        Email <span class="visually-hidden">Nico Collin</span>
+      </Button>
+      <Button href="https://www.linkedin.com/in/ncollin" target="_blank" variant="secondary">
+        LinkedIn <span class="visually-hidden">profile</span>
+        <Icon slot="icon" name="external" />
+      </Button>
+      <Button href="/assets/nico-collin-resume.pdf" target="_blank" variant="secondary">
+        Resume <span class="visually-hidden">(PDF)</span>
+        <Icon slot="icon" name="download" />
+      </Button>
+    </Fragment>
+  </ContactBlock>
+</BaseLayout>

@@ -1,0 +1,16 @@
+---
+import styles from "@molecules/fact/fact.module.css";
+
+interface Props {
+  label: string;
+  value: string;
+}
+
+const { label, value } = Astro.props;
+---
+
+<!-- Only valid inside a <dl>: use it through Facts strip -->
+<div class={styles["nc-fact"]}>
+  <dt class={styles["nc-fact__label"]}>{label}</dt>
+  <dd class={styles["nc-fact__value"]}>{value}</dd>
+</div>

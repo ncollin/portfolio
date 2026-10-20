@@ -1,0 +1,39 @@
+---
+import styles from "@organisms/case-study-card/case-study-card.module.css";
+import Tag from "@atoms/tag/tag.astro";
+import Icon from "@atoms/icon/icon.astro";
+
+interface Props {
+  href: string;
+  number: string;
+  meta: string;
+  title: string;
+  summary: string;
+  draft?: boolean;
+}
+
+const { href, number, meta, title, summary, draft = false } = Astro.props;
+---
+
+<!-- Root is an <li>: this card is always rendered inside Work list -->
+<li class={styles["nc-case-study-card"]}>
+  <article class={styles["nc-case-study-card__body"]}>
+    <div class={styles["nc-case-study-card__text"]}>
+      <p class={styles["nc-case-study-card__meta"]}>
+        <Tag tone="accent">{number}</Tag>
+        <span>{meta}</span>
+        {draft && <Tag tone="muted">Draft</Tag>}
+      </p>
+      <h3 class={styles["nc-case-study-card__title"]}>
+        <a href={href} class={styles["nc-case-study-card__link"]}>{title}</a>
+      </h3>
+      <p class={styles["nc-case-study-card__summary"]}>{summary}</p>
+      <span class={styles["nc-case-study-card__cta"]} aria-hidden="true">
+        Read case study <Icon name="arrow-right" />
+      </span>
+    </div>
+    <div class={styles["nc-case-study-card__stats"]}>
+      <slot name="stats" />
+    </div>
+  </article>
+</li>

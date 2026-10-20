@@ -1,0 +1,47 @@
+.nc-segmented-control {
+  position: relative;
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: var(--nc-gap-xs);
+  margin: 0;
+  min-inline-size: 0;
+  padding: var(--nc-padding-xs);
+  border: var(--nc-border-width-default) solid var(--nc-color-border-control);
+  border-radius: var(--nc-border-radius-md);
+  background: var(--nc-color-background-control);
+}
+
+/* Sliding indicator */
+.nc-segmented-control::before {
+  content: "";
+  position: absolute;
+  inset-block: var(--nc-padding-xs);
+  inset-inline-start: var(--nc-padding-xs);
+  width: calc((100% - 2 * var(--nc-padding-xs) - var(--nc-gap-xs)) / 2);
+  border-radius: var(--nc-border-radius-sm);
+  background: var(--nc-color-background-action);
+  pointer-events: none; /* never block clicks, even if stacking changes */
+  transition: transform var(--nc-motion-duration-base, 200ms)
+    var(--nc-motion-easing-standard, cubic-bezier(0.2, 0, 0, 1));
+}
+
+/* Element selectors, not the segment's classes: they're hashed in another file */
+.nc-segmented-control:has(> label:nth-of-type(2) input:checked)::before {
+  transform: translateX(calc(100% + var(--nc-gap-xs)));
+}
+
+.nc-segmented-control__legend {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nc-segmented-control::before {
+    transition: none;
+  }
+}

@@ -1,0 +1,13 @@
+.nc-work-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nc-gap-lg);
+}
+
+.nc-work-list__cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nc-gap-lg);
+  margin: 0;
+  padding: 0;
+}

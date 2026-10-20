@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import styles from "@atoms/button/button.module.css";
+
+type Props = {
+  variant?: "primary" | "secondary";
+  href?: string;
+} & HTMLAttributes<"a"> & HTMLAttributes<"button">;
+
+const { variant = "primary", href, class: className, ...rest } = Astro.props;
+const classes = [styles["nc-button"], styles[`nc-button--${variant}`], className];
+const hasIcon = Astro.slots.has("icon");
+---
+
+{href ? (
+  <a href={href} class:list={classes} {...rest}>
+    <slot />
+    {hasIcon && <span class={styles["nc-button__icon"]} aria-hidden="true"><slot name="icon" /></span>}
+  </a>
+) : (
+  <button type="button" class:list={classes} {...rest}>
+    <slot />
+    {hasIcon && <span class={styles["nc-button__icon"]} aria-hidden="true"><slot name="icon" /></span>}
+  </button>
+)}

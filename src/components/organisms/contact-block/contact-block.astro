@@ -1,0 +1,22 @@
+---
+import styles from "@organisms/contact-block/contact-block.module.css";
+
+interface Props {
+  id?: string;
+  title: string;
+  text: string;
+}
+
+const { id = "contact", title, text } = Astro.props;
+const headingId = `${id}-heading`;
+---
+
+<section id={id} class={styles["nc-contact-block"]} aria-labelledby={headingId}>
+  <div class={styles["nc-contact-block__text"]}>
+    <h2 id={headingId} class={styles["nc-contact-block__title"]}>{title}</h2>
+    <p class={styles["nc-contact-block__body"]}>{text}</p>
+  </div>
+  <div class={styles["nc-contact-block__actions"]}>
+    <slot name="actions" />
+  </div>
+</section>

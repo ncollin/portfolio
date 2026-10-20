@@ -1,0 +1,97 @@
+.nc-token-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nc-gap-lg);
+}
+
+.nc-token-diagram__text {
+  margin: 0;
+  color: var(--nc-color-text-primary);
+  font-family: var(--nc-font-family-body);
+  font-size: var(--nc-font-size-body);
+  font-weight: var(--nc-font-weight-body);
+  line-height: var(--nc-line-height-body);
+  letter-spacing: var(--nc-letter-spacing-body);
+}
+
+.nc-token-diagram__layers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--nc-min-width-column), 1fr));
+  gap: var(--nc-gap-md);
+  margin: 0;
+  padding: 0;
+  counter-reset: layer;
+}
+
+.nc-token-diagram__layer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nc-gap-sm);
+  padding: var(--nc-padding-lg);
+  list-style: none;
+  background-color: var(--nc-color-background-container);
+  border: var(--nc-border-width-default) solid var(--nc-color-border-default);
+  border-radius: var(--nc-border-radius-md);
+  box-shadow: var(--nc-shadow-offset-default) var(--nc-shadow-offset-default)
+    var(--nc-shadow-blur) var(--nc-shadow-color);
+}
+
+/* "01 →", "02 →", "03 ·": shows the flow between layers. The "/ ''" part
+   gives the decoration empty alt text, so screen readers skip it. */
+.nc-token-diagram__note::before {
+  counter-increment: layer;
+  content: counter(layer, decimal-leading-zero) " → " / "";
+}
+
+.nc-token-diagram__layer:last-child .nc-token-diagram__note::before {
+  content: counter(layer, decimal-leading-zero) " · " / "";
+}
+
+.nc-token-diagram__note {
+  margin: 0;
+  color: var(--nc-color-text-accent);
+  font-family: var(--nc-font-family-label);
+  font-size: var(--nc-font-size-label);
+  font-weight: var(--nc-font-weight-label);
+  line-height: var(--nc-line-height-label);
+  letter-spacing: var(--nc-letter-spacing-label);
+  text-transform: var(--nc-text-transform-label);
+}
+
+.nc-token-diagram__name {
+  margin: 0;
+  color: var(--nc-color-text-primary);
+  font-family: var(--nc-font-family-heading-3);
+  font-size: var(--nc-font-size-heading-3);
+  font-weight: var(--nc-font-weight-heading-3);
+  line-height: var(--nc-line-height-heading-3);
+  letter-spacing: var(--nc-letter-spacing-heading-3);
+  text-transform: var(--nc-text-transform-heading-3);
+}
+
+.nc-token-diagram__examples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nc-gap-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--nc-color-text-secondary);
+  font-family: var(--nc-font-family-label);
+  font-size: var(--nc-font-size-label);
+  line-height: var(--nc-line-height-label);
+}
+
+.nc-token-diagram__examples code {
+  font: inherit;
+}
+
+.nc-token-diagram__description {
+  margin: 0;
+  color: var(--nc-color-text-secondary);
+  font-family: var(--nc-font-family-body);
+  font-size: var(--nc-font-size-body);
+  font-weight: var(--nc-font-weight-body);
+  line-height: var(--nc-line-height-body);
+  letter-spacing: var(--nc-letter-spacing-body);
+}

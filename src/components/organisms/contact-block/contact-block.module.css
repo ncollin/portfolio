@@ -1,0 +1,52 @@
+.nc-contact-block {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nc-gap-lg);
+  padding: var(--nc-padding-xl);
+  background-color: var(--nc-color-background-emphasis);
+  border: var(--nc-border-width-default) solid var(--nc-color-border-default);
+  border-radius: var(--nc-border-radius-md);
+  box-shadow: var(--nc-shadow-offset-default) var(--nc-shadow-offset-default)
+    var(--nc-shadow-blur) var(--nc-shadow-color);
+}
+
+.nc-contact-block__text {
+  flex: 1 1 var(--nc-min-width-column);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nc-gap-sm);
+  max-inline-size: var(--nc-max-width-prose);
+}
+
+/* An <h2> in the outline, styled with the heading-3 role */
+.nc-contact-block__title {
+  margin: 0;
+  color: var(--nc-color-text-on-emphasis);
+  font-family: var(--nc-font-family-heading-3);
+  font-size: var(--nc-font-size-heading-3);
+  font-weight: var(--nc-font-weight-heading-3);
+  line-height: var(--nc-line-height-heading-3);
+  letter-spacing: var(--nc-letter-spacing-heading-3);
+  text-transform: var(--nc-text-transform-heading-3);
+}
+
+.nc-contact-block__body {
+  margin: 0;
+  color: var(--nc-color-text-on-emphasis);
+  opacity: var(--nc-opacity-subdued);
+  font-family: var(--nc-font-family-body);
+  font-size: var(--nc-font-size-body);
+  font-weight: var(--nc-font-weight-body);
+  line-height: var(--nc-line-height-body);
+  letter-spacing: var(--nc-letter-spacing-body);
+}
+
+.nc-contact-block__actions {
+  flex: 1 1 var(--nc-min-width-column);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--nc-gap-md); /* room for Bold's button shadows */
+}

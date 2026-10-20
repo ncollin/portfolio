@@ -1,0 +1,58 @@
+---
+import { Font } from "astro:assets";
+
+import "@styles/layout.css";
+import "@styles/utils-classes.css";
+import "@styles/tokens/primitives.css";
+import "@styles/tokens/semantic.spec.css";
+import "@styles/tokens/semantic.bold.css";
+
+import Header from "@organisms/header/header.astro";
+import Footer from "@organisms/footer/footer.astro";
+
+interface Props {
+  title: string;
+  brand?: "spec" | "bold";
+}
+
+const { title, brand = "spec" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-theme={brand}>
+  <head>
+    <meta charset="utf-8" />
+    <script is:inline>
+      try {
+        const brand = localStorage.getItem("nc-brand");
+        if (brand === "spec" || brand === "bold") {
+          document.documentElement.dataset.theme = brand;
+        }
+      } catch (error) {
+        console.warn("Unable to restore the saved brand.", error);
+      }
+    </script>
+    <Font cssVariable="--nc-font-plex-sans" />
+    <Font cssVariable="--nc-font-plex-mono" />
+    <Font cssVariable="--nc-font-archivo" />
+    <Font cssVariable="--nc-font-archivo-black" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="nc-layout">
+      <Header />
+
+      <main class="nc-layout__main">
+        <slot />
+      </main>
+
+      <Footer>
+        <p>Site name</p>
+      </Footer>
+    </div>
+  </body>
+</html>

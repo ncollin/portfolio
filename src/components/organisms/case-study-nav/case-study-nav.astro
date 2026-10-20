@@ -1,0 +1,38 @@
+---
+import styles from "@organisms/case-study-nav/case-study-nav.module.css";
+import Link from "@atoms/link/link.astro";
+import Icon from "@atoms/icon/icon.astro";
+
+interface CaseStudyLink {
+  href: string;
+  title: string;
+}
+
+interface Props {
+  previous?: CaseStudyLink;
+  next?: CaseStudyLink;
+}
+
+const { previous, next } = Astro.props;
+---
+
+<nav class={styles["nc-case-study-nav"]} aria-label="More case studies">
+  {previous && (
+    <div class={styles["nc-case-study-nav__item"]}>
+      <p class={styles["nc-case-study-nav__label"]} aria-hidden="true">Previous case study</p>
+      <Link variant="standalone" size="md" href={previous.href}>
+        <Icon slot="icon-start" name="arrow-left" />
+        <span class="visually-hidden">Previous case study: </span>{previous.title}
+      </Link>
+    </div>
+  )}
+  {next && (
+    <div class:list={[styles["nc-case-study-nav__item"], styles["nc-case-study-nav__item--next"]]}>
+      <p class={styles["nc-case-study-nav__label"]} aria-hidden="true">Next case study</p>
+      <Link variant="standalone" size="md" href={next.href}>
+        <span class="visually-hidden">Next case study: </span>{next.title}
+        <Icon slot="icon" name="arrow-right" />
+      </Link>
+    </div>
+  )}
+</nav>

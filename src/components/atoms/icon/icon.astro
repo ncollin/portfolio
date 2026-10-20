@@ -1,0 +1,39 @@
+---
+import styles from"@atoms/icon/icon.module.css";
+import externalIcon from "@atoms/icon/assets/external.svg";
+import arrowRightIcon from "@atoms/icon/assets/arrow-right.svg";
+import arrowDownIcon from "@atoms/icon/assets/arrow-down.svg";
+import arrowLeftIcon from "@atoms/icon/assets/arrow-left.svg";
+import downloadIcon from "@atoms/icon/assets/download.svg";
+
+const icons = {
+  external: externalIcon,
+  "arrow-right": arrowRightIcon,
+  "arrow-down": arrowDownIcon,
+  "arrow-left": arrowLeftIcon,
+  download: downloadIcon
+} as const;
+
+interface Props {
+  name: keyof typeof icons;
+  size?: "md";
+}
+
+const {
+  name,
+  size = "md"
+} = Astro.props;
+
+const Svg = icons[name];
+const classes = [styles["nc-icon"], size === "md" && styles["nc-icon--md"]];
+
+if (!Svg) {
+  throw new Error(`Unknown icon: ${name}`);
+}
+---
+
+<Svg
+  class:list={classes}
+  aria-hidden="true"
+  focusable="false"
+/>

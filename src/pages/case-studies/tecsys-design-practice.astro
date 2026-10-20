@@ -1,0 +1,134 @@
+---
+import BaseLayout from "@layouts/base-layout.astro";
+import CaseStudyNav from "@organisms/case-study-nav/case-study-nav.astro";
+import Hero from "@organisms/hero/hero.astro";
+import FactsStrip from "@organisms/facts-strip/facts-strip.astro";
+import Fact from "@molecules/fact/fact.astro";
+import StatsStrip from "@organisms/stats-strip/stats-strip.astro";
+import Stat from "@molecules/stat/stat.astro";
+import TextSection from "@organisms/text-section/text-section.astro";
+import CardGrid from "@organisms/card-grid/card-grid.astro";
+import InfoCard from "@molecules/info-card/info-card.astro";
+import StepList from "@organisms/step-list/step-list.astro";
+import StepRow from "@molecules/step-row/step-row.astro";
+import LessonList from "@organisms/lesson-list/lesson-list.astro";
+import LessonBlock from "@molecules/lesson-block/lesson-block.astro";
+---
+
+<BaseLayout title="Home" brand="spec">
+  <Hero
+    type="page"
+    eyebrow="Case study 03 · Tecsys · 2018–2023"
+    title="Building a frontend and design practice from zero"
+    lead="Over five years at Tecsys, I went from the company’s first and only frontend developer to frontend tech lead of a nine-person UX team. Along the way, I brought modern UI into a legacy Java supply-chain platform without a rewrite, built its component library and design system, and helped grow a design culture in a backend-first company."
+  />
+
+  <FactsStrip>
+    <Fact label="Role" value="First frontend hire, then frontend tech lead of the UX team" />
+    <Fact label="Company" value="Tecsys, supply-chain software including a WMS" />
+    <Fact label="Stack" value="Web components (Stencil, then Lit), Vue.js, Java platform, Figma" />
+    <Fact label="Scope" value="Frontend architecture, design system, UX/UI design, UX team creation, developer and agency enablement" />
+  </FactsStrip>
+
+  <StatsStrip>
+    <Stat value="1→9" caption="UX team, from one person" />
+    <Stat value="~30" caption="components, 100+ tokens" />
+    <Stat value="3" caption="products on the design system" />
+  </StatsStrip>
+
+  <TextSection id="context" index="01" title="Context">
+    <p>Tecsys sold a supply-chain platform, including a warehouse management system (WMS), built on an old custom Java framework. A full backend team maintained it, but the company had no frontend developers and no designers. I was the first.</p>
+    <p>My mandate was to modernize the platform and improve its UI and user experience. The existing UI was largely table-based and constrained by what the Java platform could render.</p>
+  </TextSection>
+
+  <CardGrid
+    id="challenges"
+    index="02"
+    title="Challenges"
+    intro="The technology was the easy part; the people and the platform were not."
+  >
+    <InfoCard tag="01" title="A team new to frontend"
+      text="The platform team had little frontend experience and was resistant to change." />
+    <InfoCard tag="02" title="No room for a rewrite"
+      text="They wanted to introduce a JavaScript framework, but would not accept a large refactor of the platform." />
+    <InfoCard tag="03" title="No design function"
+      text="There were no designers, and no access to real end users." />
+  </CardGrid>
+
+  <StepList
+    id="approach"
+    index="03"
+    title="Approach"
+    intro="My goal was to deliver modern UI incrementally, inside the existing platform, with a learning curve the team could actually absorb. The work unfolded in three phases: proving it alone, building the team, then scaling beyond myself."
+  >
+    <StepRow number="01" title="A component library that works anywhere">
+      <p>I built the foundation as native web components, so the same components could run inside the legacy Java platform and in any future frontend, whatever framework it used.</p>
+      <p><strong>Why web components.</strong> A framework-specific library would have locked Tecsys into a choice the team wasn’t ready to make, and couldn’t be dropped into the Java views. Web components work anywhere the browser does.</p>
+      <p><strong>Stencil, then Lit.</strong> I started with Stencil. Over time it proved too opinionated and sometimes restrictive, so I moved the library to Lit, which is lightweight and close to native JavaScript.</p>
+      <p><strong>Built to shrink.</strong> Lit was also a long-term bet: as native web component standards mature, the library layer gets thinner, not heavier. That kept the system maintainable for a team with limited frontend depth.</p>
+    </StepRow>
+    <StepRow number="02" title="Vue for the first product">
+      <p>The first real opportunity came from the WMS team: a new interface for warehouse package receivers. The platform’s table-based UI couldn’t support the experience they needed, so the app ran as a custom view inside the platform, bypassing those limits.</p>
+      <p>I evaluated which JavaScript framework to introduce and chose Vue.js. The deciding factor was the team, not the benchmark.</p>
+      <p><strong>Least to learn.</strong> Vue adds the least on top of plain JavaScript, which the team still needed to ramp up on.</p>
+      <p><strong>Flexible enough.</strong> Its flexibility fit a restrictive ecosystem, where a stricter framework would have fought the platform.</p>
+      <p><strong>The trade-off.</strong> Less built-in structure, which I accepted and compensated for through the component library and conventions.</p>
+      <p>I handled almost all of the development. Platform experts helped wire up the data the app needed.</p>
+    </StepRow>
+    <StepRow number="03" title="Designing without a designer">
+      <p>Tecsys had no designer, so I took on the UX and UI work myself. I learned Figma, which was still fairly new at the time, and produced the wireframes, UI design and interactive prototype.</p>
+      <p><strong>Two contexts, one app.</strong> Receivers used it at a desk and on mobile devices on the warehouse floor, so the design had to work across both.</p>
+      <p><strong>Validation with limited access.</strong> I couldn’t get access to actual end users, so I validated designs through review sessions with internal domain experts instead, and challenged assumptions there.</p>
+      <p><strong>Designing for scanner hardware.</strong> On the floor, only a specific set of older mobile devices with built-in hardware scanners was supported. The UI had to adapt to their input methods and interaction patterns, not just their smaller screens.</p>
+      <p><strong>Input that never gets lost.</strong> Receivers scanned packages back to back, without touching the screen or refocusing a field between scans. The app had to capture every scan, every time, no matter what was on screen, so focus management became a core requirement of the interaction design.</p>
+      <p><strong>Result of the first phase.</strong> The receiving app shipped and proved that the new processes and technology worked inside the platform. We never got field data from the warehouse floor, but the new experience generated real excitement internally. It also exposed the limit: one person pushing the boundaries doesn’t change a company.</p>
+    </StepRow>
+    <StepRow number="04" title="Building a UX function">
+      <p>A new manager joined with the goal of making UX part of Tecsys culture, and together we built the team from zero.</p>
+      <p><strong>Shaping the vision.</strong> I worked closely with him, travelling to work in person, to define what the UX team should be and how it would work with engineering.</p>
+      <p><strong>Hiring.</strong> We searched for and hired the first UX designer, then a UI designer.</p>
+      <p><strong>Levelling up.</strong> While we recruited, I deepened my UX practice: online training, design and prototyping tools, design sprint workshops, and design systems.</p>
+    </StepRow>
+    <StepRow number="05" title="Selling and building the design system">
+      <p>By then I was convinced that a design system was the right UI foundation for the kind of product Tecsys offered.</p>
+      <p>I pitched it first to the new UX team, so design would own it with me rather than receive it. We then ran workshop days with senior leadership, including the VP and the technical architect, each covering a different topic: the UX team’s composition, the UI and technical value of a design system, how we chose the JavaScript framework, and why testing with real end users matters.</p>
+      <p>With buy-in secured, I partnered with the UI designer to build it, connecting Figma design decisions to tokens and the Lit component library.</p>
+      <p><strong>Tokens: start simple.</strong> As our first system, the tokens were a single primitive layer, with no semantic layer and no theming yet. Theming was on the roadmap.</p>
+    </StepRow>
+    <StepRow number="06" title="Scaling beyond one developer">
+      <p>A new external application, outside the main platform, raised the stakes. The system now had to support people other than me.</p>
+      <p><strong>Growing the team.</strong> I recruited new frontend developers and coached them.</p>
+      <p><strong>Enabling an agency.</strong> An external agency joined the project. I acted as their technical enabler, supporting them on our architecture and the design system.</p>
+      <p><strong>Opening up the data.</strong> I worked with the platform team to introduce REST APIs so the external app could get the data it needed.</p>
+      <p><strong>Evolving the system.</strong> Throughout, I kept improving the tokens and component library so every team could build UI faster.</p>
+    </StepRow>
+  </StepList>
+
+  <TextSection id="outcome" index="04" title="Outcome and adoption">
+    <p>By the end, the design system was a shared foundation across three products, with about 30 components and over 100 tokens, distributed as a versioned npm package and documented in an internal portal built with the system itself.</p>
+    <p><strong>Adoption at each team’s pace.</strong> One app was built entirely on the system. The other two adopted it incrementally, replacing legacy UI with system components whenever an opportunity came up. Because it shipped as a versioned package, each team upgraded only when it was ready, so adoption never blocked delivery.</p>
+    <p><strong>Governance: a hybrid model.</strong> The UX team owned the design system, while product teams could request changes or contribute directly through pull requests. In practice, most teams weren’t yet comfortable contributing regularly, so ownership stayed concentrated in the core team.</p>
+    <p><strong>From one person to a team of nine.</strong> By the end, the UX team had a UX manager, a UX lead, two UX designers, two UI designers, two frontend developers, and me as frontend tech lead.</p>
+    <p><strong>Changing the culture, one wall at a time.</strong> Teams resisted change and didn’t yet see the value of UX and UI. It took patience, repeated exposure, and picking the right opportunities. Over time, understanding grew, and some teams began asking us to get involved and improve their experiences.</p>
+  </TextSection>
+
+  <LessonList
+    id="lessons"
+    index="05"
+    title="What I’d do differently"
+    intro="Most of my lessons are about adoption."
+  >
+    <LessonBlock
+      statement="Grow champions in strategic teams early."
+      support="Tecsys was a backend-first company, and the value of UX and UI wasn’t obvious to most teams. A model with a central owner and open pull requests wasn’t enough on its own."
+    />
+    <LessonBlock
+      statement="Let peers make the case."
+      support="Engineers who had seen the benefits firsthand could have shown their peers what the system brought, in their own context and language. That advocacy would have done more for adoption than any process designed from the outside."
+    />
+  </LessonList>
+
+  <CaseStudyNav
+    previous={{ href: "/case-studies/platform-modernization", title: "Modernizing a 10-year-old platform without stopping delivery" }}
+  />
+</BaseLayout>

@@ -1,0 +1,53 @@
+.nc-step-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--nc-gap-lg);
+  row-gap: var(--nc-gap-sm);
+  padding-block: var(--nc-padding-lg);
+  list-style: none;
+}
+
+/* Rows are separated by a border instead of a Divider instance,
+   so the last row needs no show-divider prop. */
+.nc-step-row:not(:last-child) {
+  border-block-end: var(--nc-border-width-default) solid var(--nc-color-border-default);
+}
+
+.nc-step-row__number {
+  flex: none;
+}
+
+.nc-step-row__title {
+  flex: 1 1 var(--nc-min-width-column);
+  margin: 0;
+  color: var(--nc-color-text-primary);
+  font-family: var(--nc-font-family-body);
+  font-size: var(--nc-font-size-body);
+  font-weight: var(--nc-font-weight-body);
+  line-height: var(--nc-line-height-body);
+  letter-spacing: var(--nc-letter-spacing-body);
+}
+
+.nc-step-row__description {
+  flex: 2 1 var(--nc-min-width-column);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nc-gap-sm);
+  color: var(--nc-color-text-secondary);
+  font-family: var(--nc-font-family-body);
+  font-size: var(--nc-font-size-body);
+  font-weight: var(--nc-font-weight-body);
+  line-height: var(--nc-line-height-body);
+  letter-spacing: var(--nc-letter-spacing-body);
+}
+
+.nc-step-row__description > p {
+  margin: 0;
+}
+
+/* Lead-ins like "Coaching the team." read in the primary color */
+.nc-step-row__description strong {
+  color: var(--nc-color-text-primary);
+  font-weight: var(--nc-font-weight-body);
+}
