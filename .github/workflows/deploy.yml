@@ -1,0 +1,43 @@
+# Build the site and deploy it to Firebase Hosting on every push to develop
+# (including merged pull requests). develop is the production branch.
+# Secret: FIREBASE_SERVICE_ACCOUNT (service account JSON key).
+# Variable: FIREBASE_PROJECT_ID.
+
+name: Deploy
+
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch: # manual re-deploy from the Actions tab
+
+# One deployment at a time; a newer push cancels the older run
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Also regenerates the social images (prebuild step in npm run build)
+      - run: npm run build
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: ${{ vars.FIREBASE_PROJECT_ID }}
+          channelId: live
