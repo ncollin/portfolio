@@ -268,7 +268,7 @@ Pages default to a shared 1200×630 image with a large-image Twitter card. Overr
 - `pageType="article"` (case studies) emits `Article` JSON-LD and sets `og:type="article"`. It requires a `headline` prop, shared with the visible hero title, and reuses the page's description, URL, and social image.
 - The default `pageType="website"` (404) emits no JSON-LD.
 
-Author details are defined once in [base-layout.astro](src/layouts/base-layout.astro) with a stable `Person` identifier. JSON is serialized with `<` escaped so content can't close the script early. Articles also require a `datePublished` prop (ISO 8601, such as `2026-10-20`) and accept an optional `dateModified`, which defaults to `datePublished`. Both feed the JSON-LD and the `article:published_time` / `article:modified_time` Open Graph tags. Update `dateModified` when a case study's content changes meaningfully.
+Author details are defined once in [base-layout.astro](src/layouts/base-layout.astro) with a stable `Person` identifier. JSON is serialized with `<` escaped so content can't close the script early. Articles also require a `datePublished` prop, a full ISO 8601 date-time with a timezone such as `2026-10-20T12:00:00-04:00` (Montréal is `-04:00` in summer and `-05:00` in winter); the build fails on a date-only value, which Google flags, and accept an optional `dateModified`, which defaults to `datePublished`. Both feed the JSON-LD and the `article:published_time` / `article:modified_time` Open Graph tags. Update `dateModified` when a case study's content changes meaningfully.
 
 ### Sitemap and robots
 
@@ -344,6 +344,6 @@ The Firebase CLI isn't needed for deploys; the GitHub Action brings its own.
 
 - [ ] Confirm trailing-slash URLs redirect (301) to their no-slash versions on the live domain, and check the response headers (`curl -I`). Both pass in the local Hosting emulator.
 - [ ] Check social previews (LinkedIn, Slack) for the home page and each case study.
-- [ ] Validate structured data with Google's Rich Results Test and the Schema.org validator.
+- [x] Validate structured data with Google's Rich Results Test and the Schema.org validator.
 - [ ] Consider adding a Content Security Policy in `firebase.json`. It must allow the inline styles (`inlineStylesheets: "always"`), inline scripts and JSON-LD.
 - [ ] Re-measure CSS inlining and font preloading on the deployed host, covering both brands.
