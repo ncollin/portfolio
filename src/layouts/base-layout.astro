@@ -119,11 +119,13 @@ const structuredDataJSON = structuredData
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="Nico Collin" />
     {!noindex && <link rel="canonical" href={canonicalURL.href} />}
     {noindex && <meta name="robots" content="noindex" />}
 
     <meta property="og:type" content={pageType === "article" ? "article" : "website"} />
     <meta property="og:site_name" content="Nico Collin" />
+    {pageType === "article" && <meta property="article:author" content="Nico Collin" />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL.href} />
