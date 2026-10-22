@@ -302,7 +302,7 @@ An unconditional Plex Sans 600 preload was tested on the production preview (col
 
 ### Open
 
-- [ ] **Responsive testing.** Layouts are done and checked at 375, 768 and 1280px in both brands. Remaining: 320px, 200% and 400% zoom on desktop (no horizontal scrolling), keyboard order in the header, a real iPhone and Android phone, and Lighthouse on mobile.
+- [ ] **Responsive testing.** Checked at 320, 375, 768 and 1280px in both brands, at 200% and 400% zoom, and for keyboard order in the header. Remaining: a real iPhone and Android phone, and Lighthouse on mobile.
 - [ ] **Figma comparison.** Compare the screens against the final Figma frames, including mobile.
 
 ### After deployment

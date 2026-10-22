@@ -23,6 +23,7 @@ const headline = "Modernizing a 10-year-old platform without stopping delivery";
   pageType="article"
   headline={headline}
   datePublished="2026-10-20"
+  dateModified="2026-10-21"
   title="Modernizing a 10-year-old platform without stopping delivery · Nico Collin"
   description="How I modernize a legacy Java and AngularJS platform at Nurun, improving frontend architecture, build tooling, and CI while three squads keep shipping."
   image="/assets/social/platform-modernization.png"
@@ -89,9 +90,9 @@ const headline = "Modernizing a 10-year-old platform without stopping delivery";
       <p><strong>Loading strategy.</strong> A loading layer on top applies a preload, defer or async strategy to each file.</p>
       <p><strong>Where it stands.</strong> New blocks use this system, but the legacy global files are still loaded alongside them, so page weight hasn’t dropped yet. The gains will show as legacy code is removed, block by block.</p>
     </StepRow>
-    <StepRow number="03" title="Introduce a BFF API">
+    <StepRow number="03" title="Propose a BFF API">
       <p>The existing APIs were so generic that the frontend had to parse and reshape almost everything. Every API change also risked breaking another part of the application.</p>
-      <p>I introduced a backend-for-frontend (BFF) layer shaped around what the frontend actually needs. Frontend code got simpler, and API changes stopped rippling across the app.</p>
+      <p>I proposed and championed a backend-for-frontend (BFF) layer shaped around what the frontend actually needs, and the backend team built it. Frontend code got simpler, and API changes stopped rippling across the app.</p>
     </StepRow>
     <StepRow number="04" title="Modernize the build and delivery pipeline">
       <p><strong>Vite for the new block system.</strong> The new per-block system builds with Vite, while legacy code stays on Gulp until it’s migrated.</p>

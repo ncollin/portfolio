@@ -37,7 +37,7 @@ const previews = [
     file: "component-library",
     label: "CASE STUDY 01 / NURUN",
     lines: ["Taking control of an", "inherited component", "library"],
-    detail: "DESIGN SYSTEMS / TOKENS / SIX BRANDS",
+    detail: "DESIGN SYSTEMS / TOKENS / SEVEN BRANDS",
   },
   {
     file: "platform-modernization",
