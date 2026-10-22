@@ -1,5 +1,9 @@
 # Build the site and deploy it to Firebase Hosting on every push to develop
 # (including merged pull requests). develop is the production branch.
+#
+#   build:  install dependencies -> build the site -> hand over dist/
+#   deploy: take dist/ -> deploy it to Firebase Hosting (live)
+#
 # Secret: FIREBASE_SERVICE_ACCOUNT (service account JSON key).
 # Variable: FIREBASE_PROJECT_ID.
 
@@ -19,21 +23,59 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
+  build:
+    name: Build
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out the repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
       # Also regenerates the social images (prebuild step in npm run build)
-      - run: npm run build
+      - name: Build the site
+        run: npm run build
+
+      - name: Hand over the built site
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist
+          retention-days: 1
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Shows the deployment and its URL in the repository's Environments section.
+    # Switch the URL to https://nico.collin.app once the custom domain is connected.
+    environment:
+      name: production
+      url: https://portfolio-1325f.web.app
+    steps:
+      # Only the Firebase configuration is needed here, not the source code
+      - name: Check out the Firebase configuration
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            firebase.json
+            .firebaserc
+          sparse-checkout-cone-mode: false
+
+      - name: Get the built site
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: dist
 
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
