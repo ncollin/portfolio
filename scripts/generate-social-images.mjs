@@ -78,7 +78,7 @@ function template(preview) {
     ${text(preview.detail, mono, 18, 72, 461, palette.secondary)}
     <path d="M72 502H1128" stroke="${palette.border}" />
     ${text("Nico Collin", sans, 27, 72, 559, palette.text)}
-    ${text("nico.collin.app", mono, 19, 930, 559, palette.accent)}
+    ${text("nicocollin.app", mono, 19, 941, 559, palette.accent)}
   </svg>`;
 }
 

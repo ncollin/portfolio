@@ -56,11 +56,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    # Shows the deployment and its URL in the repository's Environments section.
-    # Switch the URL to https://nico.collin.app once the custom domain is connected.
+    # Shows the deployment and its URL in the repository's Environments section
     environment:
       name: production
-      url: https://portfolio-1325f.web.app
+      url: https://nicocollin.app
     steps:
       # Only the Firebase configuration is needed here, not the source code
       - name: Check out the Firebase configuration

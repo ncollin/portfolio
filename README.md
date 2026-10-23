@@ -1,6 +1,6 @@
 # Nico Collin — Portfolio
 
-Source for [nico.collin.app](https://nico.collin.app): a static portfolio with three case studies, built with Astro and CSS Modules, with no UI framework and no client-side framework JavaScript.
+Source for [nicocollin.app](https://nicocollin.app): a static portfolio with three case studies, built with Astro and CSS Modules, with no UI framework and no client-side framework JavaScript.
 
 The site ships two brands, **spec** (dark slate, IBM Plex) and **bold** (yellow, Archivo), driven by the same semantic tokens. Visitors switch brands with the toggle in the header.
 
@@ -302,7 +302,7 @@ An unconditional Plex Sans 600 preload was tested on the production preview (col
 
 The site is hosted on Firebase Hosting and deployed by GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)). `develop` is the production branch: anything pushed or merged into it goes live.
 
-Every push to `develop` deploys the live site at [nico.collin.app](https://nico.collin.app). A deploy can also be started by hand from the **Actions** tab (**Deploy → Run workflow**).
+Every push to `develop` deploys the live site at [nicocollin.app](https://nicocollin.app). A deploy can also be started by hand from the **Actions** tab (**Deploy → Run workflow**).
 
 The workflow has two jobs. **Build** installs dependencies (`npm ci`), builds the site (`npm run build`, which also regenerates the social images) and hands over `dist/` as an artifact. **Deploy** takes that artifact and publishes it with the official `FirebaseExtended/action-hosting-deploy` action. Install and build share one job because each job runs on a fresh machine: moving `node_modules` between jobs would be slower than installing again. Deploys appear under the repository's **Environments → production**.
 
@@ -329,7 +329,7 @@ GitHub's servers can't log in as you, so deploys use a **service account**: a Go
 1. In the [Firebase console](https://console.firebase.google.com), open the project, copy its ID from **Project settings**, and put it in [.firebaserc](.firebaserc). Enable **Build → Hosting**.
 2. In the [Google Cloud console](https://console.cloud.google.com) (same project): **IAM & Admin → Service accounts → Create service account** with the **Firebase Hosting Admin**, **API Keys Viewer** and **Service Usage Consumer** roles. The last one lets the CLI check that the Hosting API is enabled. Then **Keys → Add key → JSON**.
 3. In the GitHub repository: **Settings → Secrets and variables → Actions**. Add the key's JSON as the **secret** `FIREBASE_SERVICE_ACCOUNT` and the project ID as the **variable** `FIREBASE_PROJECT_ID`. Delete the downloaded key; never commit it.
-4. In Firebase Hosting, add the custom domain `nico.collin.app` and create the DNS records it asks for (the HTTPS certificate is issued automatically, within 24 hours).
+4. In Firebase Hosting, add the custom domain `nicocollin.app` and create the DNS records it asks for: an `A` record and a `TXT` record on the domain itself. In the DNS provider, their name must be **`@`**, not `nicocollin.app`, which the provider would read as `nicocollin.app.nicocollin.app`. Check with Google's [DNS lookup tool](https://toolbox.googleapps.com/apps/dig/). The HTTPS certificate is issued automatically, within 24 hours.
 
 The Firebase CLI isn't needed for deploys; the GitHub Action brings its own.
 
